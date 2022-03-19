@@ -1,19 +1,20 @@
 <?php
 
-namespace Flowwow\Test;
+namespace Excent\Test;
 
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
-use Flowwow\Cloudpayments\Request\ApplepayStartSession;
-use Flowwow\Cloudpayments\Request\KktReceipt;
-use Flowwow\Cloudpayments\Request\Receipt\CustomerReceipt;
-use Flowwow\Cloudpayments\Request\Receipt\ReceiptAmounts;
-use Flowwow\Cloudpayments\Request\Receipt\ReceiptItem;
-use Flowwow\Cloudpayments\Request\Receipt\ReceiptItemAgentData;
-use Flowwow\Cloudpayments\Request\Receipt\ReceiptItemPurveyorData;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\Request\ApplepayStartSession;
+use Excent\Cloudpayments\Request\KktReceipt;
+use Excent\Cloudpayments\Request\Receipt\CustomerReceipt;
+use Excent\Cloudpayments\Request\Receipt\ReceiptAmounts;
+use Excent\Cloudpayments\Request\Receipt\ReceiptItem;
+use Excent\Cloudpayments\Request\Receipt\ReceiptItemAgentData;
+use Excent\Cloudpayments\Request\Receipt\ReceiptItemPurveyorData;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class KktReceiptTest
+ *
  * @group Cloudpayments
  */
 class KktReceiptTest extends TestCase
@@ -39,30 +40,30 @@ class KktReceiptTest extends TestCase
         $receipt = new KktReceipt('9000000000', 'Income', $customerReceipt);
 
         $result = [
-            'Inn'             => '9000000000',
-            'Type'            => 'Income',
+            'Inn' => '9000000000',
+            'Type' => 'Income',
             'CustomerReceipt' => [
-                'Items'          => [
+                'Items' => [
                     [
-                        'Label'        => 'Наименование товара 1',
-                        'Price'        => '100.00',
-                        'Amount'       => '1.00',
-                        'AgentData'    => [
+                        'Label' => 'Наименование товара 1',
+                        'Price' => '100.00',
+                        'Amount' => '1.00',
+                        'AgentData' => [
                             'AgentOperationName' => 'operation name'
                         ],
                         'PurveyorData' => [
                             'Name' => 'ООО Ромашка',
-                            'Inn'  => '1234567890',
+                            'Inn' => '1234567890',
                         ],
                     ],
                     [
-                        'Label'  => 'Наименование товара 2',
-                        'Price'  => '200.00',
+                        'Label' => 'Наименование товара 2',
+                        'Price' => '200.00',
                         'Amount' => '2.00',
                     ],
                 ],
                 'TaxationSystem' => '2',
-                'Amounts'        => [
+                'Amounts' => [
                     'AdvancePayment' => '1300.00'
                 ],
             ],

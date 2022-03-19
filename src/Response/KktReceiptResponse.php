@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Response;
+namespace Excent\Cloudpayments\Response;
 
-use Flowwow\Cloudpayments\Response\Models\KktReceiptModel;
+use Excent\Cloudpayments\Response\Models\KktReceiptModel;
 use stdClass;
 
 /**
  * Class KktReceiptResponse
- * @package Flowwow\Cloudpayments\Response
+ *
+ * @package Excent\Cloudpayments\Response
  */
 class KktReceiptResponse extends CloudResponse
 {
@@ -16,7 +17,7 @@ class KktReceiptResponse extends CloudResponse
 
     /**
      * {@inheritdoc}
-     * @param stdClass $modelDate
+     * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
     {

@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class SubscriptionFind
- * @package Flowwow\Cloudpayments\Request
- * @see https://developers.cloudpayments.ru/#poisk-podpisok
+ *
+ * @package Excent\Cloudpayments\Request
+ * @see     https://developers.cloudpayments.ru/#poisk-podpisok
  *
  */
 class SubscriptionFind extends BaseRequest

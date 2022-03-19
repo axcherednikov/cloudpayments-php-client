@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class CardsTopUp
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#oplata-po-kriptogramme
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#oplata-po-kriptogramme
  */
 class CardsTopUp extends BaseRequest
 {
@@ -16,13 +17,13 @@ class CardsTopUp extends BaseRequest
     /**
      * @var int|float
      */
-    public         $amount;
-    public string  $accountId;
-    public string  $currency;
+    public $amount;
+    public string $accountId;
+    public string $currency;
     public ?string $email;
     public ?string $jsonData;
     public ?string $invoiceId;
     public ?string $description;
-    public ?array  $payer;
-    public ?array  $receiver;
+    public ?array $payer;
+    public ?array $receiver;
 }

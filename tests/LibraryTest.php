@@ -1,24 +1,25 @@
 <?php
 
-use Flowwow\Cloudpayments\Library;
-use Flowwow\Cloudpayments\Request\ApplepayStartSession;
-use Flowwow\Cloudpayments\Request\CardsPayment;
-use Flowwow\Cloudpayments\Request\NotificationsGet;
-use Flowwow\Cloudpayments\Request\OrderCreate;
-use Flowwow\Cloudpayments\Request\PaymentsGet;
-use Flowwow\Cloudpayments\Request\SubscriptionCreate;
-use Flowwow\Cloudpayments\Request\SubscriptionFind;
-use Flowwow\Cloudpayments\Request\TokenPayment;
+use Excent\Cloudpayments\Library;
+use Excent\Cloudpayments\Request\ApplepayStartSession;
+use Excent\Cloudpayments\Request\CardsPayment;
+use Excent\Cloudpayments\Request\NotificationsGet;
+use Excent\Cloudpayments\Request\OrderCreate;
+use Excent\Cloudpayments\Request\PaymentsGet;
+use Excent\Cloudpayments\Request\SubscriptionCreate;
+use Excent\Cloudpayments\Request\SubscriptionFind;
+use Excent\Cloudpayments\Request\TokenPayment;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Psr7\Response;
 
 /**
  * Class LibraryTest
+ *
  * @group Cloudpayments
  */
 class LibraryTest extends TestCase
 {
-    /** @var Library  */
+    /** @var Library */
     protected $library;
 
     public function setUp(): void

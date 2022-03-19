@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Response;
+namespace Excent\Cloudpayments\Response;
 
-use Flowwow\Cloudpayments\Response\Models\TransactionWith3dsModel;
+use Excent\Cloudpayments\Response\Models\TransactionWith3dsModel;
 use stdClass;
 
 /**
  * Class TransactionResponse
- * @package Flowwow\Cloudpayments\Response
+ *
+ * @package Excent\Cloudpayments\Response
  */
 class TransactionWith3dsResponse extends CloudResponse
 {
@@ -16,7 +17,7 @@ class TransactionWith3dsResponse extends CloudResponse
 
     /**
      * {@inheritdoc}
-     * @param stdClass $modelDate
+     * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
     {
@@ -28,6 +29,7 @@ class TransactionWith3dsResponse extends CloudResponse
 
     /**
      * Нужна ли 3-D Secure аутентификация
+     *
      * @return bool
      */
     public function is3dsError(): bool

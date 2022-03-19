@@ -1,11 +1,12 @@
 <?php
 
-namespace Flowwow\Cloudpayments;
+namespace Excent\Cloudpayments;
 
 /**
  * Базовый класс моделей фондю
  * Class BaseModel
- * @package Flowwow\Cloudpayments
+ *
+ * @package Excent\Cloudpayments
  * @property string $response_status
  */
 class BaseHook
@@ -17,7 +18,8 @@ class BaseHook
 
     /**
      * BaseHook constructor.
-     * @param array $request
+     *
+     * @param  array  $request
      */
     public function __construct(array $request)
     {

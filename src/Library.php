@@ -1,42 +1,42 @@
 <?php
 
-namespace Flowwow\Cloudpayments;
+namespace Excent\Cloudpayments;
 
-use Flowwow\Cloudpayments\Enum\CloudMethodsEnum;
-use Flowwow\Cloudpayments\Request\ApplepayStartSession;
-use Flowwow\Cloudpayments\Request\CardsPayment;
-use Flowwow\Cloudpayments\Request\CardsTopUp;
-use Flowwow\Cloudpayments\Request\KktReceipt;
-use Flowwow\Cloudpayments\Request\NotificationsGet;
-use Flowwow\Cloudpayments\Request\NotificationsUpdate;
-use Flowwow\Cloudpayments\Request\OrderCancel;
-use Flowwow\Cloudpayments\Request\OrderCreate;
-use Flowwow\Cloudpayments\Request\PaymentsConfirm;
-use Flowwow\Cloudpayments\Request\PaymentsFind;
-use Flowwow\Cloudpayments\Request\PaymentsGet;
-use Flowwow\Cloudpayments\Request\PaymentsList;
-use Flowwow\Cloudpayments\Request\PaymentsRefund;
-use Flowwow\Cloudpayments\Request\PaymentsVoid;
-use Flowwow\Cloudpayments\Request\Post3DS;
-use Flowwow\Cloudpayments\Request\SubscriptionCancel;
-use Flowwow\Cloudpayments\Request\SubscriptionCreate;
-use Flowwow\Cloudpayments\Request\SubscriptionFind;
-use Flowwow\Cloudpayments\Request\SubscriptionGet;
-use Flowwow\Cloudpayments\Request\SubscriptionUpdate;
-use Flowwow\Cloudpayments\Request\TokenList;
-use Flowwow\Cloudpayments\Request\TokenPayment;
-use Flowwow\Cloudpayments\Request\TokenTopUp;
-use Flowwow\Cloudpayments\Response\AppleSessionResponse;
-use Flowwow\Cloudpayments\Response\CloudResponse;
-use Flowwow\Cloudpayments\Response\KktReceiptResponse;
-use Flowwow\Cloudpayments\Response\NotificationResponse;
-use Flowwow\Cloudpayments\Response\OrderResponse;
-use Flowwow\Cloudpayments\Response\SubscriptionArrayResponse;
-use Flowwow\Cloudpayments\Response\SubscriptionResponse;
-use Flowwow\Cloudpayments\Response\TokenArrayResponse;
-use Flowwow\Cloudpayments\Response\TransactionArrayResponse;
-use Flowwow\Cloudpayments\Response\TransactionResponse;
-use Flowwow\Cloudpayments\Response\TransactionWith3dsResponse;
+use Excent\Cloudpayments\Enum\CloudMethodsEnum;
+use Excent\Cloudpayments\Request\ApplepayStartSession;
+use Excent\Cloudpayments\Request\CardsPayment;
+use Excent\Cloudpayments\Request\CardsTopUp;
+use Excent\Cloudpayments\Request\KktReceipt;
+use Excent\Cloudpayments\Request\NotificationsGet;
+use Excent\Cloudpayments\Request\NotificationsUpdate;
+use Excent\Cloudpayments\Request\OrderCancel;
+use Excent\Cloudpayments\Request\OrderCreate;
+use Excent\Cloudpayments\Request\PaymentsConfirm;
+use Excent\Cloudpayments\Request\PaymentsFind;
+use Excent\Cloudpayments\Request\PaymentsGet;
+use Excent\Cloudpayments\Request\PaymentsList;
+use Excent\Cloudpayments\Request\PaymentsRefund;
+use Excent\Cloudpayments\Request\PaymentsVoid;
+use Excent\Cloudpayments\Request\Post3DS;
+use Excent\Cloudpayments\Request\SubscriptionCancel;
+use Excent\Cloudpayments\Request\SubscriptionCreate;
+use Excent\Cloudpayments\Request\SubscriptionFind;
+use Excent\Cloudpayments\Request\SubscriptionGet;
+use Excent\Cloudpayments\Request\SubscriptionUpdate;
+use Excent\Cloudpayments\Request\TokenList;
+use Excent\Cloudpayments\Request\TokenPayment;
+use Excent\Cloudpayments\Request\TokenTopUp;
+use Excent\Cloudpayments\Response\AppleSessionResponse;
+use Excent\Cloudpayments\Response\CloudResponse;
+use Excent\Cloudpayments\Response\KktReceiptResponse;
+use Excent\Cloudpayments\Response\NotificationResponse;
+use Excent\Cloudpayments\Response\OrderResponse;
+use Excent\Cloudpayments\Response\SubscriptionArrayResponse;
+use Excent\Cloudpayments\Response\SubscriptionResponse;
+use Excent\Cloudpayments\Response\TokenArrayResponse;
+use Excent\Cloudpayments\Response\TransactionArrayResponse;
+use Excent\Cloudpayments\Response\TransactionResponse;
+use Excent\Cloudpayments\Response\TransactionWith3dsResponse;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
@@ -48,32 +48,33 @@ class Library
 {
     const DEFAULT_URL = 'https://api.cloudpayments.ru/';
 
-    protected string  $publicId;
-    protected string  $pass;
-    protected string  $url;
-    protected Client  $client;
-    protected bool    $idempotency    = false;
+    protected string $publicId;
+    protected string $pass;
+    protected string $url;
+    protected Client $client;
+    protected bool $idempotency = false;
     protected ?string $idempotencyKey = null;
 
     /**
      * Library constructor.
-     * @param string $publicId
-     * @param string $pass
-     * @param string|null $cpUrlApi
+     *
+     * @param  string       $publicId
+     * @param  string       $pass
+     * @param  string|null  $cpUrlApi
      */
-    public function __construct(string $publicId, string  $pass, ?string $cpUrlApi = null)
+    public function __construct(string $publicId, string $pass, ?string $cpUrlApi = null)
     {
-        $this->url      = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
+        $this->url = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
         $this->publicId = $publicId;
-        $this->pass     = $pass;
+        $this->pass = $pass;
 
         $this->client = new Client([
             'base_uri' => $this->url,
-            'auth'     => [
+            'auth' => [
                 $this->publicId,
                 $this->pass,
             ],
-            'expect'   => false
+            'expect' => false
         ]);
     }
 
@@ -94,7 +95,7 @@ class Library
     }
 
     /**
-     * @param bool $idempotency
+     * @param  bool  $idempotency
      */
     public function setIdempotency(bool $idempotency): void
     {
@@ -103,7 +104,8 @@ class Library
 
     /**
      * Кастомный ключ идемпотентности
-     * @param string $idempotencyKey
+     *
+     * @param  string  $idempotencyKey
      */
     public function setIdempotencyKey(string $idempotencyKey): void
     {
@@ -121,7 +123,8 @@ class Library
 
     /**
      * Проверка платежа по номеру заказа
-     * @param PaymentsFind $data
+     *
+     * @param  PaymentsFind  $data
      * @return TransactionResponse
      */
     public function getPaymentDataByInvoice(PaymentsFind $data): TransactionResponse
@@ -133,7 +136,8 @@ class Library
 
     /**
      * Метод получения детализации по транзакции
-     * @param PaymentsGet $data
+     *
+     * @param  PaymentsGet  $data
      * @return TransactionResponse
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
@@ -145,7 +149,8 @@ class Library
 
     /**
      * Создание оплаты по токену при двухшаговой оплате
-     * @param TokenPayment $data
+     *
+     * @param  TokenPayment  $data
      * @return TransactionResponse
      */
     public function createPaymentByToken2Step(TokenPayment $data): TransactionResponse
@@ -157,7 +162,8 @@ class Library
 
     /**
      * Создание оплаты по карте при двухшаговой оплате
-     * @param CardsPayment $data
+     *
+     * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
      */
     public function createPaymentByCard2Step(CardsPayment $data): TransactionWith3dsResponse
@@ -169,7 +175,8 @@ class Library
 
     /**
      * обработка 3Ds
-     * @param Post3DS $data
+     *
+     * @param  Post3DS  $data
      * @return TransactionResponse
      */
     public function post3Ds(Post3DS $data): TransactionResponse
@@ -181,7 +188,8 @@ class Library
 
     /**
      * Проведение оплаты по токену при одношаговой оплате
-     * @param TokenPayment $data
+     *
+     * @param  TokenPayment  $data
      * @return TransactionResponse
      */
     public function executePaymentByToken(TokenPayment $data): TransactionResponse
@@ -193,7 +201,8 @@ class Library
 
     /**
      * Подтверждение оплаты
-     * @param PaymentsConfirm $data
+     *
+     * @param  PaymentsConfirm  $data
      * @return CloudResponse
      */
     public function confirmPayment(PaymentsConfirm $data): CloudResponse
@@ -205,7 +214,8 @@ class Library
 
     /**
      * Список транзакций за определенное время
-     * @param PaymentsList $data
+     *
+     * @param  PaymentsList  $data
      * @return TransactionArrayResponse
      */
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
@@ -218,7 +228,8 @@ class Library
 
     /**
      * Отмена оплаты
-     * @param PaymentsVoid $data
+     *
+     * @param  PaymentsVoid  $data
      * @return CloudResponse
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse
@@ -230,7 +241,8 @@ class Library
 
     /**
      * Старт сессии Applepay
-     * @param ApplepayStartSession $data
+     *
+     * @param  ApplepayStartSession  $data
      * @return AppleSessionResponse
      */
     public function startSession(ApplepayStartSession $data): AppleSessionResponse
@@ -242,7 +254,8 @@ class Library
 
     /**
      * Создание чека
-     * @param KktReceipt $data
+     *
+     * @param  KktReceipt  $data
      * @return KktReceiptResponse
      */
     public function createReceipt(KktReceipt $data): KktReceiptResponse
@@ -254,7 +267,8 @@ class Library
 
     /**
      * Возврат средств
-     * @param PaymentsRefund $data
+     *
+     * @param  PaymentsRefund  $data
      * @return TransactionResponse
      */
     public function paymentsRefund(PaymentsRefund $data): TransactionResponse
@@ -267,7 +281,8 @@ class Library
     /**
      * Метод для оплаты по криптограмме платежных данных (результат алгоритма шифрования)
      * для одностадийного платежа
-     * @param CardsPayment $data
+     *
+     * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
      */
     public function paymentsCardsCharge(CardsPayment $data): TransactionWith3dsResponse
@@ -279,7 +294,8 @@ class Library
 
     /**
      * Выплата по криптограмме
-     * @param CardsTopUp $data
+     *
+     * @param  CardsTopUp  $data
      * @return TransactionResponse
      */
     public function paymentsCardsTopup(CardsTopUp $data): TransactionResponse
@@ -291,7 +307,8 @@ class Library
 
     /**
      * Выплата по токену
-     * @param TokenTopUp $data
+     *
+     * @param  TokenTopUp  $data
      * @return TransactionResponse
      */
     public function paymentsTokenTopup(TokenTopUp $data): TransactionResponse
@@ -303,7 +320,8 @@ class Library
 
     /**
      * Метод выгрузки списка всех платежных токенов CloudPayments
-     * @param TokenList|null $data
+     *
+     * @param  TokenList|null  $data
      * @return TokenArrayResponse
      */
     public function paymentsTokensList(?TokenList $data = null): TokenArrayResponse
@@ -315,7 +333,8 @@ class Library
 
     /**
      * Метод создания подписки на рекуррентные платежи
-     * @param SubscriptionCreate $data
+     *
+     * @param  SubscriptionCreate  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsCreate(SubscriptionCreate $data): SubscriptionResponse
@@ -327,7 +346,8 @@ class Library
 
     /**
      * Метод получения информации о статусе подписки
-     * @param SubscriptionGet $data
+     *
+     * @param  SubscriptionGet  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsGet(SubscriptionGet $data): SubscriptionResponse
@@ -339,7 +359,8 @@ class Library
 
     /**
      * Метод получения списка подписок для определенного аккаунта
-     * @param SubscriptionFind $data
+     *
+     * @param  SubscriptionFind  $data
      * @return SubscriptionArrayResponse
      */
     public function subscriptionsFind(SubscriptionFind $data): SubscriptionArrayResponse
@@ -351,7 +372,8 @@ class Library
 
     /**
      * Метод изменения ранее созданной подписки
-     * @param SubscriptionUpdate $data
+     *
+     * @param  SubscriptionUpdate  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsUpdate(SubscriptionUpdate $data): SubscriptionResponse
@@ -363,7 +385,8 @@ class Library
 
     /**
      * Метод отмены подписки на рекуррентные платежи
-     * @param SubscriptionCancel $data
+     *
+     * @param  SubscriptionCancel  $data
      * @return CloudResponse
      */
     public function subscriptionsCancel(SubscriptionCancel $data): CloudResponse
@@ -375,7 +398,8 @@ class Library
 
     /**
      * Создание счета для отправки по почте
-     * @param OrderCreate $data
+     *
+     * @param  OrderCreate  $data
      * @return OrderResponse
      */
     public function ordersCreate(OrderCreate $data): OrderResponse
@@ -387,7 +411,8 @@ class Library
 
     /**
      * Метод отмены созданного счета
-     * @param OrderCancel $data
+     *
+     * @param  OrderCancel  $data
      * @return CloudResponse
      */
     public function ordersCancel(OrderCancel $data): CloudResponse
@@ -399,7 +424,8 @@ class Library
 
     /**
      * Метод просмотра настроек уведомлений (с указанием типа уведомления)
-     * @param NotificationsGet $data
+     *
+     * @param  NotificationsGet  $data
      * @return NotificationResponse
      */
     public function siteNotificationsGet(NotificationsGet $data): NotificationResponse
@@ -411,7 +437,8 @@ class Library
 
     /**
      * Метод изменения настроек уведомлений
-     * @param NotificationsUpdate $data
+     *
+     * @param  NotificationsUpdate  $data
      * @return CloudResponse
      */
     public function siteNotificationsUpdate(NotificationsUpdate $data): CloudResponse
@@ -423,13 +450,17 @@ class Library
 
     /**
      * Базовый запрос
-     * @param string $method
-     * @param array $postData
-     * @param CloudResponse|null $cloudResponse
+     *
+     * @param  string              $method
+     * @param  array               $postData
+     * @param  CloudResponse|null  $cloudResponse
      * @return mixed
      */
-    protected function request(string $method, array $postData = [], ?CloudResponse $cloudResponse = null): CloudResponse
-    {
+    protected function request(
+        string $method,
+        array $postData = [],
+        ?CloudResponse $cloudResponse = null
+    ): CloudResponse {
         $response = $this->sendRequest($method, $postData);
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
@@ -438,8 +469,9 @@ class Library
 
     /**
      * Запрос по api
-     * @param string $method
-     * @param array $postData
+     *
+     * @param  string  $method
+     * @param  array   $postData
      * @return ResponseInterface
      */
     public function sendRequest(string $method, array $postData = []): ResponseInterface
@@ -455,8 +487,9 @@ class Library
 
     /**
      * Генерирует request id для идемпотентных запросов
-     * @param string $method
-     * @param array $postData
+     *
+     * @param  string  $method
+     * @param  array   $postData
      * @return string
      */
     public function getRequestId(string $method, array $postData): string

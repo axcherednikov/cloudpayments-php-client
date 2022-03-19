@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 use MyCLabs\Enum\Enum;
 
@@ -14,11 +14,13 @@ class CultureName extends Enum
 {
     /**
      * Русский
+     *
      * @var string
      */
     public const RU = 'ru-RU';
     /**
      * Английский
+     *
      * @var string
      */
     public const EN = 'en-US';

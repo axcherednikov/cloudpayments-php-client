@@ -1,10 +1,11 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Exceptions;
+namespace Excent\Cloudpayments\Exceptions;
 
 /**
  * Class BadTypeException
- * @package Flowwow\Cloudpayments\Exceptions
+ *
+ * @package Excent\Cloudpayments\Exceptions
  */
 class BadTypeException extends CloudpaymentsException
 {

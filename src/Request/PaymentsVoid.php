@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class PaymentsVoid
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#otmena-oplaty
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#otmena-oplaty
  */
 class PaymentsVoid extends BaseRequest
 {
@@ -15,7 +16,8 @@ class PaymentsVoid extends BaseRequest
 
     /**
      * PaymentsVoid constructor.
-     * @param int $transactionId
+     *
+     * @param  int  $transactionId
      */
     public function __construct(int $transactionId)
     {

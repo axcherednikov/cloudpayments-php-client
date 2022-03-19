@@ -1,12 +1,13 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Exceptions;
+namespace Excent\Cloudpayments\Exceptions;
 
 use Exception;
 
 /**
  * Class CloudpaymentsException
- * @package Flowwow\Cloudpayments\Exceptions
+ *
+ * @package Excent\Cloudpayments\Exceptions
  */
 class CloudpaymentsException extends Exception
 {

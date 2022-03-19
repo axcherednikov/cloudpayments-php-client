@@ -1,16 +1,16 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request\Receipt;
+namespace Excent\Cloudpayments\Request\Receipt;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * @see https://developers.cloudkassir.ru/#amounts
  */
 class ReceiptAmounts extends BaseRequest
 {
-    public ?string $electronic     = null;
+    public ?string $electronic = null;
     public ?string $advancePayment = null;
-    public ?string $credit         = null;
-    public ?string $provision      = null;
+    public ?string $credit = null;
+    public ?string $provision = null;
 }

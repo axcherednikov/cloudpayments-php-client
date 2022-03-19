@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Test;
+namespace Excent\Test;
 
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
-use Flowwow\Cloudpayments\Request\ApplepayStartSession;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\Request\ApplepayStartSession;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ApplepayStartSessionTest
+ *
  * @group Cloudpayments
  */
 class ApplepayStartSessionTest extends TestCase
@@ -41,7 +42,7 @@ class ApplepayStartSessionTest extends TestCase
     public function testFillPaymentUrlSuccess()
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-        $paymentUrl    = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
+        $paymentUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
 
         $appleStartSessionRequest = new ApplepayStartSession($validationUrl, $paymentUrl);
 
@@ -69,7 +70,7 @@ class ApplepayStartSessionTest extends TestCase
     public function testFillPaymentUrlFailed()
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-        $paymentUrl    = 'asdf';
+        $paymentUrl = 'asdf';
 
         $this->expectException(BadTypeException::class);
         /* @phan-suppress-next-line PhanNoopNew */

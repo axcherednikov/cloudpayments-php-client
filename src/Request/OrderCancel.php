@@ -1,15 +1,16 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class OrderCancel
- * @package Flowwow\Cloudpayments\Request
- * @see https://developers.cloudpayments.ru/#otmena-sozdannogo-scheta
+ *
+ * @package Excent\Cloudpayments\Request
+ * @see     https://developers.cloudpayments.ru/#otmena-sozdannogo-scheta
  */
 class OrderCancel extends BaseRequest
 {
-    public string  $id;
+    public string $id;
 }

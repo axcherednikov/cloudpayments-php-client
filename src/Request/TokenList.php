@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class TokenList
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#vygruzka-tokenov
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#vygruzka-tokenov
  *
  */
 class TokenList extends BaseRequest

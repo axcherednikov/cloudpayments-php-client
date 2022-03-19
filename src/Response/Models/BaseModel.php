@@ -1,12 +1,13 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Response\Models;
+namespace Excent\Cloudpayments\Response\Models;
 
 use stdClass;
 
 /**
  * Class BaseModel
- * @package Flowwow\Cloudpayments\Response\Models
+ *
+ * @package Excent\Cloudpayments\Response\Models
  */
 class BaseModel
 {

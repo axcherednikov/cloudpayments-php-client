@@ -1,5 +1,5 @@
 {
-    "name": "flowwow/cloudpayments-php-client",
+    "name": "axcherednikov/cloudpayments-php-client",
     "description": "cloudpayments api client",
     "license": "MIT",
     "authors": [
@@ -13,8 +13,8 @@
         "cloudpayments"
     ],
     "require": {
-        "php": ">=7.4",
-        "guzzlehttp/guzzle": "~6.3",
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.4",
         "myclabs/php-enum": "1.6"
     },
     "require-dev": {
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Flowwow\\Cloudpayments\\": "src"
+            "Excent\\Cloudpayments\\": "src"
         }
     },
     "scripts": {

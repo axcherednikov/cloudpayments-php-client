@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 use MyCLabs\Enum\Enum;
 
@@ -12,11 +12,13 @@ class BoolField extends Enum
 {
     /**
      * True
+     *
      * @var string
      */
     public const TRUE = 'true';
     /**
      * False
+     *
      * @var string
      */
     public const FALSE = 'false';

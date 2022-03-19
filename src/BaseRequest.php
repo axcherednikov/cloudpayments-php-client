@@ -1,23 +1,25 @@
 <?php
 
-namespace Flowwow\Cloudpayments;
+namespace Excent\Cloudpayments;
 
-use Flowwow\Cloudpayments\Enum\BoolField;
+use Excent\Cloudpayments\Enum\BoolField;
 
 /**
  * Базовый класс моделей фондю
  * Class BaseRequest
- * @package Flowwow\Cloudpayments
+ *
+ * @package Excent\Cloudpayments
  */
 class BaseRequest
 {
     /**
      * Данные в нужном для запроса формате
+     *
      * @return array
      */
     public function asArray(): array
     {
-        $data   = [];
+        $data = [];
         $fields = get_object_vars($this);
         foreach ($fields as $field => $value) {
             $key = ucfirst($field);

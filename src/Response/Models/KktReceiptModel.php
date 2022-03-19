@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Response\Models;
+namespace Excent\Cloudpayments\Response\Models;
 
 /**
  * Class KktReceiptModel
- * @package Flowwow\Cloudpayments\Response\Models
+ *
+ * @package Excent\Cloudpayments\Response\Models
  */
 class KktReceiptModel extends BaseModel
 {
-    public ?string $id        = null;
-    public ?int    $errorCode = null;
+    public ?string $id = null;
+    public ?int $errorCode = null;
 }

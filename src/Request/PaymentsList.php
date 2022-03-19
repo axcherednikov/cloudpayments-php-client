@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class PaymentsList
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#vygruzka-spiska-tranzaktsiy
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#vygruzka-spiska-tranzaktsiy
  */
 class PaymentsList extends BaseRequest
 {

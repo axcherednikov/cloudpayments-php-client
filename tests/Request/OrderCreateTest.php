@@ -1,11 +1,12 @@
 <?php
 
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
-use Flowwow\Cloudpayments\Request\OrderCreate;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\Request\OrderCreate;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class OrderCreateTest
+ *
  * @group Cloudpayments
  */
 class OrderCreateTest extends TestCase
@@ -15,8 +16,8 @@ class OrderCreateTest extends TestCase
      */
     public function testCheckValidationAmountSuccessInt()
     {
-        $amount      = 1;
-        $currency    = 'RUB';
+        $amount = 1;
+        $currency = 'RUB';
         $description = 'asdf';
 
         $orderCreateRequest = new OrderCreate($amount, $currency, $description);
@@ -30,8 +31,8 @@ class OrderCreateTest extends TestCase
      */
     public function testCheckValidationAmountSuccessFloat()
     {
-        $amount      = 1.123;
-        $currency    = 'RUB';
+        $amount = 1.123;
+        $currency = 'RUB';
         $description = 'asdf';
 
         $orderCreateRequest = new OrderCreate($amount, $currency, $description);
@@ -45,8 +46,8 @@ class OrderCreateTest extends TestCase
      */
     public function testCheckValidationAmountFailed()
     {
-        $amount      = 'asdf';
-        $currency    = 'RUB';
+        $amount = 'asdf';
+        $currency = 'RUB';
         $description = 'asdf';
 
         $this->expectException(BadTypeException::class);

@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class PaymentsFind
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#proverka-statusa-platezha
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#proverka-statusa-platezha
  */
 class PaymentsFind extends BaseRequest
 {
@@ -15,7 +16,8 @@ class PaymentsFind extends BaseRequest
 
     /**
      * PaymentsFind constructor.
-     * @param string $invoiceId
+     *
+     * @param  string  $invoiceId
      */
     public function __construct(string $invoiceId)
     {

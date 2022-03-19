@@ -15,7 +15,7 @@
 Установить библиотеку можно с помощью composer:
 
 ```
-composer require flowwow/cloudpayments-php-client
+composer require axcherednikov/cloudpayments-php-client
 ```
 
 ## Начало работы
@@ -23,8 +23,8 @@ composer require flowwow/cloudpayments-php-client
 ```php
 $publicId = /*...*/;
 $pass = /*...*/;
-$apiClient = new \Flowwow\Cloudpayments\Library($publicId, $pass);
-$response = $apiClient->paymentsCardsCharge(new \Flowwow\Cloudpayments\Request\CardsPayment(
+$apiClient = new \Excent\Cloudpayments\Library($publicId, $pass);
+$response = $apiClient->paymentsCardsCharge(new \Excent\Cloudpayments\Request\CardsPayment(
     100,
     'RUB',
     '123.123.123.123',
@@ -39,7 +39,7 @@ echo $response->success;
 Библиотека поддерживает большое количество методов api(https://developers.cloudpayments.ru/#api). Для параметров запроса и ответа поддерживается объект-обертка.
 
 ```php
-$apiClient = new \Flowwow\Cloudpayments\Library(\*...*\);
+$apiClient = new \Excent\Cloudpayments\Library(\*...*\);
 $apiClient->paymentsCardsCharge(\*...*\);
 ```
 
@@ -76,7 +76,7 @@ $apiClient->paymentsCardsCharge(\*...*\);
 ```php
 ...
 $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-$request = new \Flowwow\Cloudpayments\Request\ApplepayStartSession($validationUrl);
+$request = new \Excent\Cloudpayments\Request\ApplepayStartSession($validationUrl);
 $apiClient->startSession($request);
 ```
 
@@ -86,9 +86,9 @@ $apiClient->startSession($request);
 try {
     ...
     $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-    $request = new \Flowwow\Cloudpayments\Request\ApplepayStartSession($validationUrl);
+    $request = new \Excent\Cloudpayments\Request\ApplepayStartSession($validationUrl);
     ...
-} catch (\Flowwow\Cloudpayments\Exceptions\BadTypeException $e) {
+} catch (\Excent\Cloudpayments\Exceptions\BadTypeException $e) {
     var_dump($e->getMessage());
 }
 ```
@@ -112,7 +112,7 @@ try {
 Библиотека включает в себя dto-объекты для параметров веб хуков
 
 ```php
-$hookData = new \Flowwow\Cloudpayments\Hook\HookPay($_POST);
+$hookData = new \Excent\Cloudpayments\Hook\HookPay($_POST);
 echo $hookData->transactionId;
 ```
 
@@ -134,7 +134,7 @@ echo $hookData->transactionId;
 
 ```php
 ...
-$apiClient = new \Flowwow\Cloudpayments\Library(\*...*\);
+$apiClient = new \Excent\Cloudpayments\Library(\*...*\);
 $apiClient->setIdempotency(true);
 $apiClient->createPaymentByCard2Step(\*...*\);
 ...

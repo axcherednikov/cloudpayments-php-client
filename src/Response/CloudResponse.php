@@ -1,19 +1,20 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Response;
+namespace Excent\Cloudpayments\Response;
 
-use Flowwow\Cloudpayments\BaseRequest;
-use Flowwow\Cloudpayments\Response\Models\BaseModel;
+use Excent\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\Response\Models\BaseModel;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
 /**
  * Class CloudResponse
- * @package Flowwow\Cloudpayments\Response
+ *
+ * @package Excent\Cloudpayments\Response
  */
 class CloudResponse extends BaseRequest
 {
-    public bool    $success;
+    public bool $success;
     public ?string $message = null;
     public ?string $warning = null;
 
@@ -22,7 +23,8 @@ class CloudResponse extends BaseRequest
 
     /**
      * Заполняет по респонсу
-     * @param ResponseInterface $response
+     *
+     * @param  ResponseInterface  $response
      * @return static
      */
     public function fillByResponse(ResponseInterface $response): self
@@ -32,7 +34,7 @@ class CloudResponse extends BaseRequest
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';
         $this->warning = $responseContent->Warning ?? 'Warning is not set';
-        if (!empty($responseContent->Model)) {
+        if (! empty($responseContent->Model)) {
             $this->fillModel($responseContent->Model);
         }
 
@@ -41,6 +43,7 @@ class CloudResponse extends BaseRequest
 
     /**
      * Заполняет model свойство
+     *
      * @param $modelDate
      */
     public function fillModel($modelDate)

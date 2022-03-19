@@ -1,32 +1,33 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
  * Class OrderCreate
- * @package Flowwow\Cloudpayments\Request
- * @see https://developers.cloudpayments.ru/#sozdanie-scheta-dlya-otpravki-po-pochte
+ *
+ * @package Excent\Cloudpayments\Request
+ * @see     https://developers.cloudpayments.ru/#sozdanie-scheta-dlya-otpravki-po-pochte
  */
 class OrderCreate extends BaseRequest
 {
     /**
      * @var int|float
      */
-    public         $amount;
-    public string  $currency;
-    public string  $description;
+    public $amount;
+    public string $currency;
+    public string $description;
     public ?string $email;
-    public ?bool   $requireConfirmation;
-    public ?bool   $sendEmail;
+    public ?bool $requireConfirmation;
+    public ?bool $sendEmail;
     public ?string $invoiceId;
     public ?string $accountId;
     public ?string $offerUri;
     public ?string $phone;
-    public ?bool   $sendSms;
-    public ?bool   $sendViber;
+    public ?bool $sendSms;
+    public ?bool $sendViber;
     public ?string $cultureName;
     public ?string $subscriptionBehavior;
     public ?string $successRedirectUrl;
@@ -35,18 +36,19 @@ class OrderCreate extends BaseRequest
 
     /**
      * OrderCreate constructor.
-     * @param $amount
-     * @param string $currency
-     * @param string $description
+     *
+     * @param          $amount
+     * @param  string  $currency
+     * @param  string  $description
      * @throws BadTypeException
      */
     public function __construct($amount, string $currency, string $description)
     {
-        if (!is_numeric($amount)) {
+        if (! is_numeric($amount)) {
             throw new BadTypeException('Amount isn\'t numeric');
         }
-        $this->amount      = $amount;
-        $this->currency    = $currency;
+        $this->amount = $amount;
+        $this->currency = $currency;
         $this->description = $description;
     }
 }

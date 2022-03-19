@@ -1,13 +1,14 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * Class PaymentsGet
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#prosmotr-tranzaktsii
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#prosmotr-tranzaktsii
  *
  */
 class PaymentsGet extends BaseRequest
@@ -16,7 +17,8 @@ class PaymentsGet extends BaseRequest
 
     /**
      * PaymentsGet constructor.
-     * @param int $transactionId
+     *
+     * @param  int  $transactionId
      */
     public function __construct(int $transactionId)
     {

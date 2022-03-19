@@ -1,13 +1,13 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request\Receipt;
+namespace Excent\Cloudpayments\Request\Receipt;
 
-use Flowwow\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\BaseRequest;
 
 /**
  * @see https://developers.cloudkassir.ru/#productcodedata
  */
 class ReceiptItemProductCodeData extends BaseRequest
 {
-   public ?string $codeProductNomenclature = null;
+    public ?string $codeProductNomenclature = null;
 }

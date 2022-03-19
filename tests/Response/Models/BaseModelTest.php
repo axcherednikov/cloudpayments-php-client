@@ -1,10 +1,11 @@
 <?php
 
-use Flowwow\Cloudpayments\Response\Models\BaseModel;
+use Excent\Cloudpayments\Response\Models\BaseModel;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class BaseModelTest
+ *
  * @group Cloudpayments
  */
 class BaseModelTest extends TestCase

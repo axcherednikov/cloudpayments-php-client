@@ -1,24 +1,26 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Request;
+namespace Excent\Cloudpayments\Request;
 
-use Flowwow\Cloudpayments\BaseRequest;
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
  * Class ApplepayStartSession
- * @package Flowwow\Cloudpayments\CardPayment
- * @see https://developers.cloudpayments.ru/#zapusk-sessii-dlya-oplaty-cherez-apple-pay
+ *
+ * @package Excent\Cloudpayments\CardPayment
+ * @see     https://developers.cloudpayments.ru/#zapusk-sessii-dlya-oplaty-cherez-apple-pay
  */
 class ApplepayStartSession extends BaseRequest
 {
-    public string  $validationUrl;
+    public string $validationUrl;
     public ?string $paymentUrl;
 
     /**
      * ApplepayStartSession constructor.
-     * @param string $validationUrl
-     * @param string|null $paymentUrl
+     *
+     * @param  string       $validationUrl
+     * @param  string|null  $paymentUrl
      * @throws BadTypeException
      */
     public function __construct(string $validationUrl, ?string $paymentUrl = null)

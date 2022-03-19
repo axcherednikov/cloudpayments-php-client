@@ -1,11 +1,12 @@
 <?php
 
-use Flowwow\Cloudpayments\Exceptions\BadTypeException;
-use Flowwow\Cloudpayments\Request\PaymentsRefund;
+use Excent\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\Request\PaymentsRefund;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class PaymentsRefundTest
+ *
  * @group Cloudpayments
  */
 class PaymentsRefundTest extends TestCase
@@ -15,7 +16,7 @@ class PaymentsRefundTest extends TestCase
      */
     public function testCheckValidationAmountSuccessInt()
     {
-        $amount        = 1;
+        $amount = 1;
         $transactionId = 123;
 
         $paymentsRefundRequest = new PaymentsRefund($transactionId, $amount);
@@ -28,7 +29,7 @@ class PaymentsRefundTest extends TestCase
      */
     public function testCheckValidationAmountSuccessFloat()
     {
-        $amount        = 1.123;
+        $amount = 1.123;
         $transactionId = 1;
 
         $paymentsRefundRequest = new PaymentsRefund($transactionId, $amount);
@@ -41,7 +42,7 @@ class PaymentsRefundTest extends TestCase
      */
     public function testCheckValidationAmountFailed()
     {
-        $amount        = 'asdf';
+        $amount = 'asdf';
         $transactionId = 1;
 
         $this->expectException(BadTypeException::class);

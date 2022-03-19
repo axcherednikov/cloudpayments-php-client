@@ -1,9 +1,9 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Hook;
+namespace Excent\Cloudpayments\Hook;
 
 
-use Flowwow\Cloudpayments\BaseHook;
+use Excent\Cloudpayments\BaseHook;
 
 /**
  * Class HookReceipt

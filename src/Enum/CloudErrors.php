@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowwow\Cloudpayments\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 use MyCLabs\Enum\Enum;
 
