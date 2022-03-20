@@ -2,8 +2,6 @@
 
 namespace Excent\Test;
 
-use Excent\Cloudpayments\Exceptions\BadTypeException;
-use Excent\Cloudpayments\Request\ApplepayStartSession;
 use Excent\Cloudpayments\Request\KktReceipt;
 use Excent\Cloudpayments\Request\Receipt\CustomerReceipt;
 use Excent\Cloudpayments\Request\Receipt\ReceiptAmounts;
@@ -24,15 +22,17 @@ class KktReceiptTest extends TestCase
      */
     public function testTransformToArray()
     {
-        $item = new ReceiptItem('Наименование товара 1', '100.00', '1.00');
-        $agentData = new ReceiptItemAgentData();
-        $agentData->agentOperationName = 'operation name';
+        $item = new ReceiptItem('Наименование товара 1', '100.00', '1.00', '100.00');
+        $agentData = new ReceiptItemAgentData(agentOperationName: 'operation name');
+
         $item->agentData = $agentData;
         $item->purveyorData = new ReceiptItemPurveyorData('ООО Ромашка', '1234567890');
+
         $items = [
             $item,
-            new ReceiptItem('Наименование товара 2', '200.00', '2.00'),
+            new ReceiptItem('Наименование товара 2', '200.00', '2.00', '400.00'),
         ];
+
         $amounts = new ReceiptAmounts();
         $amounts->advancePayment = '1300.00';
         $customerReceipt = new CustomerReceipt($items, '2', $amounts);
@@ -47,7 +47,8 @@ class KktReceiptTest extends TestCase
                     [
                         'Label' => 'Наименование товара 1',
                         'Price' => '100.00',
-                        'Amount' => '1.00',
+                        'Quantity' => '1.00',
+                        'Amount' => '100.00',
                         'AgentData' => [
                             'AgentOperationName' => 'operation name'
                         ],
@@ -59,7 +60,8 @@ class KktReceiptTest extends TestCase
                     [
                         'Label' => 'Наименование товара 2',
                         'Price' => '200.00',
-                        'Amount' => '2.00',
+                        'Quantity' => '2.00',
+                        'Amount' => '400.00',
                     ],
                 ],
                 'TaxationSystem' => '2',
@@ -68,6 +70,7 @@ class KktReceiptTest extends TestCase
                 ],
             ],
         ];
+
         $this->assertEquals($result, $receipt->asArray());
     }
 }

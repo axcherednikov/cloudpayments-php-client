@@ -12,32 +12,16 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class TokenPayment extends BaseRequest
 {
-    /**
-     * @var int|float
-     */
-    public $amount;
-    public string $currency;
-    public string $accountId;
-    public string $token;
-    public ?string $invoiceId;
-    public ?string $description;
-    public ?string $ipAddress;
-    public ?string $email;
-    public ?string $jsonData;
-
-    /**
-     * TokenPayment constructor.
-     *
-     * @param          $amount
-     * @param  string  $currency
-     * @param  string  $accountId
-     * @param  string  $token
-     */
-    public function __construct($amount, string $currency, string $accountId, string $token)
-    {
-        $this->amount = $amount;
-        $this->currency = $currency;
-        $this->accountId = $accountId;
-        $this->token = $token;
+    public function __construct(
+        public int|float $amount,
+        public string $currency,
+        public string $accountId,
+        public string $token,
+        public ?string $invoiceId = null,
+        public ?string $description = null,
+        public ?string $ipAddress = null,
+        public ?string $email = null,
+        public ?string $jsonData = null,
+    ) {
     }
 }

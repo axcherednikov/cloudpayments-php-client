@@ -9,17 +9,10 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class ReceiptItemPurveyorData extends BaseRequest
 {
-    public string $name;
-    public string $inn;
-    public ?string $phone = null;
-
-    /**
-     * @param  string  $name
-     * @param  string  $inn
-     */
-    public function __construct(string $name, string $inn)
-    {
-        $this->name = $name;
-        $this->inn = $inn;
+    public function __construct(
+        public string $name,
+        public string $inn,
+        public ?string $phone = null,
+    ) {
     }
 }

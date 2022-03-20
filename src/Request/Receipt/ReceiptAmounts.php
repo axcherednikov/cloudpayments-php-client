@@ -9,8 +9,11 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class ReceiptAmounts extends BaseRequest
 {
-    public ?string $electronic = null;
-    public ?string $advancePayment = null;
-    public ?string $credit = null;
-    public ?string $provision = null;
+    public function __construct(
+        public ?string $electronic = null,
+        public ?string $advancePayment = null,
+        public ?string $credit = null,
+        public ?string $provision = null,
+    ) {
+    }
 }
