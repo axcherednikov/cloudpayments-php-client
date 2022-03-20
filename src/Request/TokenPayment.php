@@ -15,9 +15,9 @@ class TokenPayment extends BaseRequest
     public function __construct(
         public int|float $amount,
         public string $currency,
-        public string $accountId,
-        public string $token,
-        public ?string $invoiceId = null,
+        public string|int $accountId,
+        public string|int $token,
+        public null|string|int $invoiceId = null,
         public ?string $description = null,
         public ?string $ipAddress = null,
         public ?string $email = null,
