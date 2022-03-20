@@ -11,9 +11,9 @@ class ReceiptItem extends BaseRequest
 {
     public function __construct(
         public string $label,
-        public string $price,
-        public string $quantity,
-        public string $amount,
+        public string|float|int $price,
+        public string|float|int $quantity,
+        public string|float|int $amount,
         public ?string $vat = null,
         public ?string $method = null,
         public ?string $object = null,
