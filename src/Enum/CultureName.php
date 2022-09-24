@@ -18,6 +18,7 @@ class CultureName extends Enum
      * @var string
      */
     public const RU = 'ru-RU';
+
     /**
      * Английский
      *

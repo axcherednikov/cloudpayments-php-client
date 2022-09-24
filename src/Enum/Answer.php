@@ -19,6 +19,7 @@ class Answer extends Enum
      * @var string
      */
     public const OK = 0;
+
     /**
      * Неверный номер заказа
      * Платеж будет отклонен
@@ -26,6 +27,7 @@ class Answer extends Enum
      * @var string
      */
     public const WRONG_ID = 10;
+
     /**
      * Некорректный AccountId
      * Платеж будет отклонен
@@ -33,6 +35,7 @@ class Answer extends Enum
      * @var string
      */
     public const WRONG_USER = 11;
+
     /**
      * Неверная сумма
      * Платеж будет отклонен
@@ -40,6 +43,7 @@ class Answer extends Enum
      * @var string
      */
     public const WRONG_SUM = 12;
+
     /**
      * Платеж не может быть принят
      * Платеж будет отклонен
@@ -47,6 +51,7 @@ class Answer extends Enum
      * @var string
      */
     public const CANT_ACCEPT = 13;
+
     /**
      * Платеж просрочен
      * Платеж будет отклонен, плательщик получит соответствующее уведомление

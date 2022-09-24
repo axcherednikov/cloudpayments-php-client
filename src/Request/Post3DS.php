@@ -12,18 +12,9 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class Post3DS extends BaseRequest
 {
-    public int $transactionId;
-    public string $paRes;
-
-    /**
-     * Post3DS constructor.
-     *
-     * @param  int     $transactionId
-     * @param  string  $paRes
-     */
-    public function __construct(int $transactionId, string $paRes)
-    {
-        $this->transactionId = $transactionId;
-        $this->paRes = $paRes;
+    public function __construct(
+        public int $transactionId,
+        public string $paRes
+    ) {
     }
 }

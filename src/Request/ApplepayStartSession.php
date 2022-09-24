@@ -6,37 +6,26 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
- * Class ApplepayStartSession
- *
  * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#zapusk-sessii-dlya-oplaty-cherez-apple-pay
  */
 class ApplepayStartSession extends BaseRequest
 {
-    public string $validationUrl;
-    public ?string $paymentUrl;
-
     /**
-     * ApplepayStartSession constructor.
-     *
-     * @param  string       $validationUrl
-     * @param  string|null  $paymentUrl
      * @throws BadTypeException
      */
-    public function __construct(string $validationUrl, ?string $paymentUrl = null)
-    {
+    public function __construct(
+        public string $validationUrl,
+        public ?string $paymentUrl = null
+    ) {
         if (filter_var($validationUrl, FILTER_VALIDATE_URL) === false) {
             throw new BadTypeException('Validation url is wrong');
         }
 
-        $this->validationUrl = $validationUrl;
-
-        if ($paymentUrl) {
+        if ($paymentUrl !== null) {
             if (filter_var($paymentUrl, FILTER_VALIDATE_URL) === false) {
                 throw new BadTypeException('Payment url is wrong');
             }
-
-            $this->paymentUrl = $paymentUrl;
         }
     }
 }

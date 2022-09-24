@@ -49,31 +49,31 @@ $apiClient = new \Excent\Cloudpayments\Library(\*...*\);
 $apiClient->paymentsCardsCharge(\*...*\);
 ```
 
-| Метод api                        | Метод library               | Объект Request              | Объект Response            |
-|----------------------------------|-----------------------------|-----------------------------|----------------------------|
-| payments/cards/charge            | paymentsCardsCharge         | TransactionWith3dsResponse  | TransactionWith3dsResponse |
-| payments/cards/auth              | createPaymentByCard2Step    | TransactionWith3dsResponse  | TransactionWith3dsResponse |
-| payments/tokens/charge           | executePaymentByToken       | TokenPayment                | TransactionResponse        |
-| payments/tokens/auth             | executePaymentByToken       | TokenPayment                | TransactionResponse        |
-| payments/confirm                 | confirmPayment              | PaymentsConfirm             | CloudResponse              |
-| payments/void                    | cancelPayment               | PaymentsVoid                | CloudResponse              |
-| payments/refund                  | paymentsRefund              | PaymentsRefund              | TransactionResponse        |
-| payments/cards/topup             | paymentsCardsTopup          | CardsTopUp                  | TransactionResponse        |
-| payments/token/topup             | paymentsTokenTopup          | TokenTopUp                  | TransactionResponse        |
-| payments/get                     | getPaymentData              | PaymentsGet                 | TransactionResponse        |
-| payments/find                    | getPaymentDataByInvoice     | PaymentsFind                | TransactionResponse        |
-| payments/list                    | getListPayment              | PaymentsList                | TransactionArrayResponse   |
-| payments/tokens/list             | paymentsTokensList          | TokenList                   | TokenArrayResponse         |
-| subscriptions/create             | subscriptionsCreate         | SubscriptionCreate          | SubscriptionResponse       |
-| subscriptions/get                | subscriptionsGet            | SubscriptionGet             | SubscriptionResponse       |
-| subscriptions/find               | subscriptionsFind           | SubscriptionFind            | SubscriptionArrayResponse  |
-| subscriptions/update             | subscriptionsUpdate         | SubscriptionUpdate          | SubscriptionResponse       |
-| subscriptions/cancel             | subscriptionsCancel         | SubscriptionCancel          | CloudResponse              |
-| orders/create                    | ordersCreate                | OrderCreate                 | OrderResponse              |
-| orders/cancel                    | ordersCancel                | OrderCancel                 | CloudResponse              |
-| site/notifications/{Type}/get    | siteNotificationsGet        | NotificationsGet            | NotificationResponse       |
-| site/notifications/{Type}/update | siteNotificationsUpdate     | NotificationsUpdate         | CloudResponse              |
-| applepay/startsession            | startSession                | ApplepayStartSession        | AppleSessionResponse       |
+| Метод api                        | Метод library            | Объект Request       | Объект Response            |
+|----------------------------------|--------------------------|----------------------|----------------------------|
+| payments/cards/charge            | paymentsCardsCharge      | CardsPayment         | TransactionWith3dsResponse |
+| payments/cards/auth              | createPaymentByCard2Step | CardsPayment         | TransactionWith3dsResponse |
+| payments/tokens/charge           | executePaymentByToken    | TokenPayment         | TransactionResponse        |
+| payments/tokens/auth             | executePaymentByToken    | TokenPayment         | TransactionResponse        |
+| payments/confirm                 | confirmPayment           | PaymentsConfirm      | CloudResponse              |
+| payments/void                    | cancelPayment            | PaymentsVoid         | CloudResponse              |
+| payments/refund                  | paymentsRefund           | PaymentsRefund       | TransactionResponse        |
+| payments/cards/topup             | paymentsCardsTopup       | CardsTopUp           | TransactionResponse        |
+| payments/token/topup             | paymentsTokenTopup       | TokenTopUp           | TransactionResponse        |
+| payments/get                     | getPaymentData           | PaymentsGet          | TransactionResponse        |
+| payments/find                    | getPaymentDataByInvoice  | PaymentsFind         | TransactionResponse        |
+| payments/list                    | getListPayment           | PaymentsList         | TransactionArrayResponse   |
+| payments/tokens/list             | paymentsTokensList       | TokenList            | TokenArrayResponse         |
+| subscriptions/create             | subscriptionsCreate      | SubscriptionCreate   | SubscriptionResponse       |
+| subscriptions/get                | subscriptionsGet         | SubscriptionGet      | SubscriptionResponse       |
+| subscriptions/find               | subscriptionsFind        | SubscriptionFind     | SubscriptionArrayResponse  |
+| subscriptions/update             | subscriptionsUpdate      | SubscriptionUpdate   | SubscriptionResponse       |
+| subscriptions/cancel             | subscriptionsCancel      | SubscriptionCancel   | CloudResponse              |
+| orders/create                    | ordersCreate             | OrderCreate          | OrderResponse              |
+| orders/cancel                    | ordersCancel             | OrderCancel          | CloudResponse              |
+| site/notifications/{Type}/get    | siteNotificationsGet     | NotificationsGet     | NotificationResponse       |
+| site/notifications/{Type}/update | siteNotificationsUpdate  | NotificationsUpdate  | CloudResponse              |
+| applepay/startsession            | startSession             | ApplepayStartSession | AppleSessionResponse       |
 
 ## Параметры запроса
 

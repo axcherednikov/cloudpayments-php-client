@@ -19,6 +19,7 @@ class ReceiptType extends Enum
      * @var string
      */
     public const INCOME = 'Income';
+
     /**
      * Возврат прихода
      * Выдается при возврате покупателю (клиенту) средств, полученных от него
@@ -26,6 +27,7 @@ class ReceiptType extends Enum
      * @var string
      */
     public const INCOME_RETURN = 'IncomeReturn';
+
     /**
      * Расход
      * Выдается при выдаче средств покупателю (клиенту)
@@ -33,6 +35,7 @@ class ReceiptType extends Enum
      * @var string
      */
     public const EXPENSE = 'Expense';
+
     /**
      * Возврат расхода
      * Выдается при получении средств от покупателя (клиента), выданных ему

@@ -12,15 +12,8 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class PaymentsVoid extends BaseRequest
 {
-    public int $transactionId;
-
-    /**
-     * PaymentsVoid constructor.
-     *
-     * @param  int  $transactionId
-     */
-    public function __construct(int $transactionId)
-    {
-        $this->transactionId = $transactionId;
+    public function __construct(
+        public int $transactionId
+    ) {
     }
 }

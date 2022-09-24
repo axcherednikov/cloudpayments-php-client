@@ -14,10 +14,7 @@ class CardsTopUp extends BaseRequest
 {
     public string $name;
     public string $cardCryptogramPacket;
-    /**
-     * @var int|float
-     */
-    public $amount;
+    public int|float $amount;
     public string $accountId;
     public string $currency;
     public ?string $email;

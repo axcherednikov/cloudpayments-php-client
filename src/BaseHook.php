@@ -11,19 +11,12 @@ namespace Excent\Cloudpayments;
  */
 class BaseHook
 {
-    /**
-     * @var array
-     */
     protected array $request;
 
-    /**
-     * BaseHook constructor.
-     *
-     * @param  array  $request
-     */
     public function __construct(array $request)
     {
         $this->request = $request;
+
         $this->fill();
     }
 
@@ -32,14 +25,13 @@ class BaseHook
         return $this->request;
     }
 
-    /**
-     * Заливка полей
-     */
-    private function fill()
+    private function fill(): void
     {
         $modelFields = get_object_vars($this);
+
         foreach ($modelFields as $key => $field) {
             $requestKey = ucfirst($key);
+
             if (isset($this->request[$requestKey])) {
                 $this->$key = $this->request[$requestKey];
             }

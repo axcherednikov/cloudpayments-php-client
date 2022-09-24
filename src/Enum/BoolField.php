@@ -16,6 +16,7 @@ class BoolField extends Enum
      * @var string
      */
     public const TRUE = 'true';
+
     /**
      * False
      *

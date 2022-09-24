@@ -20,15 +20,19 @@ class BaseRequest
     public function asArray(): array
     {
         $data = [];
+
         $fields = get_object_vars($this);
+
         foreach ($fields as $field => $value) {
             $key = ucfirst($field);
+
             //Подменим booleans
             if ($value === true) {
                 $value = BoolField::TRUE;
             } elseif ($value === false) {
                 $value = BoolField::FALSE;
             }
+
             //Пустые поля слать не будем
             if ($value !== null) {
                 $data[$key] = $value;
@@ -40,6 +44,7 @@ class BaseRequest
 
             if (is_array($value)) {
                 $computed = [];
+
                 foreach ($value as $item) {
                     if ($item instanceof BaseRequest) {
                         $item = $item->asArray();
@@ -47,6 +52,7 @@ class BaseRequest
 
                     $computed[] = $item;
                 }
+
                 $data[$key] = $computed;
             }
         }
