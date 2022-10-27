@@ -9,7 +9,7 @@ namespace Excent\Cloudpayments\Response\Models;
  */
 class TransactionModel extends BaseModel
 {
-    public ?int $transactionId = null;
+    public int $transactionId;
     public ?string $publicId = null;
     public ?string $terminalUrl = null;
     public ?float $amount = null;
