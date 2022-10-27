@@ -45,9 +45,9 @@ class TransactionModel extends BaseModel
     public ?string $ipLatitude = null;
     public ?string $ipLongitude = null;
     public ?string $cardFirstSix = null;
-    public ?string $cardLastFour = null;
+    public string $cardLastFour = '0000';
     public ?string $cardExpDate = null;
-    public ?string $cardType = null;
+    public string $cardType = 'unknown';
     public ?int $cardTypeCode = null;
     public ?string $cardProduct = null;
     public ?string $cardCategory = null;
