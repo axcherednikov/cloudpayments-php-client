@@ -3,11 +3,8 @@
 namespace Excent\Cloudpayments\Exceptions;
 
 /**
- * Class BadTypeException
- *
- * @package Excent\Cloudpayments\Exceptions
+ * Class BadTypeException.
  */
 class BadTypeException extends CloudpaymentsException
 {
-
 }

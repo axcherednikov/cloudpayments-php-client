@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class TransactionModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class TransactionModel.
  */
 class TransactionModel extends BaseModel
 {
@@ -75,7 +73,7 @@ class TransactionModel extends BaseModel
     public ?int $escrowAccumulationId = null;
 
     /**
-     * Получение переведенного кода ошибки
+     * Получение переведенного кода ошибки.
      *
      * @return string
      */

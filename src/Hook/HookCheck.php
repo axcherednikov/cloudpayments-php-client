@@ -2,11 +2,10 @@
 
 namespace Excent\Cloudpayments\Hook;
 
-
 use Excent\Cloudpayments\BaseHook;
 
 /**
- * Class HookCheck
+ * Class HookCheck.
  *
  * @link https://developers.cloudpayments.ru/#check
  */

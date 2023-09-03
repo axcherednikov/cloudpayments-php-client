@@ -5,7 +5,7 @@ namespace Excent\Cloudpayments\Hook;
 use Excent\Cloudpayments\BaseHook;
 
 /**
- * Class HookRecurrent
+ * Class HookRecurrent.
  *
  * @link https://developers.cloudpayments.ru/#recurrent
  */

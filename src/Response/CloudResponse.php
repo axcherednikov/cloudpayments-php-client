@@ -8,9 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
 /**
- * Class CloudResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class CloudResponse.
  */
 class CloudResponse extends BaseRequest
 {
@@ -22,7 +20,7 @@ class CloudResponse extends BaseRequest
     public $model;
 
     /**
-     * Заполняет по респонсу
+     * Заполняет по респонсу.
      *
      * @param  ResponseInterface  $response
      * @return static
@@ -34,6 +32,7 @@ class CloudResponse extends BaseRequest
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';
         $this->warning = $responseContent->Warning ?? 'Warning is not set';
+
         if (! empty($responseContent->Model)) {
             $this->fillModel($responseContent->Model);
         }
@@ -42,13 +41,14 @@ class CloudResponse extends BaseRequest
     }
 
     /**
-     * Заполняет model свойство
+     * Заполняет model свойство.
      *
      * @param $modelDate
      */
     public function fillModel($modelDate)
     {
         $model = $modelDate;
+
         if (is_object($modelDate)) {
             $model = new BaseModel();
             $model->fill($modelDate);

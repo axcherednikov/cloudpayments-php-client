@@ -2,12 +2,10 @@
 
 namespace Excent\Cloudpayments\Hook;
 
-
 use Excent\Cloudpayments\BaseHook;
 
 /**
- * Class HookReceipt
- *
+ * Class HookReceipt.
  */
 class HookReceipt extends BaseHook
 {

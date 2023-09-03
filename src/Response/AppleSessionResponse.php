@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\AppleSessionModel;
 use stdClass;
 
 /**
- * Class NotificationResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class NotificationResponse.
  */
 class AppleSessionResponse extends CloudResponse
 {
@@ -16,7 +14,7 @@ class AppleSessionResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)

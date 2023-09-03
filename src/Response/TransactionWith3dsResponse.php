@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\TransactionWith3dsModel;
 use stdClass;
 
 /**
- * Class TransactionResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class TransactionResponse.
  */
 class TransactionWith3dsResponse extends CloudResponse
 {
@@ -16,7 +14,7 @@ class TransactionWith3dsResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
@@ -28,7 +26,7 @@ class TransactionWith3dsResponse extends CloudResponse
     }
 
     /**
-     * Нужна ли 3-D Secure аутентификация
+     * Нужна ли 3-D Secure аутентификация.
      *
      * @return bool
      */

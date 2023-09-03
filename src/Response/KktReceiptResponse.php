@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\KktReceiptModel;
 use stdClass;
 
 /**
- * Class KktReceiptResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class KktReceiptResponse.
  */
 class KktReceiptResponse extends CloudResponse
 {
@@ -16,7 +14,7 @@ class KktReceiptResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)

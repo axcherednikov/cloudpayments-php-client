@@ -1,6 +1,6 @@
 <?php
 
-namespace Excent\Test;
+namespace Excent\Cloudpayments\Tests\Request;
 
 use Excent\Cloudpayments\Request\KktReceipt;
 use Excent\Cloudpayments\Request\Receipt\CustomerReceipt;
@@ -11,14 +11,14 @@ use Excent\Cloudpayments\Request\Receipt\ReceiptItemPurveyorData;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class KktReceiptTest
+ * Class KktReceiptTest.
  *
  * @group Cloudpayments
  */
 class KktReceiptTest extends TestCase
 {
     /**
-     * Проверка формирования массива
+     * Проверка формирования массива.
      */
     public function testTransformToArray()
     {
@@ -50,7 +50,7 @@ class KktReceiptTest extends TestCase
                         'Quantity' => '1.00',
                         'Amount' => '100.00',
                         'AgentData' => [
-                            'AgentOperationName' => 'operation name'
+                            'AgentOperationName' => 'operation name',
                         ],
                         'PurveyorData' => [
                             'Name' => 'ООО Ромашка',
@@ -66,7 +66,7 @@ class KktReceiptTest extends TestCase
                 ],
                 'TaxationSystem' => '2',
                 'Amounts' => [
-                    'AdvancePayment' => '1300.00'
+                    'AdvancePayment' => '1300.00',
                 ],
             ],
         ];

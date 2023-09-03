@@ -1,11 +1,13 @@
 <?php
 
+namespace Excent\Cloudpayments\Tests\Request;
+
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 use Excent\Cloudpayments\Request\PaymentsRefund;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class PaymentsRefundTest
+ * Class PaymentsRefundTest.
  *
  * @group Cloudpayments
  */
@@ -38,7 +40,7 @@ class PaymentsRefundTest extends TestCase
     }
 
     /**
-     * Проверяем валидацию для amount - ожидаем ошибку
+     * Проверяем валидацию для amount - ожидаем ошибку.
      */
     public function testCheckValidationAmountFailed()
     {

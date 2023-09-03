@@ -5,11 +5,9 @@ namespace Excent\Cloudpayments\Request;
 use Excent\Cloudpayments\BaseRequest;
 
 /**
- * Class PaymentsGet
+ * Class PaymentsGet.
  *
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#prosmotr-tranzaktsii
- *
  */
 class PaymentsGet extends BaseRequest
 {

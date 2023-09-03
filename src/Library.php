@@ -42,7 +42,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Библиотека методов для работы с CloudPayments
- * Class Library
+ * Class Library.
  */
 class Library
 {
@@ -74,7 +74,7 @@ class Library
                 $this->publicId,
                 $this->pass,
             ],
-            'expect' => false
+            'expect' => false,
         ]);
     }
 
@@ -103,7 +103,7 @@ class Library
     }
 
     /**
-     * Кастомный ключ идемпотентности
+     * Кастомный ключ идемпотентности.
      *
      * @param  string  $idempotencyKey
      */
@@ -122,7 +122,7 @@ class Library
     }
 
     /**
-     * Проверка платежа по номеру заказа
+     * Проверка платежа по номеру заказа.
      *
      * @param  PaymentsFind  $data
      * @return TransactionResponse
@@ -135,7 +135,7 @@ class Library
     }
 
     /**
-     * Метод получения детализации по транзакции
+     * Метод получения детализации по транзакции.
      *
      * @param  PaymentsGet  $data
      * @return TransactionResponse
@@ -148,7 +148,7 @@ class Library
     }
 
     /**
-     * Создание оплаты по токену при двухшаговой оплате
+     * Создание оплаты по токену при двухшаговой оплате.
      *
      * @param  TokenPayment  $data
      * @return TransactionResponse
@@ -161,7 +161,7 @@ class Library
     }
 
     /**
-     * Создание оплаты по карте при двухшаговой оплате
+     * Создание оплаты по карте при двухшаговой оплате.
      *
      * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
@@ -174,7 +174,7 @@ class Library
     }
 
     /**
-     * обработка 3Ds
+     * обработка 3Ds.
      *
      * @param  Post3DS  $data
      * @return TransactionResponse
@@ -187,7 +187,7 @@ class Library
     }
 
     /**
-     * Проведение оплаты по токену при одношаговой оплате
+     * Проведение оплаты по токену при одношаговой оплате.
      *
      * @param  TokenPayment  $data
      * @return TransactionResponse
@@ -200,7 +200,7 @@ class Library
     }
 
     /**
-     * Подтверждение оплаты
+     * Подтверждение оплаты.
      *
      * @param  PaymentsConfirm  $data
      * @return CloudResponse
@@ -213,7 +213,7 @@ class Library
     }
 
     /**
-     * Список транзакций за определенное время
+     * Список транзакций за определенное время.
      *
      * @param  PaymentsList  $data
      * @return TransactionArrayResponse
@@ -225,9 +225,8 @@ class Library
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
     }
 
-
     /**
-     * Отмена оплаты
+     * Отмена оплаты.
      *
      * @param  PaymentsVoid  $data
      * @return CloudResponse
@@ -240,7 +239,7 @@ class Library
     }
 
     /**
-     * Старт сессии Applepay
+     * Старт сессии Applepay.
      *
      * @param  ApplepayStartSession  $data
      * @return AppleSessionResponse
@@ -253,7 +252,7 @@ class Library
     }
 
     /**
-     * Создание чека
+     * Создание чека.
      *
      * @param  KktReceipt  $data
      * @return KktReceiptResponse
@@ -266,7 +265,7 @@ class Library
     }
 
     /**
-     * Возврат средств
+     * Возврат средств.
      *
      * @param  PaymentsRefund  $data
      * @return TransactionResponse
@@ -280,7 +279,7 @@ class Library
 
     /**
      * Метод для оплаты по криптограмме платежных данных (результат алгоритма шифрования)
-     * для одностадийного платежа
+     * для одностадийного платежа.
      *
      * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
@@ -293,7 +292,7 @@ class Library
     }
 
     /**
-     * Выплата по криптограмме
+     * Выплата по криптограмме.
      *
      * @param  CardsTopUp  $data
      * @return TransactionResponse
@@ -306,7 +305,7 @@ class Library
     }
 
     /**
-     * Выплата по токену
+     * Выплата по токену.
      *
      * @param  TokenTopUp  $data
      * @return TransactionResponse
@@ -319,7 +318,7 @@ class Library
     }
 
     /**
-     * Метод выгрузки списка всех платежных токенов CloudPayments
+     * Метод выгрузки списка всех платежных токенов CloudPayments.
      *
      * @param  TokenList|null  $data
      * @return TokenArrayResponse
@@ -332,7 +331,7 @@ class Library
     }
 
     /**
-     * Метод создания подписки на рекуррентные платежи
+     * Метод создания подписки на рекуррентные платежи.
      *
      * @param  SubscriptionCreate  $data
      * @return SubscriptionResponse
@@ -345,7 +344,7 @@ class Library
     }
 
     /**
-     * Метод получения информации о статусе подписки
+     * Метод получения информации о статусе подписки.
      *
      * @param  SubscriptionGet  $data
      * @return SubscriptionResponse
@@ -358,7 +357,7 @@ class Library
     }
 
     /**
-     * Метод получения списка подписок для определенного аккаунта
+     * Метод получения списка подписок для определенного аккаунта.
      *
      * @param  SubscriptionFind  $data
      * @return SubscriptionArrayResponse
@@ -371,7 +370,7 @@ class Library
     }
 
     /**
-     * Метод изменения ранее созданной подписки
+     * Метод изменения ранее созданной подписки.
      *
      * @param  SubscriptionUpdate  $data
      * @return SubscriptionResponse
@@ -384,7 +383,7 @@ class Library
     }
 
     /**
-     * Метод отмены подписки на рекуррентные платежи
+     * Метод отмены подписки на рекуррентные платежи.
      *
      * @param  SubscriptionCancel  $data
      * @return CloudResponse
@@ -397,7 +396,7 @@ class Library
     }
 
     /**
-     * Создание счета для отправки по почте
+     * Создание счета для отправки по почте.
      *
      * @param  OrderCreate  $data
      * @return OrderResponse
@@ -410,7 +409,7 @@ class Library
     }
 
     /**
-     * Метод отмены созданного счета
+     * Метод отмены созданного счета.
      *
      * @param  OrderCancel  $data
      * @return CloudResponse
@@ -423,7 +422,7 @@ class Library
     }
 
     /**
-     * Метод просмотра настроек уведомлений (с указанием типа уведомления)
+     * Метод просмотра настроек уведомлений (с указанием типа уведомления).
      *
      * @param  NotificationsGet  $data
      * @return NotificationResponse
@@ -436,7 +435,7 @@ class Library
     }
 
     /**
-     * Метод изменения настроек уведомлений
+     * Метод изменения настроек уведомлений.
      *
      * @param  NotificationsUpdate  $data
      * @return CloudResponse
@@ -463,12 +462,13 @@ class Library
     ): CloudResponse {
         $response = $this->sendRequest($method, $postData);
 
-        $cloudResponse = $cloudResponse ?? new CloudResponse();
+        $cloudResponse ??= new CloudResponse();
+
         return $cloudResponse->fillByResponse($response);
     }
 
     /**
-     * Запрос по api
+     * Запрос по api.
      *
      * @param  string  $method
      * @param  array   $postData
@@ -486,7 +486,7 @@ class Library
     }
 
     /**
-     * Генерирует request id для идемпотентных запросов
+     * Генерирует request id для идемпотентных запросов.
      *
      * @param  string  $method
      * @param  array   $postData
@@ -495,6 +495,7 @@ class Library
     public function getRequestId(string $method, array $postData): string
     {
         $stringData = "method:$method;";
+
         foreach ($postData as $key => $value) {
             $stringData .= sprintf('%s:%s', $key, serialize($value));
         }

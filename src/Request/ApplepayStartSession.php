@@ -6,7 +6,6 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#zapusk-sessii-dlya-oplaty-cherez-apple-pay
  */
 class ApplepayStartSession extends BaseRequest

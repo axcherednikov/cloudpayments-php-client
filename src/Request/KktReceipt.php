@@ -6,9 +6,8 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Request\Receipt\CustomerReceipt;
 
 /**
- * Class KktReceipt
+ * Class KktReceipt.
  *
- * @package Excent\Cloudpayments\Request
  * @see     https://developers.cloudkassir.ru/#formirovanie-kassovogo-cheka
  */
 class KktReceipt extends BaseRequest

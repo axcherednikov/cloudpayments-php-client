@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class KktReceiptModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class KktReceiptModel.
  */
 class KktReceiptModel extends BaseModel
 {

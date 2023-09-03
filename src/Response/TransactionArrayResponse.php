@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\TransactionModel;
 use stdClass;
 
 /**
- * Class TransactionArrayResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class TransactionArrayResponse.
  */
 class TransactionArrayResponse extends CloudResponse
 {
@@ -16,12 +14,13 @@ class TransactionArrayResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
     {
         $models = [];
+
         if (is_array($modelDate)) {
             foreach ($modelDate as $value) {
                 $model = new TransactionModel();

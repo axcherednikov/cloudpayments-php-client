@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class TransactionWith3dsModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class TransactionWith3dsModel.
  */
 class TransactionWith3dsModel extends TransactionModel
 {

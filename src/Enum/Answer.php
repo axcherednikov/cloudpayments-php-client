@@ -6,7 +6,7 @@ use MyCLabs\Enum\Enum;
 
 /**
  * Типы агента
- * https://developers.cloudkassir.ru/#agentsign
+ * https://developers.cloudkassir.ru/#agentsign.
  *
  * @see Enum
  */
@@ -14,7 +14,7 @@ class Answer extends Enum
 {
     /**
      * Платеж может быть проведен
-     * Система выполнит авторизацию платежа
+     * Система выполнит авторизацию платежа.
      *
      * @var string
      */
@@ -22,7 +22,7 @@ class Answer extends Enum
 
     /**
      * Неверный номер заказа
-     * Платеж будет отклонен
+     * Платеж будет отклонен.
      *
      * @var string
      */
@@ -30,7 +30,7 @@ class Answer extends Enum
 
     /**
      * Некорректный AccountId
-     * Платеж будет отклонен
+     * Платеж будет отклонен.
      *
      * @var string
      */
@@ -38,7 +38,7 @@ class Answer extends Enum
 
     /**
      * Неверная сумма
-     * Платеж будет отклонен
+     * Платеж будет отклонен.
      *
      * @var string
      */
@@ -46,7 +46,7 @@ class Answer extends Enum
 
     /**
      * Платеж не может быть принят
-     * Платеж будет отклонен
+     * Платеж будет отклонен.
      *
      * @var string
      */
@@ -54,7 +54,7 @@ class Answer extends Enum
 
     /**
      * Платеж просрочен
-     * Платеж будет отклонен, плательщик получит соответствующее уведомление
+     * Платеж будет отклонен, плательщик получит соответствующее уведомление.
      *
      * @var string
      */

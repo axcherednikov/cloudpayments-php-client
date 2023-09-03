@@ -6,9 +6,8 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
- * Class PaymentsRefund
+ * Class PaymentsRefund.
  *
- * @package Excent\Cloudpayments\Request
  * @see     https://developers.cloudpayments.ru/#vozvrat-deneg
  */
 class PaymentsRefund extends BaseRequest

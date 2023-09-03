@@ -6,7 +6,7 @@ use MyCLabs\Enum\Enum;
 
 /**
  * Типы агента
- * https://developers.cloudkassir.ru/#agentsign
+ * https://developers.cloudkassir.ru/#agentsign.
  *
  * @see Enum
  */

@@ -6,14 +6,12 @@ use Excent\Cloudpayments\Enum\BoolField;
 
 /**
  * Базовый класс моделей фондю
- * Class BaseRequest
- *
- * @package Excent\Cloudpayments
+ * Class BaseRequest.
  */
 class BaseRequest
 {
     /**
-     * Данные в нужном для запроса формате
+     * Данные в нужном для запроса формате.
      *
      * @return array
      */
@@ -38,7 +36,7 @@ class BaseRequest
                 $data[$key] = $value;
             }
 
-            if ($value instanceof BaseRequest) {
+            if ($value instanceof self) {
                 $data[$key] = $value->asArray();
             }
 
@@ -46,7 +44,7 @@ class BaseRequest
                 $computed = [];
 
                 foreach ($value as $item) {
-                    if ($item instanceof BaseRequest) {
+                    if ($item instanceof self) {
                         $item = $item->asArray();
                     }
 
@@ -59,5 +57,4 @@ class BaseRequest
 
         return $data;
     }
-
 }

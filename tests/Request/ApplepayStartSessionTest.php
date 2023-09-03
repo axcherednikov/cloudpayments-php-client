@@ -1,13 +1,13 @@
 <?php
 
-namespace Excent\Test;
+namespace Excent\Cloudpayments\Tests\Request;
 
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 use Excent\Cloudpayments\Request\ApplepayStartSession;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class ApplepayStartSessionTest
+ * Class ApplepayStartSessionTest.
  *
  * @group Cloudpayments
  */
@@ -25,7 +25,7 @@ class ApplepayStartSessionTest extends TestCase
     }
 
     /**
-     * Проверяем валидацию для validationUrl - ожидаем ошибку
+     * Проверяем валидацию для validationUrl - ожидаем ошибку.
      */
     public function testCheckValidationUrlFailed()
     {
@@ -52,7 +52,7 @@ class ApplepayStartSessionTest extends TestCase
 
     /**
      * Проверяем, что поле paymentUrl не заполняется,
-     * если ничего не передано
+     * если ничего не передано.
      */
     public function testFillPaymentUrlNotFilledSuccess()
     {
@@ -65,7 +65,7 @@ class ApplepayStartSessionTest extends TestCase
     }
 
     /**
-     * Проверяем валидацию для paymentUrl - ожидаем ошибку
+     * Проверяем валидацию для paymentUrl - ожидаем ошибку.
      */
     public function testFillPaymentUrlFailed()
     {

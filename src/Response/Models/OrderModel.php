@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class OrderModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class OrderModel.
  */
 class OrderModel extends BaseModel
 {

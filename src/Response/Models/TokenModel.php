@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class TokenModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class TokenModel.
  */
 class TokenModel extends BaseModel
 {

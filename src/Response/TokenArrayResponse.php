@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\TokenModel;
 use stdClass;
 
 /**
- * Class TokenArrayResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class TokenArrayResponse.
  */
 class TokenArrayResponse extends CloudResponse
 {
@@ -16,12 +14,13 @@ class TokenArrayResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
     {
         $models = [];
+
         if (is_array($modelDate)) {
             foreach ($modelDate as $value) {
                 $model = new TokenModel();

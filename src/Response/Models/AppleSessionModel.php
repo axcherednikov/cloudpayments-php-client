@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class AppleSessionModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class AppleSessionModel.
  */
 class AppleSessionModel extends BaseModel
 {

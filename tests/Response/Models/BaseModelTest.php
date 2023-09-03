@@ -1,17 +1,19 @@
 <?php
 
+namespace Excent\Cloudpayments\Tests\Response\Models;
+
 use Excent\Cloudpayments\Response\Models\BaseModel;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class BaseModelTest
+ * Class BaseModelTest.
  *
  * @group Cloudpayments
  */
 class BaseModelTest extends TestCase
 {
     /**
-     * Проверяем заполнение модели по объекту
+     * Проверяем заполнение модели по объекту.
      */
     public function testFillBaseModel()
     {

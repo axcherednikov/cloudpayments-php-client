@@ -6,9 +6,8 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
- * Class OrderCreate
+ * Class OrderCreate.
  *
- * @package Excent\Cloudpayments\Request
  * @see     https://developers.cloudpayments.ru/#sozdanie-scheta-dlya-otpravki-po-pochte
  */
 class OrderCreate extends BaseRequest

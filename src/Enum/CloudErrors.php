@@ -6,7 +6,7 @@ use MyCLabs\Enum\Enum;
 
 /**
  * Коды ошибок
- * https://developers.cloudpayments.ru/#kody-oshibok
+ * https://developers.cloudpayments.ru/#kody-oshibok.
  *
  * @see Enum
  */

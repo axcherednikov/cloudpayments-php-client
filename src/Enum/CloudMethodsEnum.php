@@ -7,7 +7,7 @@ use MyCLabs\Enum\Enum;
 /**
  * Список методов
  * https://developers.cloudpayments.ru/#api
- * https://developers.cloudkassir.ru/#api-kassy
+ * https://developers.cloudkassir.ru/#api-kassy.
  *
  * @see Enum
  */

@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\SubscriptionModel;
 use stdClass;
 
 /**
- * Class SubscriptionArrayResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class SubscriptionArrayResponse.
  */
 class SubscriptionArrayResponse extends CloudResponse
 {
@@ -16,12 +14,13 @@ class SubscriptionArrayResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)
     {
         $models = [];
+
         if (is_array($modelDate)) {
             foreach ($modelDate as $value) {
                 $model = new SubscriptionModel();

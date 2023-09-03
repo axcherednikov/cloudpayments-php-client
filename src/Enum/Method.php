@@ -6,28 +6,28 @@ use MyCLabs\Enum\Enum;
 
 /**
  * Признак способа расчета.
- * https://developers.cloudkassir.ru/#method
+ * https://developers.cloudkassir.ru/#method.
  *
  * @see Enum
  */
 class Method extends Enum
 {
     /**
-     * Unknown, неизвестный способ расчета
+     * Unknown, неизвестный способ расчета.
      *
      * @var int
      */
     public const UNKNOWN = 0;
 
     /**
-     * FullPrepayment, предоплата 100%
+     * FullPrepayment, предоплата 100%.
      *
      * @var int
      */
     public const FULL_PREPAYMENT = 1;
 
     /**
-     * PartialPrepayment, предоплата
+     * PartialPrepayment, предоплата.
      *
      * @var int
      */
@@ -62,7 +62,7 @@ class Method extends Enum
     public const CREDIT = 6;
 
     /**
-     * CreditPayment, оплата кредита
+     * CreditPayment, оплата кредита.
      *
      * @var int
      */

@@ -4,19 +4,14 @@ namespace Excent\Cloudpayments;
 
 /**
  * Базовый класс моделей фондю
- * Class BaseModel
+ * Class BaseModel.
  *
- * @package Excent\Cloudpayments
  * @property string $response_status
  */
 class BaseHook
 {
-    protected array $request;
-
-    public function __construct(array $request)
+    public function __construct(protected array $request)
     {
-        $this->request = $request;
-
         $this->fill();
     }
 

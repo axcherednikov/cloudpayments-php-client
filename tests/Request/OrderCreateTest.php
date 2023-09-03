@@ -1,11 +1,13 @@
 <?php
 
+namespace Excent\Cloudpayments\Tests\Request;
+
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 use Excent\Cloudpayments\Request\OrderCreate;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class OrderCreateTest
+ * Class OrderCreateTest.
  *
  * @group Cloudpayments
  */
@@ -42,7 +44,7 @@ class OrderCreateTest extends TestCase
     }
 
     /**
-     * Проверяем валидацию для amount - ожидаем ошибку
+     * Проверяем валидацию для amount - ожидаем ошибку.
      */
     public function testCheckValidationAmountFailed()
     {

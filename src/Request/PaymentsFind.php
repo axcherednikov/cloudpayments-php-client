@@ -5,9 +5,8 @@ namespace Excent\Cloudpayments\Request;
 use Excent\Cloudpayments\BaseRequest;
 
 /**
- * Class PaymentsFind
+ * Class PaymentsFind.
  *
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#proverka-statusa-platezha
  */
 class PaymentsFind extends BaseRequest

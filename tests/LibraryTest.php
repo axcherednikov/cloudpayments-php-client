@@ -1,5 +1,7 @@
 <?php
 
+namespace Excent\Cloudpayments\Tests;
+
 use Excent\Cloudpayments\Library;
 use Excent\Cloudpayments\Request\ApplepayStartSession;
 use Excent\Cloudpayments\Request\CardsPayment;
@@ -9,11 +11,11 @@ use Excent\Cloudpayments\Request\PaymentsGet;
 use Excent\Cloudpayments\Request\SubscriptionCreate;
 use Excent\Cloudpayments\Request\SubscriptionFind;
 use Excent\Cloudpayments\Request\TokenPayment;
-use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class LibraryTest
+ * Class LibraryTest.
  *
  * @group Cloudpayments
  */
@@ -34,7 +36,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * createPaymentByToken2Step
+     * createPaymentByToken2Step.
      */
     public function testCreatePaymentByToken2Step()
     {
@@ -55,7 +57,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * getPaymentData
+     * getPaymentData.
      */
     public function testGetPaymentData()
     {
@@ -77,7 +79,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * paymentsCardsCharge
+     * paymentsCardsCharge.
      */
     public function testPaymentsCardsCharge()
     {
@@ -98,7 +100,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * paymentsTokensList
+     * paymentsTokensList.
      */
     public function testPaymentsTokensList()
     {
@@ -121,7 +123,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * subscriptionsCreate
+     * subscriptionsCreate.
      */
     public function testSubscriptionsCreate()
     {
@@ -142,7 +144,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * subscriptionsFind
+     * subscriptionsFind.
      */
     public function testSubscriptionsFind()
     {
@@ -165,7 +167,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * ordersCreate
+     * ordersCreate.
      */
     public function testOrdersCreate()
     {
@@ -186,7 +188,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * siteNotificationsGet
+     * siteNotificationsGet.
      */
     public function testSiteNotificationsGet()
     {
@@ -209,7 +211,7 @@ class LibraryTest extends TestCase
 
     /**
      * Проверяем заполнение модели по запросу
-     * startSession
+     * startSession.
      */
     public function testStartSession()
     {

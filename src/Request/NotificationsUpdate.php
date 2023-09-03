@@ -5,9 +5,8 @@ namespace Excent\Cloudpayments\Request;
 use Excent\Cloudpayments\BaseRequest;
 
 /**
- * Class NotificationsUpdate
+ * Class NotificationsUpdate.
  *
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#izmenenie-nastroek-uvedomleniy
  */
 class NotificationsUpdate extends BaseRequest

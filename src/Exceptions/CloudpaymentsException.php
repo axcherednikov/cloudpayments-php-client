@@ -5,11 +5,8 @@ namespace Excent\Cloudpayments\Exceptions;
 use Exception;
 
 /**
- * Class CloudpaymentsException
- *
- * @package Excent\Cloudpayments\Exceptions
+ * Class CloudpaymentsException.
  */
 class CloudpaymentsException extends Exception
 {
-
 }

@@ -6,9 +6,7 @@ use Excent\Cloudpayments\Response\Models\OrderModel;
 use stdClass;
 
 /**
- * Class SubscriptionResponse
- *
- * @package Excent\Cloudpayments\Response
+ * Class SubscriptionResponse.
  */
 class OrderResponse extends CloudResponse
 {
@@ -16,7 +14,7 @@ class OrderResponse extends CloudResponse
     public $model;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * @param  stdClass  $modelDate
      */
     public function fillModel($modelDate)

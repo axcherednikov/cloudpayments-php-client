@@ -5,9 +5,8 @@ namespace Excent\Cloudpayments\Request;
 use Excent\Cloudpayments\BaseRequest;
 
 /**
- * Class TokenPayment
+ * Class TokenPayment.
  *
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#oplata-po-tokenu-rekarring
  */
 class TokenPayment extends BaseRequest

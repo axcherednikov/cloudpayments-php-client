@@ -1,17 +1,19 @@
 <?php
 
+namespace Excent\Cloudpayments\Tests\Response;
+
 use Excent\Cloudpayments\Response\TransactionWith3dsResponse;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class TransactionWith3dsModelTes
+ * Class TransactionWith3dsModelTes.
  *
  * @group Cloudpayments
  */
 class TransactionWith3dsModelTest extends TestCase
 {
     /**
-     * Проверка на наличие 3ds - проверка нужна
+     * Проверка на наличие 3ds - проверка нужна.
      */
     public function testIs3dsErrorTrue()
     {
@@ -24,7 +26,7 @@ class TransactionWith3dsModelTest extends TestCase
     }
 
     /**
-     * Проверка на наличие 3ds - проверка не нужна
+     * Проверка на наличие 3ds - проверка не нужна.
      */
     public function testIs3dsErrorFalse()
     {

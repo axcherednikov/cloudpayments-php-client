@@ -7,7 +7,6 @@ namespace Excent\Cloudpayments\Request;
 use Excent\Cloudpayments\BaseRequest;
 
 /**
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#oplata-po-kriptogramme
  */
 class CardsPayment extends BaseRequest

@@ -6,11 +6,9 @@ use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**
- * Class PaymentsConfirm
+ * Class PaymentsConfirm.
  *
- * @package Excent\Cloudpayments\CardPayment
  * @see     https://developers.cloudpayments.ru/#podtverzhdenie-oplaty
- *
  */
 class PaymentsConfirm extends BaseRequest
 {

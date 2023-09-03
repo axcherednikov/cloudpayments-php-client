@@ -3,9 +3,7 @@
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Class NotificationModel
- *
- * @package Excent\Cloudpayments\Response\Models
+ * Class NotificationModel.
  */
 class NotificationModel extends BaseModel
 {
