@@ -1,28 +1,22 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Язык уведомлений после ссылки на оплату
  * https://developers.cloudkassir.ru/#agentsign.
- *
- * @see Enum
  */
-class CultureName extends Enum
+enum CultureName: string
 {
     /**
      * Русский.
-     *
-     * @var string
      */
-    final public const RU = 'ru-RU';
+    case RU = 'ru-RU';
 
     /**
      * Английский.
-     *
-     * @var string
      */
-    final public const EN = 'en-US';
+    case EN = 'en-US';
 }

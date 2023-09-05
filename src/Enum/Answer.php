@@ -1,62 +1,48 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Типы агента
  * https://developers.cloudkassir.ru/#agentsign.
- *
- * @see Enum
  */
-class Answer extends Enum
+enum Answer: int
 {
     /**
      * Платеж может быть проведен
      * Система выполнит авторизацию платежа.
-     *
-     * @var string
      */
-    final public const OK = 0;
+    case OK = 0;
 
     /**
      * Неверный номер заказа
      * Платеж будет отклонен.
-     *
-     * @var string
      */
-    final public const WRONG_ID = 10;
+    case WRONG_ID = 10;
 
     /**
      * Некорректный AccountId
      * Платеж будет отклонен.
-     *
-     * @var string
      */
-    final public const WRONG_USER = 11;
+    case WRONG_USER = 11;
 
     /**
      * Неверная сумма
      * Платеж будет отклонен.
-     *
-     * @var string
      */
-    final public const WRONG_SUM = 12;
+    case WRONG_SUM = 12;
 
     /**
      * Платеж не может быть принят
      * Платеж будет отклонен.
-     *
-     * @var string
      */
-    final public const CANT_ACCEPT = 13;
+    case CANT_ACCEPT = 13;
 
     /**
      * Платеж просрочен
      * Платеж будет отклонен, плательщик получит соответствующее уведомление.
-     *
-     * @var string
      */
-    final public const OVERDUE = 20;
+    case OVERDUE = 20;
 }

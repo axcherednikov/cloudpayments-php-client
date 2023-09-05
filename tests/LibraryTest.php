@@ -21,7 +21,6 @@ use PHPUnit\Framework\TestCase;
  */
 class LibraryTest extends TestCase
 {
-    /** @var Library */
     protected $library;
 
     public function setUp(): void
@@ -29,7 +28,7 @@ class LibraryTest extends TestCase
         parent::setUp();
 
         $this->library = $this->getMockBuilder(Library::class)
-            ->setConstructorArgs(['1', '1'])
+            ->setConstructorArgs(['public_id', 'password'])
             ->onlyMethods(['sendRequest'])
             ->getMock();
     }
@@ -38,7 +37,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * createPaymentByToken2Step.
      */
-    public function testCreatePaymentByToken2Step()
+    public function testCreatePaymentByToken2Step(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => false,
@@ -47,7 +46,10 @@ class LibraryTest extends TestCase
         ]));
 
         $library = clone $this->library;
-        $library->expects($this->once())->method('sendRequest')->willReturn($response);
+        $library
+            ->expects($this->once())
+            ->method('sendRequest')
+            ->willReturn($response);
 
         $result = $library->createPaymentByToken2Step(new TokenPayment(100, 'RUB', '100', '100'));
 
@@ -59,7 +61,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * getPaymentData.
      */
-    public function testGetPaymentData()
+    public function testGetPaymentData(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -81,7 +83,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * paymentsCardsCharge.
      */
-    public function testPaymentsCardsCharge()
+    public function testPaymentsCardsCharge(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -102,7 +104,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * paymentsTokensList.
      */
-    public function testPaymentsTokensList()
+    public function testPaymentsTokensList(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -125,7 +127,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * subscriptionsCreate.
      */
-    public function testSubscriptionsCreate()
+    public function testSubscriptionsCreate(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -146,7 +148,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * subscriptionsFind.
      */
-    public function testSubscriptionsFind()
+    public function testSubscriptionsFind(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -169,7 +171,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * ordersCreate.
      */
-    public function testOrdersCreate()
+    public function testOrdersCreate(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -190,7 +192,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * siteNotificationsGet.
      */
-    public function testSiteNotificationsGet()
+    public function testSiteNotificationsGet(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,
@@ -213,7 +215,7 @@ class LibraryTest extends TestCase
      * Проверяем заполнение модели по запросу
      * startSession.
      */
-    public function testStartSession()
+    public function testStartSession(): void
     {
         $response = new Response(200, ['Content-type' => 'application/json'], json_encode([
             'Success' => true,

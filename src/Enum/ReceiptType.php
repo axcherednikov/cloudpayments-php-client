@@ -1,46 +1,36 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Типы чека по признаку расчета
  * https://developers.cloudkassir.ru/#type.
- *
- * @see Enum
  */
-class ReceiptType extends Enum
+enum ReceiptType: string
 {
     /**
      * Приход
      * Выдается при получении средств от покупателя (клиента).
-     *
-     * @var string
      */
-    final public const INCOME = 'Income';
+    case INCOME = 'Income';
 
     /**
-     * Возврат прихода
+     * Возврат прихода.
      * Выдается при возврате покупателю (клиенту) средств, полученных от него.
-     *
-     * @var string
      */
-    final public const INCOME_RETURN = 'IncomeReturn';
+    case INCOME_RETURN = 'IncomeReturn';
 
     /**
      * Расход
      * Выдается при выдаче средств покупателю (клиенту).
-     *
-     * @var string
      */
-    final public const EXPENSE = 'Expense';
+    case EXPENSE = 'Expense';
 
     /**
      * Возврат расхода
      * Выдается при получении средств от покупателя (клиента), выданных ему.
-     *
-     * @var string
      */
-    final public const EXPENSE_RETURN = 'ExpenseReturn';
+    case EXPENSE_RETURN = 'ExpenseReturn';
 }

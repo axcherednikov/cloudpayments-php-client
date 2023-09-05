@@ -38,6 +38,7 @@ use Excent\Cloudpayments\Response\TransactionArrayResponse;
 use Excent\Cloudpayments\Response\TransactionResponse;
 use Excent\Cloudpayments\Response\TransactionWith3dsResponse;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -47,9 +48,13 @@ use Psr\Http\Message\ResponseInterface;
 class Library
 {
     final public const DEFAULT_URL = 'https://api.cloudpayments.ru/';
+
     protected string $url;
+
     protected Client $client;
+
     protected bool $idempotency = false;
+
     protected ?string $idempotencyKey = null;
 
     public function __construct(protected string $publicId, protected string $pass, ?string $cpUrlApi = null)
@@ -107,8 +112,6 @@ class Library
 
     /**
      * Метод получения детализации по транзакции.
-     *
-     * @return TransactionResponse
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
     {
@@ -119,8 +122,6 @@ class Library
 
     /**
      * Создание оплаты по токену при двухшаговой оплате.
-     *
-     * @return TransactionResponse
      */
     public function createPaymentByToken2Step(TokenPayment $data): TransactionResponse
     {
@@ -131,8 +132,6 @@ class Library
 
     /**
      * Создание оплаты по карте при двухшаговой оплате.
-     *
-     * @return TransactionWith3dsResponse
      */
     public function createPaymentByCard2Step(CardsPayment $data): TransactionWith3dsResponse
     {
@@ -142,7 +141,7 @@ class Library
     }
 
     /**
-     * обработка 3Ds.
+     * Обработка 3Ds.
      */
     public function post3Ds(Post3DS $data): TransactionResponse
     {
@@ -153,8 +152,6 @@ class Library
 
     /**
      * Проведение оплаты по токену при одношаговой оплате.
-     *
-     * @return TransactionResponse
      */
     public function executePaymentByToken(TokenPayment $data): TransactionResponse
     {
@@ -165,20 +162,16 @@ class Library
 
     /**
      * Подтверждение оплаты.
-     *
-     * @return CloudResponse
      */
     public function confirmPayment(PaymentsConfirm $data): CloudResponse
     {
         $method = CloudMethodsEnum::PAYMENTS_CONFIRM;
 
-        return $this->request($method, $data->asArray());
+        return $this->request($method, $data->asArray(), new CloudResponse());
     }
 
     /**
      * Список транзакций за определенное время.
-     *
-     * @return TransactionArrayResponse
      */
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
     {
@@ -189,20 +182,16 @@ class Library
 
     /**
      * Отмена оплаты.
-     *
-     * @return CloudResponse
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse
     {
         $method = CloudMethodsEnum::PAYMENTS_VOID;
 
-        return $this->request($method, $data->asArray());
+        return $this->request($method, $data->asArray(), new CloudResponse());
     }
 
     /**
      * Старт сессии Applepay.
-     *
-     * @return AppleSessionResponse
      */
     public function startSession(ApplepayStartSession $data): AppleSessionResponse
     {
@@ -213,8 +202,6 @@ class Library
 
     /**
      * Создание чека.
-     *
-     * @return KktReceiptResponse
      */
     public function createReceipt(KktReceipt $data): KktReceiptResponse
     {
@@ -225,8 +212,6 @@ class Library
 
     /**
      * Возврат средств.
-     *
-     * @return TransactionResponse
      */
     public function paymentsRefund(PaymentsRefund $data): TransactionResponse
     {
@@ -238,8 +223,6 @@ class Library
     /**
      * Метод для оплаты по криптограмме платежных данных (результат алгоритма шифрования)
      * для одностадийного платежа.
-     *
-     * @return TransactionWith3dsResponse
      */
     public function paymentsCardsCharge(CardsPayment $data): TransactionWith3dsResponse
     {
@@ -250,8 +233,6 @@ class Library
 
     /**
      * Выплата по криптограмме.
-     *
-     * @return TransactionResponse
      */
     public function paymentsCardsTopup(CardsTopUp $data): TransactionResponse
     {
@@ -262,8 +243,6 @@ class Library
 
     /**
      * Выплата по токену.
-     *
-     * @return TransactionResponse
      */
     public function paymentsTokenTopup(TokenTopUp $data): TransactionResponse
     {
@@ -274,9 +253,6 @@ class Library
 
     /**
      * Метод выгрузки списка всех платежных токенов CloudPayments.
-     *
-     * @param  TokenList|null  $data
-     * @return TokenArrayResponse
      */
     public function paymentsTokensList(?TokenList $data = null): TokenArrayResponse
     {
@@ -287,8 +263,6 @@ class Library
 
     /**
      * Метод создания подписки на рекуррентные платежи.
-     *
-     * @return SubscriptionResponse
      */
     public function subscriptionsCreate(SubscriptionCreate $data): SubscriptionResponse
     {
@@ -299,8 +273,6 @@ class Library
 
     /**
      * Метод получения информации о статусе подписки.
-     *
-     * @return SubscriptionResponse
      */
     public function subscriptionsGet(SubscriptionGet $data): SubscriptionResponse
     {
@@ -311,8 +283,6 @@ class Library
 
     /**
      * Метод получения списка подписок для определенного аккаунта.
-     *
-     * @return SubscriptionArrayResponse
      */
     public function subscriptionsFind(SubscriptionFind $data): SubscriptionArrayResponse
     {
@@ -323,8 +293,6 @@ class Library
 
     /**
      * Метод изменения ранее созданной подписки.
-     *
-     * @return SubscriptionResponse
      */
     public function subscriptionsUpdate(SubscriptionUpdate $data): SubscriptionResponse
     {
@@ -335,20 +303,16 @@ class Library
 
     /**
      * Метод отмены подписки на рекуррентные платежи.
-     *
-     * @return CloudResponse
      */
     public function subscriptionsCancel(SubscriptionCancel $data): CloudResponse
     {
         $method = CloudMethodsEnum::SUBSCRIPTIONS_CANCEL;
 
-        return $this->request($method, $data->asArray());
+        return $this->request($method, $data->asArray(), new CloudResponse());
     }
 
     /**
      * Создание счета для отправки по почте.
-     *
-     * @return OrderResponse
      */
     public function ordersCreate(OrderCreate $data): OrderResponse
     {
@@ -359,14 +323,12 @@ class Library
 
     /**
      * Метод отмены созданного счета.
-     *
-     * @return CloudResponse
      */
     public function ordersCancel(OrderCancel $data): CloudResponse
     {
         $method = CloudMethodsEnum::ORDERS_CANCEL;
 
-        return $this->request($method, $data->asArray());
+        return $this->request($method, $data->asArray(), new CloudResponse());
     }
 
     /**
@@ -386,26 +348,27 @@ class Library
     {
         $method = sprintf('site/notifications/%s/update', $data->type);
 
-        return $this->request($method, $data->asArray());
+        return $this->request($method, $data->asArray(), new CloudResponse());
     }
 
     /**
      * Базовый запрос
      */
-    private function request(
-        string $method,
-        array $postData = [],
-        ?CloudResponse $cloudResponse = null
-    ): CloudResponse {
-        $response = $this->sendRequest($method, $postData);
+    private function request(string|CloudMethodsEnum $method, array $postData, CloudResponse $cloudResponse): CloudResponse
+    {
+        if ($method instanceof CloudMethodsEnum) {
+            $method = $method->value;
+        }
 
-        $cloudResponse ??= new CloudResponse();
+        $response = $this->sendRequest($method, $postData);
 
         return $cloudResponse->fillByResponse($response);
     }
 
     /**
      * Запрос по api.
+     *
+     * @throws GuzzleException
      */
     public function sendRequest(string $method, array $postData = []): ResponseInterface
     {

@@ -20,7 +20,7 @@ class KktReceiptTest extends TestCase
     /**
      * Проверка формирования массива.
      */
-    public function testTransformToArray()
+    public function testTransformToArray(): void
     {
         $item = new ReceiptItem('Наименование товара 1', '100.00', '1.00', '100.00');
         $agentData = new ReceiptItemAgentData(agentOperationName: 'operation name');

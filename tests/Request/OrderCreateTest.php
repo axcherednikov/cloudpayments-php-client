@@ -16,7 +16,7 @@ class OrderCreateTest extends TestCase
     /**
      * Проверяем валидацию для amount - успешный вариант
      */
-    public function testCheckValidationAmountSuccessInt()
+    public function testCheckValidationAmountSuccessInt(): void
     {
         $amount = 1;
         $currency = 'RUB';
@@ -31,7 +31,7 @@ class OrderCreateTest extends TestCase
     /**
      * Проверяем валидацию для amount - успешный вариант
      */
-    public function testCheckValidationAmountSuccessFloat()
+    public function testCheckValidationAmountSuccessFloat(): void
     {
         $amount = 1.123;
         $currency = 'RUB';
@@ -46,7 +46,7 @@ class OrderCreateTest extends TestCase
     /**
      * Проверяем валидацию для amount - ожидаем ошибку.
      */
-    public function testCheckValidationAmountFailed()
+    public function testCheckValidationAmountFailed(): void
     {
         $amount = 'asdf';
         $currency = 'RUB';

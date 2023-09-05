@@ -16,7 +16,7 @@ class ApplepayStartSessionTest extends TestCase
     /**
      * Проверяем валидацию для validationUrl - успешный вариант
      */
-    public function testCheckValidationUrlSuccess()
+    public function testCheckValidationUrlSuccess(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
 
@@ -27,7 +27,7 @@ class ApplepayStartSessionTest extends TestCase
     /**
      * Проверяем валидацию для validationUrl - ожидаем ошибку.
      */
-    public function testCheckValidationUrlFailed()
+    public function testCheckValidationUrlFailed(): void
     {
         $validationUrl = 'asdf';
 
@@ -39,7 +39,7 @@ class ApplepayStartSessionTest extends TestCase
     /**
      * Проверяем валидацию для paymentUrl - успешный вариант
      */
-    public function testFillPaymentUrlSuccess()
+    public function testFillPaymentUrlSuccess(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
         $paymentUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
@@ -54,7 +54,7 @@ class ApplepayStartSessionTest extends TestCase
      * Проверяем, что поле paymentUrl не заполняется,
      * если ничего не передано.
      */
-    public function testFillPaymentUrlNotFilledSuccess()
+    public function testFillPaymentUrlNotFilledSuccess(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
 
@@ -67,7 +67,7 @@ class ApplepayStartSessionTest extends TestCase
     /**
      * Проверяем валидацию для paymentUrl - ожидаем ошибку.
      */
-    public function testFillPaymentUrlFailed()
+    public function testFillPaymentUrlFailed(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
         $paymentUrl = 'asdf';

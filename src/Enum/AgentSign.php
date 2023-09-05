@@ -1,64 +1,48 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Типы агента
  * https://developers.cloudkassir.ru/#agentsign.
- *
- * @see Enum
  */
-class AgentSign extends Enum
+enum AgentSign: int
 {
     /**
      * "Банковский платежный агент", Оказание услуг пользователем, являющимся банковским платежным агентом
-     *
-     * @var string
      */
-    final public const BANK_AGENT = 0;
+    case BANK_AGENT = 0;
 
     /**
      * "Банковский платежный субагент", Оказание услуг пользователем, являющимся банковским платежным субагентом
-     *
-     * @var string
      */
-    final public const BANK_SUB_AGENT = 1;
+    case BANK_SUB_AGENT = 1;
 
     /**
      * "Платежный агент", Оказание услуг пользователем, являющимся платежным агентом
-     *
-     * @var string
      */
-    final public const PAY_AGENT = 2;
+    case PAY_AGENT = 2;
 
     /**
      * "Платежный субагент", Оказание услуг пользователем, являющимся платежным субагентом
-     *
-     * @var string
      */
-    final public const PAY_SUB_AGENT = 3;
+    case PAY_SUB_AGENT = 3;
 
     /**
      * "Поверенный", Оказание услуг пользователем, являющимся поверенным
-     *
-     * @var string
      */
-    final public const ATTORNEY = 4;
+    case ATTORNEY = 4;
 
     /**
      * "Комиссионер", Оказание услуг пользователем, являющимся комиссионером
-     *
-     * @var string
      */
-    final public const COMMISSIONER = 5;
+    case COMMISSIONER = 5;
 
     /**
      * "Агент", Оказание услуг пользователем, являющимся агентом и не являющимся
      * банковским платежным агентом (субагентом), платежным агентом (субагентом), поверенным, комиссионером
-     *
-     * @var string
      */
-    final public const AGENT = 6;
+    case AGENT = 6;
 }

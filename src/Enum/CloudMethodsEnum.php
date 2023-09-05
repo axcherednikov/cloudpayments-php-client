@@ -1,84 +1,82 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Список методов
  * https://developers.cloudpayments.ru/#api
  * https://developers.cloudkassir.ru/#api-kassy.
- *
- * @see Enum
  */
-class CloudMethodsEnum extends Enum
+enum CloudMethodsEnum: string
 {
     /** Проверка платежа по номеру заказа */
-    final public const PAYMENTS_FIND = 'payments/find';
+    case PAYMENTS_FIND = 'payments/find';
 
     /** Проверка платежа */
-    final public const PAYMENTS_GET = 'payments/get';
+    case PAYMENTS_GET = 'payments/get';
 
     /** Создание оплаты по токену при двухшаговой оплате */
-    final public const PAYMENTS_TOKENS_AUTH = 'payments/tokens/auth';
+    case PAYMENTS_TOKENS_AUTH = 'payments/tokens/auth';
 
     /** Создание оплаты по карте при двухшаговой оплате */
-    final public const PAYMENTS_CARDS_AUTH = 'payments/cards/auth';
+    case PAYMENTS_CARDS_AUTH = 'payments/cards/auth';
 
     /** обработка 3Ds */
-    final public const PAYMENTS_CARDS_POST3DS = 'payments/cards/post3ds';
+    case PAYMENTS_CARDS_POST3DS = 'payments/cards/post3ds';
 
     /** Проведение оплаты по токену при одношаговой оплате */
-    final public const PAYMENTS_TOKENS_CHARGE = 'payments/tokens/charge';
+    case PAYMENTS_TOKENS_CHARGE = 'payments/tokens/charge';
 
     /** Подтверждение оплаты */
-    final public const PAYMENTS_CONFIRM = 'payments/confirm';
+    case PAYMENTS_CONFIRM = 'payments/confirm';
 
     /** Список транзакций за определенное время */
-    final public const PAYMENTS_LIST = 'payments/list';
+    case PAYMENTS_LIST = 'payments/list';
 
     /** Отмена оплаты */
-    final public const PAYMENTS_VOID = 'payments/void';
+    case PAYMENTS_VOID = 'payments/void';
 
     /** Старт сессии Applepay */
-    final public const APPLEPAY_STARTSESSION = 'applepay/startsession';
+    case APPLEPAY_STARTSESSION = 'applepay/startsession';
 
     /** Возврат средств */
-    final public const PAYMENTS_REFUND = 'payments/refund';
+    case PAYMENTS_REFUND = 'payments/refund';
 
     /** Метод для оплаты по криптограмме платежных данных для одностадийного платежа */
-    final public const PAYMENTS_CARDS_CHARGE = 'payments/cards/charge';
+    case PAYMENTS_CARDS_CHARGE = 'payments/cards/charge';
 
     /** Выплата по криптограмме */
-    final public const PAYMENTS_CARDS_TOPUP = 'payments/cards/topup';
+    case PAYMENTS_CARDS_TOPUP = 'payments/cards/topup';
 
     /** Выплата по токену */
-    final public const PAYMENTS_TOKEN_TOPUP = 'payments/token/topup';
+    case PAYMENTS_TOKEN_TOPUP = 'payments/token/topup';
 
     /** Метод выгрузки списка всех платежных токенов */
-    final public const PAYMENTS_TOKENS_LIST = 'payments/tokens/list';
+    case PAYMENTS_TOKENS_LIST = 'payments/tokens/list';
 
     /** Метод создания подписки на рекуррентные платежи */
-    final public const SUBSCRIPTIONS_CREATE = 'subscriptions/create';
+    case SUBSCRIPTIONS_CREATE = 'subscriptions/create';
 
     /** Метод получения информации о статусе подписки */
-    final public const SUBSCRIPTIONS_GET = 'subscriptions/get';
+    case SUBSCRIPTIONS_GET = 'subscriptions/get';
 
     /** Метод получения списка подписок для определенного аккаунта */
-    final public const SUBSCRIPTIONS_FIND = 'subscriptions/find';
+    case SUBSCRIPTIONS_FIND = 'subscriptions/find';
 
     /** Метод изменения ранее созданной подписки */
-    final public const SUBSCRIPTIONS_UPDATE = 'subscriptions/update';
+    case SUBSCRIPTIONS_UPDATE = 'subscriptions/update';
 
     /** Метод отмены подписки на рекуррентные платежи */
-    final public const SUBSCRIPTIONS_CANCEL = 'subscriptions/cancel';
+    case SUBSCRIPTIONS_CANCEL = 'subscriptions/cancel';
 
     /** Создание счета для отправки по почте */
-    final public const ORDERS_CREATE = 'orders/create';
+    case ORDERS_CREATE = 'orders/create';
 
     /** Метод отмены созданного счета */
-    final public const ORDERS_CANCEL = 'orders/cancel';
+    case ORDERS_CANCEL = 'orders/cancel';
 
     /** Создание чека */
-    final public const KKT_RECEIPT = 'kkt/receipt';
+    case KKT_RECEIPT = 'kkt/receipt';
 }

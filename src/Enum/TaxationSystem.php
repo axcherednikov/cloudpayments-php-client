@@ -1,56 +1,42 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Варианты систем налогообложения
  * https://developers.cloudkassir.ru/#taxationsystem.
- *
- * @see Enum
  */
-class TaxationSystem extends Enum
+enum TaxationSystem: int
 {
     /**
      * Общая система налогообложения.
-     *
-     * @var int
      */
-    final public const OSNO = 0;
+    case OSNO = 0;
 
     /**
      * Упрощенная система налогообложения (Доход).
-     *
-     * @var int
      */
-    final public const USN_1 = 1;
+    case USN_1 = 1;
 
     /**
      * Упрощенная система налогообложения (Доход минус Расход).
-     *
-     * @var int
      */
-    final public const USN_2 = 2;
+    case USN_2 = 2;
 
     /**
      * Единый налог на вмененный доход.
-     *
-     * @var int
      */
-    final public const ENVD = 3;
+    case ENVD = 3;
 
     /**
      * Единый сельскохозяйственный налог.
-     *
-     * @var int
      */
-    final public const ESN = 4;
+    case ESN = 4;
 
     /**
      * Патентная система налогообложения.
-     *
-     * @var int
      */
-    final public const PATENT = 5;
+    case PATENT = 5;
 }

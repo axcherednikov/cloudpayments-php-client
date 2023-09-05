@@ -4,7 +4,6 @@ namespace Excent\Cloudpayments\Response;
 
 use Excent\Cloudpayments\Response\Models\BaseModel;
 use Psr\Http\Message\ResponseInterface;
-use stdClass;
 
 /**
  * Class CloudResponse.
@@ -22,7 +21,7 @@ class CloudResponse
      */
     public function fillByResponse(ResponseInterface $response): self
     {
-        $responseContent = json_decode($response->getBody()->getContents(), null, 512, JSON_THROW_ON_ERROR);
+        $responseContent = (object) json_decode($response->getBody()->getContents(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';

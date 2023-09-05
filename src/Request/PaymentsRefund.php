@@ -11,23 +11,21 @@ use Excent\Cloudpayments\Exceptions\BadTypeException;
  */
 class PaymentsRefund extends BaseRequest
 {
-    /**
-     * @var int|float
-     */
-    public $amount;
+    public float $amount;
+
     public ?string $jsonData = null;
 
     /**
      * PaymentsRefund constructor.
      *
-     * @param       $amount
      * @throws BadTypeException
      */
-    public function __construct(public int $transactionId, $amount)
+    public function __construct(public int $transactionId, string|int|float $amount)
     {
         if (! is_numeric($amount)) {
             throw new BadTypeException('Amount isn\'t numeric');
         }
-        $this->amount = $amount;
+
+        $this->amount = (float) $amount;
     }
 }

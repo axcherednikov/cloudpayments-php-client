@@ -15,7 +15,7 @@ class TransactionWith3dsModelTest extends TestCase
     /**
      * Проверка на наличие 3ds - проверка нужна.
      */
-    public function testIs3dsErrorTrue()
+    public function testIs3dsErrorTrue(): void
     {
         $responseModel = (object) ['PaReq' => 'some', 'AcsUrl' => 'some'];
 
@@ -28,7 +28,7 @@ class TransactionWith3dsModelTest extends TestCase
     /**
      * Проверка на наличие 3ds - проверка не нужна.
      */
-    public function testIs3dsErrorFalse()
+    public function testIs3dsErrorFalse(): void
     {
         $responseModel = (object) [];
 
