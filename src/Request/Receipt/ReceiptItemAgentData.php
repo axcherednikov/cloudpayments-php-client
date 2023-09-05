@@ -2,7 +2,7 @@
 
 namespace Excent\Cloudpayments\Request\Receipt;
 
-use Excent\Cloudpayments\BaseRequest;
+use Excent\Cloudpayments\Request\BaseRequest;
 
 /**
  * @see https://developers.cloudkassir.ru/#agentdata

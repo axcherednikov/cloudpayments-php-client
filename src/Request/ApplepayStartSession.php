@@ -2,7 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 
 /**

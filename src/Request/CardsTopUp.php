@@ -2,8 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * Class CardsTopUp.
  *
@@ -16,10 +14,10 @@ class CardsTopUp extends BaseRequest
     public int|float $amount;
     public string $accountId;
     public string $currency;
-    public ?string $email;
-    public ?string $jsonData;
-    public ?string $invoiceId;
-    public ?string $description;
-    public ?array $payer;
-    public ?array $receiver;
+    public ?string $email = null;
+    public ?string $jsonData = null;
+    public ?string $invoiceId = null;
+    public ?string $description = null;
+    public ?array $payer = null;
+    public ?array $receiver = null;
 }

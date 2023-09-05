@@ -2,7 +2,6 @@
 
 namespace Excent\Cloudpayments\Tests\Response\Models;
 
-use Excent\Cloudpayments\Response\Models\BaseModel;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,11 +14,11 @@ class BaseModelTest extends TestCase
     /**
      * Проверяем заполнение модели по объекту.
      */
-    public function testFillBaseModel()
+    public function testFillBaseModel(): void
     {
         $testObject = (object) ['a' => 1, 'b' => 2, 'c' => 3];
 
-        $model = new BaseModel();
+        $model = new TestModel();
         $model->fill($testObject);
 
         $this->assertEquals($testObject->a, $model->a);

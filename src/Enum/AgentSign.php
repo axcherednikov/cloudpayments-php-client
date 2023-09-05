@@ -17,42 +17,42 @@ class AgentSign extends Enum
      *
      * @var string
      */
-    public const BANK_AGENT = 0;
+    final public const BANK_AGENT = 0;
 
     /**
      * "Банковский платежный субагент", Оказание услуг пользователем, являющимся банковским платежным субагентом
      *
      * @var string
      */
-    public const BANK_SUB_AGENT = 1;
+    final public const BANK_SUB_AGENT = 1;
 
     /**
      * "Платежный агент", Оказание услуг пользователем, являющимся платежным агентом
      *
      * @var string
      */
-    public const PAY_AGENT = 2;
+    final public const PAY_AGENT = 2;
 
     /**
      * "Платежный субагент", Оказание услуг пользователем, являющимся платежным субагентом
      *
      * @var string
      */
-    public const PAY_SUB_AGENT = 3;
+    final public const PAY_SUB_AGENT = 3;
 
     /**
      * "Поверенный", Оказание услуг пользователем, являющимся поверенным
      *
      * @var string
      */
-    public const ATTORNEY = 4;
+    final public const ATTORNEY = 4;
 
     /**
      * "Комиссионер", Оказание услуг пользователем, являющимся комиссионером
      *
      * @var string
      */
-    public const COMMISSIONER = 5;
+    final public const COMMISSIONER = 5;
 
     /**
      * "Агент", Оказание услуг пользователем, являющимся агентом и не являющимся
@@ -60,5 +60,5 @@ class AgentSign extends Enum
      *
      * @var string
      */
-    public const AGENT = 6;
+    final public const AGENT = 6;
 }

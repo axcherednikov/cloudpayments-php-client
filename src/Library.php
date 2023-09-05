@@ -46,27 +46,15 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Library
 {
-    const DEFAULT_URL = 'https://api.cloudpayments.ru/';
-
-    protected string $publicId;
-    protected string $pass;
+    final public const DEFAULT_URL = 'https://api.cloudpayments.ru/';
     protected string $url;
     protected Client $client;
     protected bool $idempotency = false;
     protected ?string $idempotencyKey = null;
 
-    /**
-     * Library constructor.
-     *
-     * @param  string       $publicId
-     * @param  string       $pass
-     * @param  string|null  $cpUrlApi
-     */
-    public function __construct(string $publicId, string $pass, ?string $cpUrlApi = null)
+    public function __construct(protected string $publicId, protected string $pass, ?string $cpUrlApi = null)
     {
-        $this->url = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
-        $this->publicId = $publicId;
-        $this->pass = $pass;
+        $this->url = $cpUrlApi ?? self::DEFAULT_URL;
 
         $this->client = new Client([
             'base_uri' => $this->url,
@@ -78,25 +66,16 @@ class Library
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getPublicId(): string
     {
         return $this->publicId;
     }
 
-    /**
-     * @return string
-     */
     public function getPass(): string
     {
         return $this->pass;
     }
 
-    /**
-     * @param  bool  $idempotency
-     */
     public function setIdempotency(bool $idempotency): void
     {
         $this->idempotency = $idempotency;
@@ -104,8 +83,6 @@ class Library
 
     /**
      * Кастомный ключ идемпотентности.
-     *
-     * @param  string  $idempotencyKey
      */
     public function setIdempotencyKey(string $idempotencyKey): void
     {
@@ -113,9 +90,6 @@ class Library
         $this->idempotencyKey = $idempotencyKey;
     }
 
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
         return $this->url;
@@ -123,9 +97,6 @@ class Library
 
     /**
      * Проверка платежа по номеру заказа.
-     *
-     * @param  PaymentsFind  $data
-     * @return TransactionResponse
      */
     public function getPaymentDataByInvoice(PaymentsFind $data): TransactionResponse
     {
@@ -137,7 +108,6 @@ class Library
     /**
      * Метод получения детализации по транзакции.
      *
-     * @param  PaymentsGet  $data
      * @return TransactionResponse
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
@@ -150,7 +120,6 @@ class Library
     /**
      * Создание оплаты по токену при двухшаговой оплате.
      *
-     * @param  TokenPayment  $data
      * @return TransactionResponse
      */
     public function createPaymentByToken2Step(TokenPayment $data): TransactionResponse
@@ -163,7 +132,6 @@ class Library
     /**
      * Создание оплаты по карте при двухшаговой оплате.
      *
-     * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
      */
     public function createPaymentByCard2Step(CardsPayment $data): TransactionWith3dsResponse
@@ -175,9 +143,6 @@ class Library
 
     /**
      * обработка 3Ds.
-     *
-     * @param  Post3DS  $data
-     * @return TransactionResponse
      */
     public function post3Ds(Post3DS $data): TransactionResponse
     {
@@ -189,7 +154,6 @@ class Library
     /**
      * Проведение оплаты по токену при одношаговой оплате.
      *
-     * @param  TokenPayment  $data
      * @return TransactionResponse
      */
     public function executePaymentByToken(TokenPayment $data): TransactionResponse
@@ -202,7 +166,6 @@ class Library
     /**
      * Подтверждение оплаты.
      *
-     * @param  PaymentsConfirm  $data
      * @return CloudResponse
      */
     public function confirmPayment(PaymentsConfirm $data): CloudResponse
@@ -215,7 +178,6 @@ class Library
     /**
      * Список транзакций за определенное время.
      *
-     * @param  PaymentsList  $data
      * @return TransactionArrayResponse
      */
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
@@ -228,7 +190,6 @@ class Library
     /**
      * Отмена оплаты.
      *
-     * @param  PaymentsVoid  $data
      * @return CloudResponse
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse
@@ -241,7 +202,6 @@ class Library
     /**
      * Старт сессии Applepay.
      *
-     * @param  ApplepayStartSession  $data
      * @return AppleSessionResponse
      */
     public function startSession(ApplepayStartSession $data): AppleSessionResponse
@@ -254,7 +214,6 @@ class Library
     /**
      * Создание чека.
      *
-     * @param  KktReceipt  $data
      * @return KktReceiptResponse
      */
     public function createReceipt(KktReceipt $data): KktReceiptResponse
@@ -267,7 +226,6 @@ class Library
     /**
      * Возврат средств.
      *
-     * @param  PaymentsRefund  $data
      * @return TransactionResponse
      */
     public function paymentsRefund(PaymentsRefund $data): TransactionResponse
@@ -281,7 +239,6 @@ class Library
      * Метод для оплаты по криптограмме платежных данных (результат алгоритма шифрования)
      * для одностадийного платежа.
      *
-     * @param  CardsPayment  $data
      * @return TransactionWith3dsResponse
      */
     public function paymentsCardsCharge(CardsPayment $data): TransactionWith3dsResponse
@@ -294,7 +251,6 @@ class Library
     /**
      * Выплата по криптограмме.
      *
-     * @param  CardsTopUp  $data
      * @return TransactionResponse
      */
     public function paymentsCardsTopup(CardsTopUp $data): TransactionResponse
@@ -307,7 +263,6 @@ class Library
     /**
      * Выплата по токену.
      *
-     * @param  TokenTopUp  $data
      * @return TransactionResponse
      */
     public function paymentsTokenTopup(TokenTopUp $data): TransactionResponse
@@ -333,7 +288,6 @@ class Library
     /**
      * Метод создания подписки на рекуррентные платежи.
      *
-     * @param  SubscriptionCreate  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsCreate(SubscriptionCreate $data): SubscriptionResponse
@@ -346,7 +300,6 @@ class Library
     /**
      * Метод получения информации о статусе подписки.
      *
-     * @param  SubscriptionGet  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsGet(SubscriptionGet $data): SubscriptionResponse
@@ -359,7 +312,6 @@ class Library
     /**
      * Метод получения списка подписок для определенного аккаунта.
      *
-     * @param  SubscriptionFind  $data
      * @return SubscriptionArrayResponse
      */
     public function subscriptionsFind(SubscriptionFind $data): SubscriptionArrayResponse
@@ -372,7 +324,6 @@ class Library
     /**
      * Метод изменения ранее созданной подписки.
      *
-     * @param  SubscriptionUpdate  $data
      * @return SubscriptionResponse
      */
     public function subscriptionsUpdate(SubscriptionUpdate $data): SubscriptionResponse
@@ -385,7 +336,6 @@ class Library
     /**
      * Метод отмены подписки на рекуррентные платежи.
      *
-     * @param  SubscriptionCancel  $data
      * @return CloudResponse
      */
     public function subscriptionsCancel(SubscriptionCancel $data): CloudResponse
@@ -398,7 +348,6 @@ class Library
     /**
      * Создание счета для отправки по почте.
      *
-     * @param  OrderCreate  $data
      * @return OrderResponse
      */
     public function ordersCreate(OrderCreate $data): OrderResponse
@@ -411,7 +360,6 @@ class Library
     /**
      * Метод отмены созданного счета.
      *
-     * @param  OrderCancel  $data
      * @return CloudResponse
      */
     public function ordersCancel(OrderCancel $data): CloudResponse
@@ -423,9 +371,6 @@ class Library
 
     /**
      * Метод просмотра настроек уведомлений (с указанием типа уведомления).
-     *
-     * @param  NotificationsGet  $data
-     * @return NotificationResponse
      */
     public function siteNotificationsGet(NotificationsGet $data): NotificationResponse
     {
@@ -436,9 +381,6 @@ class Library
 
     /**
      * Метод изменения настроек уведомлений.
-     *
-     * @param  NotificationsUpdate  $data
-     * @return CloudResponse
      */
     public function siteNotificationsUpdate(NotificationsUpdate $data): CloudResponse
     {
@@ -449,13 +391,8 @@ class Library
 
     /**
      * Базовый запрос
-     *
-     * @param  string              $method
-     * @param  array               $postData
-     * @param  CloudResponse|null  $cloudResponse
-     * @return mixed
      */
-    protected function request(
+    private function request(
         string $method,
         array $postData = [],
         ?CloudResponse $cloudResponse = null
@@ -469,10 +406,6 @@ class Library
 
     /**
      * Запрос по api.
-     *
-     * @param  string  $method
-     * @param  array   $postData
-     * @return ResponseInterface
      */
     public function sendRequest(string $method, array $postData = []): ResponseInterface
     {
@@ -487,10 +420,6 @@ class Library
 
     /**
      * Генерирует request id для идемпотентных запросов.
-     *
-     * @param  string  $method
-     * @param  array   $postData
-     * @return string
      */
     public function getRequestId(string $method, array $postData): string
     {

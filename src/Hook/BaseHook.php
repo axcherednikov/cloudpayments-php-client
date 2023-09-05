@@ -1,6 +1,6 @@
 <?php
 
-namespace Excent\Cloudpayments;
+namespace Excent\Cloudpayments\Hook;
 
 /**
  * Базовый класс моделей фондю

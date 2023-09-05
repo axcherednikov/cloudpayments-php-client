@@ -2,8 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * Class OrderCancel.
  *

@@ -18,7 +18,7 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const OK = 0;
+    final public const OK = 0;
 
     /**
      * Неверный номер заказа
@@ -26,7 +26,7 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const WRONG_ID = 10;
+    final public const WRONG_ID = 10;
 
     /**
      * Некорректный AccountId
@@ -34,7 +34,7 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const WRONG_USER = 11;
+    final public const WRONG_USER = 11;
 
     /**
      * Неверная сумма
@@ -42,7 +42,7 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const WRONG_SUM = 12;
+    final public const WRONG_SUM = 12;
 
     /**
      * Платеж не может быть принят
@@ -50,7 +50,7 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const CANT_ACCEPT = 13;
+    final public const CANT_ACCEPT = 13;
 
     /**
      * Платеж просрочен
@@ -58,5 +58,5 @@ class Answer extends Enum
      *
      * @var string
      */
-    public const OVERDUE = 20;
+    final public const OVERDUE = 20;
 }

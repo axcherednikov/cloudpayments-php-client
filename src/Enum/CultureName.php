@@ -17,12 +17,12 @@ class CultureName extends Enum
      *
      * @var string
      */
-    public const RU = 'ru-RU';
+    final public const RU = 'ru-RU';
 
     /**
      * Английский.
      *
      * @var string
      */
-    public const EN = 'en-US';
+    final public const EN = 'en-US';
 }

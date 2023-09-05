@@ -2,7 +2,6 @@
 
 namespace Excent\Cloudpayments\Response;
 
-use Excent\Cloudpayments\BaseRequest;
 use Excent\Cloudpayments\Response\Models\BaseModel;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
@@ -10,24 +9,20 @@ use stdClass;
 /**
  * Class CloudResponse.
  */
-class CloudResponse extends BaseRequest
+class CloudResponse
 {
     public bool $success;
     public ?string $message = null;
     public ?string $warning = null;
 
-    /** @var BaseModel|stdClass */
     public $model;
 
     /**
      * Заполняет по респонсу.
-     *
-     * @param  ResponseInterface  $response
-     * @return static
      */
     public function fillByResponse(ResponseInterface $response): self
     {
-        $responseContent = json_decode($response->getBody()->getContents());
+        $responseContent = json_decode($response->getBody()->getContents(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';
@@ -42,10 +37,8 @@ class CloudResponse extends BaseRequest
 
     /**
      * Заполняет model свойство.
-     *
-     * @param $modelDate
      */
-    public function fillModel($modelDate)
+    public function fillModel($modelDate): void
     {
         $model = $modelDate;
 

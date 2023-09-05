@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * @see     https://developers.cloudpayments.ru/#oplata-po-kriptogramme
  */

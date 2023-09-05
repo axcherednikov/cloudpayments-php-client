@@ -2,8 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * Class PaymentsList.
  *
@@ -12,20 +10,17 @@ use Excent\Cloudpayments\BaseRequest;
 class PaymentsList extends BaseRequest
 {
     /**
-     * "Date":"2014-08-09".
-     * @var string
-     */
-    public string $date;
-    /**
      * https://developers.cloudpayments.ru/#kody-vremennyh-zon.
      * @var string
      */
     public string $timeZone;
 
-    public function __construct(string $date, ?string $timeZone = null)
-    {
-        $this->date = $date;
-
+    public function __construct(/**
+     * "Date":"2014-08-09".
+     */
+        public string $date,
+        ?string $timeZone = null
+    ) {
         if ($timeZone) {
             $this->timeZone = $timeZone;
         }

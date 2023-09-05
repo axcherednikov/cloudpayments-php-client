@@ -1,7 +1,9 @@
-# Cloudpayments api Library
+# Cloudpayments API Library
 
 ## Оглавление
 
+- [Предисловие](#предисловие)
+- [Требования](#требования)
 - [Установка](#установка)
 - [Начало работы](#начало-работы)
 - [Поддерживаемые методы](#поддерживаемые-методы)
@@ -16,12 +18,16 @@
 и было принято решение создать форк данного пакета для поддержки более современных версий php и пакетов, 
 поддерживающие новые версии php
 
+## Требования
+
+- php 8.1
+
 ## Установка
 
 Установить библиотеку можно с помощью composer:
 
-```
-composer require axcherednikov/cloudpayments-php-client
+```bash
+$ composer require axcherednikov/cloudpayments-php-client
 ```
 
 ## Начало работы
@@ -30,6 +36,7 @@ composer require axcherednikov/cloudpayments-php-client
 $publicId = /*...*/;
 $pass = /*...*/;
 $apiClient = new \Excent\Cloudpayments\Library($publicId, $pass);
+
 $response = $apiClient->paymentsCardsCharge(new \Excent\Cloudpayments\Request\CardsPayment(
     100,
     'RUB',

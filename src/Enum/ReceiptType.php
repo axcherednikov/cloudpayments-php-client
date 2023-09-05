@@ -18,7 +18,7 @@ class ReceiptType extends Enum
      *
      * @var string
      */
-    public const INCOME = 'Income';
+    final public const INCOME = 'Income';
 
     /**
      * Возврат прихода
@@ -26,7 +26,7 @@ class ReceiptType extends Enum
      *
      * @var string
      */
-    public const INCOME_RETURN = 'IncomeReturn';
+    final public const INCOME_RETURN = 'IncomeReturn';
 
     /**
      * Расход
@@ -34,7 +34,7 @@ class ReceiptType extends Enum
      *
      * @var string
      */
-    public const EXPENSE = 'Expense';
+    final public const EXPENSE = 'Expense';
 
     /**
      * Возврат расхода
@@ -42,5 +42,5 @@ class ReceiptType extends Enum
      *
      * @var string
      */
-    public const EXPENSE_RETURN = 'ExpenseReturn';
+    final public const EXPENSE_RETURN = 'ExpenseReturn';
 }

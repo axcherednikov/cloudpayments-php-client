@@ -3,7 +3,6 @@
 namespace Excent\Cloudpayments\Response;
 
 use Excent\Cloudpayments\Response\Models\AppleSessionModel;
-use stdClass;
 
 /**
  * Class NotificationResponse.
@@ -13,11 +12,7 @@ class AppleSessionResponse extends CloudResponse
     /** @var AppleSessionModel */
     public $model;
 
-    /**
-     * @inheritdoc
-     * @param  stdClass  $modelDate
-     */
-    public function fillModel($modelDate)
+    public function fillModel($modelDate): void
     {
         $model = new AppleSessionModel();
         $model->fill($modelDate);

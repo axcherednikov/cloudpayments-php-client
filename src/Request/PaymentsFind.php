@@ -2,8 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * Class PaymentsFind.
  *
@@ -11,15 +9,10 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class PaymentsFind extends BaseRequest
 {
-    public string $invoiceId;
-
     /**
      * PaymentsFind constructor.
-     *
-     * @param  string  $invoiceId
      */
-    public function __construct(string $invoiceId)
+    public function __construct(public string $invoiceId)
     {
-        $this->invoiceId = $invoiceId;
     }
 }

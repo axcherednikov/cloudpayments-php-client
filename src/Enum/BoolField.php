@@ -1,26 +1,16 @@
 <?php
 
-namespace Excent\Cloudpayments\Enum;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace Excent\Cloudpayments\Enum;
 
 /**
  * Bool-значения для клауда
  * https://developers.cloudkassir.ru/#agentsign.
  */
-class BoolField extends Enum
+enum BoolField: string
 {
-    /**
-     * True.
-     *
-     * @var string
-     */
-    public const TRUE = 'true';
+    case TRUE = 'true';
 
-    /**
-     * False.
-     *
-     * @var string
-     */
-    public const FALSE = 'false';
+    case FALSE = 'false';
 }

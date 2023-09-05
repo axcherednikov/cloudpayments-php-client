@@ -1,6 +1,6 @@
 <?php
 
-namespace Excent\Cloudpayments;
+namespace Excent\Cloudpayments\Request;
 
 use Excent\Cloudpayments\Enum\BoolField;
 
@@ -8,12 +8,12 @@ use Excent\Cloudpayments\Enum\BoolField;
  * Базовый класс моделей фондю
  * Class BaseRequest.
  */
-class BaseRequest
+abstract class BaseRequest
 {
     /**
      * Данные в нужном для запроса формате.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function asArray(): array
     {
@@ -24,14 +24,14 @@ class BaseRequest
         foreach ($fields as $field => $value) {
             $key = ucfirst($field);
 
-            //Подменим booleans
             if ($value === true) {
-                $value = BoolField::TRUE;
-            } elseif ($value === false) {
-                $value = BoolField::FALSE;
+                $value = BoolField::TRUE->value;
             }
 
-            //Пустые поля слать не будем
+            if ($value === false) {
+                $value = BoolField::FALSE->value;
+            }
+
             if ($value !== null) {
                 $data[$key] = $value;
             }

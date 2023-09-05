@@ -2,8 +2,6 @@
 
 namespace Excent\Cloudpayments\Request;
 
-use Excent\Cloudpayments\BaseRequest;
-
 /**
  * Class PaymentsGet.
  *
@@ -11,15 +9,7 @@ use Excent\Cloudpayments\BaseRequest;
  */
 class PaymentsGet extends BaseRequest
 {
-    public int $transactionId;
-
-    /**
-     * PaymentsGet constructor.
-     *
-     * @param  int  $transactionId
-     */
-    public function __construct(int $transactionId)
+    public function __construct(public int $transactionId)
     {
-        $this->transactionId = $transactionId;
     }
 }
