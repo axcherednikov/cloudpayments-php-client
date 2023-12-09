@@ -19,6 +19,8 @@ class TokenPayment extends BaseRequest
         public ?string $ipAddress = null,
         public ?string $email = null,
         public ?string $jsonData = null,
+        public int $paymentScheduled = 0,
+        public int $trInitiatorCode = 1,
     ) {
     }
 }
