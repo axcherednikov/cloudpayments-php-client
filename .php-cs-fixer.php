@@ -179,6 +179,7 @@ $finder = Finder::create()
 $config = new Config();
 
 return $config->setFinder($finder)
+    ->setCacheFile(__DIR__ . '/tmp/.php-cs-fixer.cache')
     ->setRules($rules)
     ->setRiskyAllowed(true)
     ->setUsingCache(true);

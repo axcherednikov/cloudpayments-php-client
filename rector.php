@@ -9,6 +9,7 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importNames();
+    $rectorConfig->cacheDirectory(__DIR__ . '/tmp/rector');
 
     $rectorConfig->paths([
         __DIR__ . '/src',
