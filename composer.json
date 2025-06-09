@@ -21,8 +21,7 @@
         "ergebnis/composer-normalize": "^2.47",
         "friendsofphp/php-cs-fixer": "^3.25",
         "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^9.5",
-        "rector/rector": "^1.1"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {

@@ -14,6 +14,10 @@ vendor: composer.json composer.lock ## Собрать vendor
 ## Контроль качества кода
 ## ----------------------
 
+rector-fix: vendor ## Запустить исправление PHP кода при помощи Rector (https://getrector.org)
+	$(EXEC_PHP)  vendor-bin/rector/vendor/bin/rector process
+.PHONY: rector-fix
+
 ##
 ## Контроль зависимостей
 ## ----------------------
