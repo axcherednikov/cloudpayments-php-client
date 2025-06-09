@@ -26,6 +26,10 @@ fixcs: vendor ## Исправить ошибки PHP code style при помо�
 	$(EXEC_PHP) vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff --verbose
 .PHONY: fixcs
 
+phpstan: vendor ## Запустить полный анализ PHP кода при помощи PHPStan (https://phpstan.org)
+	$(EXEC_PHP) vendor-bin/phpstan/vendor/bin/phpstan analyse --memory-limit 2G
+.PHONY: phpstan
+
 ##
 ## Контроль зависимостей
 ## ----------------------
