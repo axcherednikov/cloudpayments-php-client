@@ -1,158 +1,298 @@
-# Cloudpayments API Library
+# CloudPayments PHP Client
+
+[![Tests](https://github.com/axcherednikov/cloudpayments-php-client/actions/workflows/tests.yml/badge.svg)](https://github.com/axcherednikov/cloudpayments-php-client/actions/workflows/tests.yml)
+[![Latest Stable Version](https://img.shields.io/packagist/v/axcherednikov/cloudpayments-php-client.svg)](https://packagist.org/packages/axcherednikov/cloudpayments-php-client)
+[![PHP Version](https://img.shields.io/packagist/dependency-v/axcherednikov/cloudpayments-php-client/php.svg)](https://packagist.org/packages/axcherednikov/cloudpayments-php-client)
+[![License](https://img.shields.io/packagist/l/axcherednikov/cloudpayments-php-client.svg)](LICENSE)
+
+PHP-клиент для [CloudPayments API](https://developers.cloudpayments.ru/#api).
+Пакет предоставляет DTO для запросов, DTO для ответов, обработку HTTP-запросов через Guzzle и классы для данных webhook-уведомлений.
+
+Проект основан на кодовой базе `flowwow/cloudpayments-php-client`, развивается независимо и использует namespace `Excent\Cloudpayments`.
 
 ## Оглавление
 
-- [Предисловие](#предисловие)
 - [Требования](#требования)
 - [Установка](#установка)
-- [Начало работы](#начало-работы)
+- [Быстрый старт](#быстрый-старт)
+- [3-D Secure](#3-d-secure)
 - [Поддерживаемые методы](#поддерживаемые-методы)
-- [Параметры запроса](#параметры-запроса)
-- [Параметры ответа](#параметры-ответа)
+- [Запросы](#запросы)
+- [Ответы](#ответы)
 - [Уведомления](#уведомления)
 - [Идемпотентность](#идемпотентность)
-
-## Предисловие
-
-Пакет flowwow/cloudpayments-php-client потерял своевременную поддержку, 
-и было принято решение создать форк данного пакета для поддержки более современных версий php и пакетов, 
-поддерживающие новые версии php
+- [Обработка ошибок](#обработка-ошибок)
+- [Разработка](#разработка)
+- [Версионирование](#версионирование)
+- [License](#license)
 
 ## Требования
 
-- php 8.1
+- PHP `^8.1`
+- Guzzle `^7.4`
+- Composer
 
 ## Установка
 
-Установить библиотеку можно с помощью composer:
-
 ```bash
-$ composer require axcherednikov/cloudpayments-php-client
+composer require axcherednikov/cloudpayments-php-client
 ```
 
-## Начало работы
+## Быстрый старт
 
 ```php
-$publicId = /*...*/;
-$pass = /*...*/;
-$apiClient = new \Excent\Cloudpayments\Library($publicId, $pass);
+<?php
 
-$response = $apiClient->paymentsCardsCharge(new \Excent\Cloudpayments\Request\CardsPayment(
-    100,
+declare(strict_types=1);
+
+use Excent\Cloudpayments\Library;
+use Excent\Cloudpayments\Request\CardsPayment;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$client = new Library(
+    $_ENV['CLOUDPAYMENTS_PUBLIC_ID'],
+    $_ENV['CLOUDPAYMENTS_API_PASSWORD']
+);
+
+$request = new CardsPayment(
+    100.00,
     'RUB',
-    '123.123.123.123',
-    '01492500008719030128SMfLeYdKp5dSQVIiO5l6ZCJiPdel4uDjdFTTz1UnXY'
-));
+    '127.0.0.1',
+    'CARD_CRYPTOGRAM_PACKET'
+);
 
-echo $response->success;
+$response = $client->paymentsCardsCharge($request);
+
+if ($response->success) {
+    echo $response->model->transactionId;
+}
+```
+
+Если нужно переопределить endpoint CloudPayments, передайте URL третьим аргументом конструктора:
+
+```php
+$client = new Library($publicId, $apiPassword, $customApiUrl);
+```
+
+## 3-D Secure
+
+Методы `paymentsCardsCharge()` и `createPaymentByCard2Step()` возвращают `TransactionWith3dsResponse`. Если требуется 3-D Secure, `is3dsError()` вернет `true`, а данные для перенаправления будут доступны в `model`.
+
+```php
+use Excent\Cloudpayments\Request\Post3DS;
+
+$response = $client->paymentsCardsCharge($request);
+
+if ($response->is3dsError()) {
+    $acsUrl = $response->model->acsUrl;
+    $paReq = $response->model->paReq;
+    $transactionId = $response->model->transactionId;
+
+    // Передайте пользователя на страницу ACS банка, затем обработайте PaRes.
+    $client->post3Ds(new Post3DS($transactionId, 'PARES_FROM_ACS'));
+}
 ```
 
 ## Поддерживаемые методы
 
-Библиотека поддерживает большое количество методов api(https://developers.cloudpayments.ru/#api). Для параметров запроса и ответа поддерживается объект-обертка.
+Библиотека работает с методами из [CloudPayments API](https://developers.cloudpayments.ru/#api) через request/response DTO.
+
+| Метод API                        | Метод Library             | Request DTO          | Response DTO               |
+|----------------------------------|---------------------------|----------------------|----------------------------|
+| `payments/cards/charge`          | `paymentsCardsCharge`     | `CardsPayment`       | `TransactionWith3dsResponse` |
+| `payments/cards/auth`            | `createPaymentByCard2Step` | `CardsPayment`       | `TransactionWith3dsResponse` |
+| `payments/cards/post3ds`         | `post3Ds`                 | `Post3DS`            | `TransactionResponse`      |
+| `payments/tokens/charge`         | `executePaymentByToken`   | `TokenPayment`       | `TransactionResponse`      |
+| `payments/tokens/auth`           | `createPaymentByToken2Step` | `TokenPayment`       | `TransactionResponse`      |
+| `payments/confirm`               | `confirmPayment`          | `PaymentsConfirm`    | `CloudResponse`            |
+| `payments/void`                  | `cancelPayment`           | `PaymentsVoid`       | `CloudResponse`            |
+| `payments/refund`                | `paymentsRefund`          | `PaymentsRefund`     | `TransactionResponse`      |
+| `payments/cards/topup`           | `paymentsCardsTopup`      | `CardsTopUp`         | `TransactionResponse`      |
+| `payments/token/topup`           | `paymentsTokenTopup`      | `TokenTopUp`         | `TransactionResponse`      |
+| `payments/get`                   | `getPaymentData`          | `PaymentsGet`        | `TransactionResponse`      |
+| `payments/find`                  | `getPaymentDataByInvoice` | `PaymentsFind`       | `TransactionResponse`      |
+| `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
+| `payments/tokens/list`           | `paymentsTokensList`      | `TokenList` или `null` | `TokenArrayResponse`     |
+| `subscriptions/create`           | `subscriptionsCreate`     | `SubscriptionCreate` | `SubscriptionResponse`     |
+| `subscriptions/get`              | `subscriptionsGet`        | `SubscriptionGet`    | `SubscriptionResponse`     |
+| `subscriptions/find`             | `subscriptionsFind`       | `SubscriptionFind`   | `SubscriptionArrayResponse` |
+| `subscriptions/update`           | `subscriptionsUpdate`     | `SubscriptionUpdate` | `SubscriptionResponse`     |
+| `subscriptions/cancel`           | `subscriptionsCancel`     | `SubscriptionCancel` | `CloudResponse`            |
+| `orders/create`                  | `ordersCreate`            | `OrderCreate`        | `OrderResponse`            |
+| `orders/cancel`                  | `ordersCancel`            | `OrderCancel`        | `CloudResponse`            |
+| `site/notifications/{Type}/get`  | `siteNotificationsGet`    | `NotificationsGet`   | `NotificationResponse`     |
+| `site/notifications/{Type}/update` | `siteNotificationsUpdate` | `NotificationsUpdate` | `CloudResponse`          |
+| `applepay/startsession`          | `startSession`            | `ApplepayStartSession` | `AppleSessionResponse`   |
+| `kkt/receipt`                    | `createReceipt`           | `KktReceipt`         | `KktReceiptResponse`       |
+
+## Запросы
+
+Параметры API передаются через DTO из namespace `Excent\Cloudpayments\Request`.
 
 ```php
-$apiClient = new \Excent\Cloudpayments\Library(\*...*\);
-$apiClient->paymentsCardsCharge(\*...*\);
+use Excent\Cloudpayments\Request\ApplepayStartSession;
+
+$request = new ApplepayStartSession(
+    'https://apple-pay-gateway.apple.com/paymentservices/startSession'
+);
+
+$response = $client->startSession($request);
 ```
 
-| Метод api                        | Метод library            | Объект Request       | Объект Response            |
-|----------------------------------|--------------------------|----------------------|----------------------------|
-| payments/cards/charge            | paymentsCardsCharge      | CardsPayment         | TransactionWith3dsResponse |
-| payments/cards/auth              | createPaymentByCard2Step | CardsPayment         | TransactionWith3dsResponse |
-| payments/tokens/charge           | executePaymentByToken    | TokenPayment         | TransactionResponse        |
-| payments/tokens/auth             | executePaymentByToken    | TokenPayment         | TransactionResponse        |
-| payments/confirm                 | confirmPayment           | PaymentsConfirm      | CloudResponse              |
-| payments/void                    | cancelPayment            | PaymentsVoid         | CloudResponse              |
-| payments/refund                  | paymentsRefund           | PaymentsRefund       | TransactionResponse        |
-| payments/cards/topup             | paymentsCardsTopup       | CardsTopUp           | TransactionResponse        |
-| payments/token/topup             | paymentsTokenTopup       | TokenTopUp           | TransactionResponse        |
-| payments/get                     | getPaymentData           | PaymentsGet          | TransactionResponse        |
-| payments/find                    | getPaymentDataByInvoice  | PaymentsFind         | TransactionResponse        |
-| payments/list                    | getListPayment           | PaymentsList         | TransactionArrayResponse   |
-| payments/tokens/list             | paymentsTokensList       | TokenList            | TokenArrayResponse         |
-| subscriptions/create             | subscriptionsCreate      | SubscriptionCreate   | SubscriptionResponse       |
-| subscriptions/get                | subscriptionsGet         | SubscriptionGet      | SubscriptionResponse       |
-| subscriptions/find               | subscriptionsFind        | SubscriptionFind     | SubscriptionArrayResponse  |
-| subscriptions/update             | subscriptionsUpdate      | SubscriptionUpdate   | SubscriptionResponse       |
-| subscriptions/cancel             | subscriptionsCancel      | SubscriptionCancel   | CloudResponse              |
-| orders/create                    | ordersCreate             | OrderCreate          | OrderResponse              |
-| orders/cancel                    | ordersCancel             | OrderCancel          | CloudResponse              |
-| site/notifications/{Type}/get    | siteNotificationsGet     | NotificationsGet     | NotificationResponse       |
-| site/notifications/{Type}/update | siteNotificationsUpdate  | NotificationsUpdate  | CloudResponse              |
-| applepay/startsession            | startSession             | ApplepayStartSession | AppleSessionResponse       |
+DTO наследуются от `BaseRequest` и преобразуются в формат CloudPayments через `asArray()`:
 
-## Параметры запроса
+- `amount` превращается в `Amount`;
+- значения `null` не попадают в запрос;
+- `true` и `false` передаются как строковые значения, ожидаемые API;
+- вложенные DTO и массивы DTO преобразуются рекурсивно.
 
-Параметры запроса обернуты в dto-объект 
+Некоторые DTO для совместимости с существующим публичным контрактом заполняются через публичные свойства:
 
 ```php
-...
-$validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-$request = new \Excent\Cloudpayments\Request\ApplepayStartSession($validationUrl);
-$apiClient->startSession($request);
+use Excent\Cloudpayments\Request\NotificationsUpdate;
+
+$request = new NotificationsUpdate();
+$request->type = 'pay';
+$request->isEnabled = true;
+$request->address = 'https://example.com/cloudpayments/pay';
+
+$client->siteNotificationsUpdate($request);
 ```
 
-Библиотека может выбрасывать ошибку ```BadTypeException``` при формировании request-объекта
+## Ответы
+
+Все response DTO наследуются от `CloudResponse`.
+
+| Свойство  | Описание |
+|-----------|----------|
+| `success` | Результат операции из поля `Success`. |
+| `message` | Сообщение из поля `Message`. |
+| `warning` | Предупреждение из поля `Warning`. |
+| `model`   | Модель ответа, тип зависит от вызванного метода. |
+
+Поддерживаемые модели:
+
+| Response DTO | Model |
+|--------------|-------|
+| `AppleSessionResponse` | `AppleSessionModel` |
+| `KktReceiptResponse` | `KktReceiptModel` |
+| `NotificationResponse` | `NotificationModel` |
+| `OrderResponse` | `OrderModel` |
+| `SubscriptionResponse` | `SubscriptionModel` |
+| `SubscriptionArrayResponse` | `SubscriptionModel[]` |
+| `TokenArrayResponse` | `TokenModel[]` |
+| `TransactionResponse` | `TransactionModel` |
+| `TransactionArrayResponse` | `TransactionModel[]` |
+| `TransactionWith3dsResponse` | `TransactionWith3dsModel` |
+
+Если CloudPayments вернет поля, которых нет в модели, они будут доступны через `getAdditionalProperties()`.
 
 ```php
-try {
-    ...
-    $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
-    $request = new \Excent\Cloudpayments\Request\ApplepayStartSession($validationUrl);
-    ...
-} catch (\Excent\Cloudpayments\Exceptions\BadTypeException $e) {
-    var_dump($e->getMessage());
-}
+$extra = $response->model->getAdditionalProperties();
 ```
-
-## Параметры ответа
-
-Параметры ответа так же обернуты в dto-объект. ```CloudResponse``` имеет 3 свойства: ```success```, ```message```, ```model``` 
-
-В свойство ```model``` записывается нужная сущность, в зависимости от запроса.
-
-Список поддерживаемых сущностей:
-- ```AppleSessionModel```
-- ```NotificationModel```
-- ```SubscriptionModel```
-- ```TokenModel```
-- ```TransactionModel```
-- ```TransactionWith3dsModel```
 
 ## Уведомления
 
-Библиотека включает в себя dto-объекты для параметров веб хуков
+Библиотека включает DTO для данных webhook-уведомлений. Классы мапят поля CloudPayments вида `TransactionId` в свойства вида `transactionId`.
 
 ```php
-$hookData = new \Excent\Cloudpayments\Hook\HookPay($_POST);
-echo $hookData->transactionId;
+use Excent\Cloudpayments\Hook\HookPay;
+
+$hook = new HookPay($_POST);
+
+echo $hook->transactionId;
 ```
 
-Список всех уведомлений - https://developers.cloudpayments.ru/#check
+Классы уведомлений:
 
-| Webhook   | Объект        |
-|-----------|---------------|
-| Check     | HookCheck     |
-| Pay       | HookPay       |
-| Fail      | HookFail      |
-| Confirm   | HookConfirm   |
-| Refund    | HookRefund    |
-| Recurrent | HookRecurrent |
-| Cancel    | HookCancel    |
+| Webhook | DTO |
+|---------|-----|
+| `Check` | `HookCheck` |
+| `Pay` | `HookPay` |
+| `Fail` | `HookFail` |
+| `Confirm` | `HookConfirm` |
+| `Refund` | `HookRefund` |
+| `Recurrent` | `HookRecurrent` |
+| `Cancel` | `HookCancel` |
+| `Receipt` | `HookReceipt` |
+
+Webhook DTO только преобразуют входные данные в объект. Проверку подписи, бизнес-валидацию и формирование ответа для CloudPayments нужно реализовать на стороне приложения.
 
 ## Идемпотентность
 
-Библиотека поддерживает идемпотентные запросы
+Для идемпотентных запросов библиотека отправляет заголовок `X-Request-ID`.
+
+Автоматический ключ строится из метода и данных запроса:
 
 ```php
-...
-$apiClient = new \Excent\Cloudpayments\Library(\*...*\);
-$apiClient->setIdempotency(true);
-$apiClient->createPaymentByCard2Step(\*...*\);
-...
+$client->setIdempotency(true);
+
+$response = $client->createPaymentByCard2Step($request);
 ```
+
+Можно задать ключ явно:
+
+```php
+$client->setIdempotencyKey('order-100500-auth');
+
+$response = $client->createPaymentByCard2Step($request);
+```
+
+## Обработка ошибок
+
+Request DTO могут выбрасывать `BadTypeException`, если переданы некорректные значения. HTTP-слой может выбросить исключения Guzzle, а разбор JSON - `JsonException`.
+
+```php
+use Excent\Cloudpayments\Exceptions\BadTypeException;
+use GuzzleHttp\Exception\GuzzleException;
+
+try {
+    $response = $client->paymentsRefund($request);
+} catch (BadTypeException $exception) {
+    // Некорректные параметры request DTO.
+} catch (GuzzleException $exception) {
+    // Ошибка HTTP-запроса.
+} catch (JsonException $exception) {
+    // Ответ API не удалось разобрать как JSON.
+}
+```
+
+## Разработка
+
+```bash
+composer install
+composer bin phpstan install
+composer bin rector install
+composer bin php-cs-fixer install
+
+composer test
+make phpstan
+make rector
+make lint
+```
+
+Полезные команды:
+
+| Команда | Назначение |
+|---------|------------|
+| `composer test` | Запустить PHPUnit. |
+| `make phpstan` | Запустить PHPStan. |
+| `make rector` | Проверить код Rector в dry-run режиме. |
+| `make lint` | Проверить стиль PHP CS Fixer. |
+| `make fixcs` | Исправить стиль PHP CS Fixer. |
+| `make rector-fix` | Применить исправления Rector. |
+
+CI запускает тесты на поддерживаемых версиях PHP и отдельные quality checks для PHPStan, Rector и PHP CS Fixer.
+
+## Версионирование
+
+Проект следует SemVer:
+
+- patch-релизы исправляют ошибки, документацию, тесты и статический анализ без изменения публичного контракта;
+- minor-релизы могут добавлять новые методы и DTO обратно совместимым образом;
+- major-релизы могут содержать несовместимые изменения.
 
 ## License
 
-MIT
+MIT. See [LICENSE](LICENSE).
