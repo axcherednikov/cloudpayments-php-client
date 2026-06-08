@@ -286,7 +286,7 @@ final class LibraryTest extends TestCase
             'paymentsCardsTopup' => [
                 'paymentsCardsTopup',
                 'payments/cards/topup',
-                static fn (): CardsTopUp => self::cardsTopUp(),
+                self::cardsTopUp(...),
                 [
                     'Name' => 'Card Holder',
                     'CardCryptogramPacket' => 'cryptogram',
@@ -300,7 +300,7 @@ final class LibraryTest extends TestCase
             'paymentsTokenTopup' => [
                 'paymentsTokenTopup',
                 'payments/token/topup',
-                static fn (): TokenTopUp => self::tokenTopUp(),
+                self::tokenTopUp(...),
                 ['Token' => 'token', 'Amount' => 10, 'AccountId' => 'account', 'Currency' => 'RUB'],
                 self::transactionPayload(),
                 TransactionResponse::class,
@@ -324,7 +324,7 @@ final class LibraryTest extends TestCase
             'subscriptionsGet' => [
                 'subscriptionsGet',
                 'subscriptions/get',
-                static fn (): SubscriptionGet => self::subscriptionGet(),
+                self::subscriptionGet(...),
                 ['Id' => 'sub-id'],
                 ['Success' => true, 'Model' => ['Id' => 'sub-id']],
                 SubscriptionResponse::class,
@@ -340,7 +340,7 @@ final class LibraryTest extends TestCase
             'subscriptionsUpdate' => [
                 'subscriptionsUpdate',
                 'subscriptions/update',
-                static fn (): SubscriptionUpdate => self::subscriptionUpdate(),
+                self::subscriptionUpdate(...),
                 ['Id' => 'sub-id', 'Description' => 'description'],
                 ['Success' => true, 'Model' => ['Id' => 'sub-id']],
                 SubscriptionResponse::class,
@@ -348,7 +348,7 @@ final class LibraryTest extends TestCase
             'subscriptionsCancel' => [
                 'subscriptionsCancel',
                 'subscriptions/cancel',
-                static fn (): SubscriptionCancel => self::subscriptionCancel(),
+                self::subscriptionCancel(...),
                 ['Id' => 'sub-id'],
                 self::successPayload(),
                 CloudResponse::class,
@@ -364,7 +364,7 @@ final class LibraryTest extends TestCase
             'ordersCancel' => [
                 'ordersCancel',
                 'orders/cancel',
-                static fn (): OrderCancel => self::orderCancel(),
+                self::orderCancel(...),
                 ['Id' => 'order-id'],
                 self::successPayload(),
                 CloudResponse::class,
@@ -372,7 +372,7 @@ final class LibraryTest extends TestCase
             'siteNotificationsGet' => [
                 'siteNotificationsGet',
                 'site/notifications/pay/get',
-                static fn (): NotificationsGet => self::notificationsGet(),
+                self::notificationsGet(...),
                 ['Type' => 'pay'],
                 ['Success' => true, 'Model' => ['Address' => 'https://example.com/hook']],
                 NotificationResponse::class,
@@ -380,7 +380,7 @@ final class LibraryTest extends TestCase
             'siteNotificationsUpdate' => [
                 'siteNotificationsUpdate',
                 'site/notifications/pay/update',
-                static fn (): NotificationsUpdate => self::notificationsUpdate(),
+                self::notificationsUpdate(...),
                 ['Type' => 'pay', 'IsEnabled' => 'true', 'Address' => 'https://example.com/hook'],
                 self::successPayload(),
                 CloudResponse::class,
