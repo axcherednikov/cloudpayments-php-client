@@ -18,7 +18,7 @@ class BaseModel
         $knownProperties = $this->getKnownProperties();
 
         foreach ($props as $key => $value) {
-            $lowerKey = lcfirst($key);
+            $lowerKey = lcfirst((string) $key);
 
             if (isset($knownProperties[$lowerKey])) {
                 $this->{$lowerKey} = $value;

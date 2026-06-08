@@ -31,7 +31,7 @@ class BaseHook
         $modelFields = get_object_vars($this);
 
         foreach ($modelFields as $key => $field) {
-            $requestKey = ucfirst($key);
+            $requestKey = ucfirst((string) $key);
 
             if (isset($this->request[$requestKey])) {
                 $this->$key = $this->request[$requestKey];

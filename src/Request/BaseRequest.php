@@ -22,7 +22,7 @@ abstract class BaseRequest
         $fields = get_object_vars($this);
 
         foreach ($fields as $field => $value) {
-            $key = ucfirst($field);
+            $key = ucfirst((string) $field);
 
             if ($value === true) {
                 $value = BoolField::TRUE->value;
