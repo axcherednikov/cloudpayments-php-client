@@ -18,6 +18,7 @@ class TransactionModel extends BaseModel
     public ?int $paymentCurrencyCode = null;
     public ?string $invoiceId = null;
     public ?string $accountId = null;
+    public ?int $trInitiatorCode = null;
     public ?string $email = null;
     public ?string $description = null;
     public ?string $jsonData = null;
@@ -69,7 +70,15 @@ class TransactionModel extends BaseModel
     public ?bool $applePay = null;
     public ?bool $androidPay = null;
     public ?bool $masterPass = null;
+    public ?string $walletType = null;
     public ?float $totalFee = null;
+    public ?float $vatAboveTotalFee = null;
+    public ?float $processorAndPartnerFee = null;
+    public ?float $vatWithinProcessorFee = null;
+    public mixed $infoShopData = null;
+    public mixed $receiver = null;
+    public mixed $splits = null;
+    public ?bool $transactionIsInProcess = null;
     public ?int $escrowAccumulationId = null;
 
     /**
