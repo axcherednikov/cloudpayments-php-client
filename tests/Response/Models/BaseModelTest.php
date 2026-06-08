@@ -1,20 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Excent\Cloudpayments\Tests\Response\Models;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class BaseModelTest.
- *
- * @group Cloudpayments
- */
-class BaseModelTest extends TestCase
+final class BaseModelTest extends TestCase
 {
-    /**
-     * Проверяем заполнение модели по объекту.
-     */
-    public function testFillBaseModel(): void
+    public function testFillAssignsKnownProperties(): void
     {
         $testObject = (object) ['a' => 1, 'b' => 2, 'c' => 3];
 
@@ -26,9 +20,6 @@ class BaseModelTest extends TestCase
         $this->assertEquals($testObject->c, $model->c);
     }
 
-    /**
-     * Проверяем, что неизвестные поля не становятся динамическими свойствами.
-     */
     public function testFillKeepsUnknownFieldsWithoutDynamicProperties(): void
     {
         $model = new TestModel();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Excent\Cloudpayments\Tests\Request;
 
 use Excent\Cloudpayments\Request\KktReceipt;
@@ -10,17 +12,9 @@ use Excent\Cloudpayments\Request\Receipt\ReceiptItemAgentData;
 use Excent\Cloudpayments\Request\Receipt\ReceiptItemPurveyorData;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class KktReceiptTest.
- *
- * @group Cloudpayments
- */
-class KktReceiptTest extends TestCase
+final class KktReceiptTest extends TestCase
 {
-    /**
-     * Проверка формирования массива.
-     */
-    public function testTransformToArray(): void
+    public function testAsArrayContainsNestedCustomerReceipt(): void
     {
         $item = new ReceiptItem('Наименование товара 1', '100.00', '1.00', '100.00');
         $agentData = new ReceiptItemAgentData(agentOperationName: 'operation name');

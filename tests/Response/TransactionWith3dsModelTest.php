@@ -1,40 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Excent\Cloudpayments\Tests\Response;
 
 use Excent\Cloudpayments\Response\TransactionWith3dsResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class TransactionWith3dsModelTes.
- *
- * @group Cloudpayments
- */
-class TransactionWith3dsModelTest extends TestCase
+final class TransactionWith3dsModelTest extends TestCase
 {
-    /**
-     * Проверка на наличие 3ds - проверка нужна.
-     */
-    public function testIs3dsErrorTrue(): void
+    public function testIs3dsErrorReturnsTrueWhenPaReqAndAcsUrlAreFilled(): void
     {
         $responseModel = (object) ['PaReq' => 'some', 'AcsUrl' => 'some'];
 
-        $cloudReponseModel = new TransactionWith3dsResponse();
-        $cloudReponseModel->fillModel($responseModel);
+        $cloudResponseModel = new TransactionWith3dsResponse();
+        $cloudResponseModel->fillModel($responseModel);
 
-        $this->assertTrue($cloudReponseModel->is3dsError());
+        $this->assertTrue($cloudResponseModel->is3dsError());
     }
 
-    /**
-     * Проверка на наличие 3ds - проверка не нужна.
-     */
-    public function testIs3dsErrorFalse(): void
+    public function testIs3dsErrorReturnsFalseWhenPaReqAndAcsUrlAreMissing(): void
     {
         $responseModel = (object) [];
 
-        $cloudReponseModel = new TransactionWith3dsResponse();
-        $cloudReponseModel->fillModel($responseModel);
+        $cloudResponseModel = new TransactionWith3dsResponse();
+        $cloudResponseModel->fillModel($responseModel);
 
-        $this->assertFalse($cloudReponseModel->is3dsError());
+        $this->assertFalse($cloudResponseModel->is3dsError());
     }
 }

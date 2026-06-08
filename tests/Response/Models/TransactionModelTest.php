@@ -1,21 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Excent\Cloudpayments\Tests\Response\Models;
 
 use Excent\Cloudpayments\Response\Models\TransactionModel;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class TransactionModelTest.
- *
- * @group Cloudpayments
- */
-class TransactionModelTest extends TestCase
+final class TransactionModelTest extends TestCase
 {
-    /**
-     * Проверяем заполнение полей транзакции, которые возвращает CloudPayments.
-     */
-    public function testFillAdditionalTransactionFields(): void
+    public function testFillAssignsAdditionalTransactionFields(): void
     {
         $transaction = new TransactionModel();
         $receiver = (object) ['inn' => '1234567890'];
@@ -45,5 +39,13 @@ class TransactionModelTest extends TestCase
         $this->assertSame($receiver, $transaction->receiver);
         $this->assertSame($splits, $transaction->splits);
         $this->assertTrue($transaction->transactionIsInProcess);
+    }
+
+    public function testGetClientErrorCode(): void
+    {
+        $model = new TransactionModel();
+        $model->reasonCode = 5005;
+
+        $this->assertSame('cloudpayments_error_5005', $model->getClientErrorCode());
     }
 }
