@@ -10,11 +10,17 @@ namespace Excent\Cloudpayments\Hook;
  */
 class BaseHook
 {
+    /**
+     * @param array<string, mixed> $request
+     */
     public function __construct(protected array $request)
     {
         $this->fill();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getRequest(): array
     {
         return $this->request;

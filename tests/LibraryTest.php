@@ -12,6 +12,7 @@ use Excent\Cloudpayments\Request\SubscriptionCreate;
 use Excent\Cloudpayments\Request\SubscriptionFind;
 use Excent\Cloudpayments\Request\TokenPayment;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,6 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class LibraryTest extends TestCase
 {
+    /** @var Library&MockObject */
     protected $library;
 
     public function setUp(): void
@@ -43,7 +45,7 @@ class LibraryTest extends TestCase
             'Success' => false,
             'Message' => null,
             'Model' => ['TransactionId' => 504],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library
@@ -67,7 +69,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['TransactionId' => 504, 'Amount' => 10.00000],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -89,7 +91,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['TransactionId' => 521],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -110,7 +112,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => [['Token' => '123asdf']],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -133,7 +135,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['Id' => 'sc_8cf8a9338fb8ebf7202b08d09c938'],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -154,7 +156,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => [['Id' => 'sc_b4bdedba0e2bdf279be2e0bab9c99']],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -177,7 +179,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['Id' => 'f2K8LV6reGE9WBFn'],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -198,7 +200,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['Address' => 'http://example.com'],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
@@ -221,7 +223,7 @@ class LibraryTest extends TestCase
             'Success' => true,
             'Message' => null,
             'Model' => ['nonce' => 'd6358e06'],
-        ]));
+        ], JSON_THROW_ON_ERROR));
 
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);

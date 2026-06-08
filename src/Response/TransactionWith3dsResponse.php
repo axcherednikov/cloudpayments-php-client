@@ -3,6 +3,7 @@
 namespace Excent\Cloudpayments\Response;
 
 use Excent\Cloudpayments\Response\Models\TransactionWith3dsModel;
+use stdClass;
 
 /**
  * Class TransactionResponse.
@@ -12,6 +13,9 @@ class TransactionWith3dsResponse extends CloudResponse
     /** @var TransactionWith3dsModel */
     public $model;
 
+    /**
+     * @param stdClass $modelDate
+     */
     public function fillModel($modelDate): void
     {
         $model = new TransactionWith3dsModel();

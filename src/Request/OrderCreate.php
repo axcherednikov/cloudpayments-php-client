@@ -12,7 +12,7 @@ use Excent\Cloudpayments\Exceptions\BadTypeException;
 class OrderCreate extends BaseRequest
 {
     /**
-     * @var int|float
+     * @var int|float|string
      */
     public $amount;
     public ?string $email = null;
@@ -33,7 +33,8 @@ class OrderCreate extends BaseRequest
     /**
      * OrderCreate constructor.
      *
-     * @param          $amount
+     * @param int|float|string $amount
+     *
      * @throws BadTypeException
      */
     public function __construct($amount, public string $currency, public string $description)
