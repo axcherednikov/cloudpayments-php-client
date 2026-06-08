@@ -5,19 +5,46 @@ on:
   pull_request:
 
 jobs:
-  phpunit:
-    name: PHPUnit (PHP ${{ matrix.php-version }})
+  checks:
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        php-version:
-          - '8.1'
-          - '8.2'
-          - '8.3'
-          - '8.4'
-          - '8.5'
+        include:
+          - name: PHPUnit (PHP 8.1)
+            php-version: '8.1'
+            command: composer test
+            tool: ''
+          - name: PHPUnit (PHP 8.2)
+            php-version: '8.2'
+            command: composer test
+            tool: ''
+          - name: PHPUnit (PHP 8.3)
+            php-version: '8.3'
+            command: composer test
+            tool: ''
+          - name: PHPUnit (PHP 8.4)
+            php-version: '8.4'
+            command: composer test
+            tool: ''
+          - name: PHPUnit (PHP 8.5)
+            php-version: '8.5'
+            command: composer test
+            tool: ''
+          - name: PHPStan
+            php-version: '8.3'
+            command: make phpstan
+            tool: phpstan
+          - name: Rector
+            php-version: '8.3'
+            command: make rector
+            tool: rector
+          - name: PHP CS Fixer
+            php-version: '8.3'
+            command: make lint
+            tool: php-cs-fixer
 
     steps:
       - name: Checkout
@@ -36,5 +63,9 @@ jobs:
       - name: Install dependencies
         run: composer update --prefer-dist --no-progress --no-interaction
 
-      - name: Run tests
-        run: composer test
+      - name: Install tool dependencies
+        if: ${{ matrix.tool != '' }}
+        run: composer bin ${{ matrix.tool }} install --no-progress --no-interaction
+
+      - name: Run ${{ matrix.name }}
+        run: ${{ matrix.command }}
