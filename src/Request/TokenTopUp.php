@@ -17,6 +17,12 @@ class TokenTopUp extends BaseRequest
     public string $accountId;
     public string $currency;
     public ?string $invoiceId = null;
+    /**
+     * @var array<string, mixed>|null
+     */
     public ?array $payer = null;
+    /**
+     * @var array<string, mixed>|null
+     */
     public ?array $receiver = null;
 }

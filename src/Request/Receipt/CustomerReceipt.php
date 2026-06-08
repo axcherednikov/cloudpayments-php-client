@@ -21,7 +21,7 @@ class CustomerReceipt extends BaseRequest
      * @param  bool|null            $isBso
      * @param  string|null          $agentSign
      * @param  string|null          $cashierName
-     * @param  array|null           $additionalReceiptInfos
+     * @param  array<int|string, mixed>|null $additionalReceiptInfos
      */
     public function __construct(
         public array $items,

@@ -12,7 +12,7 @@ use Excent\Cloudpayments\Exceptions\BadTypeException;
 class PaymentsConfirm extends BaseRequest
 {
     /**
-     * @var int|float
+     * @var int|float|string
      */
     public $amount;
     public ?string $jsonData = null;
@@ -20,8 +20,9 @@ class PaymentsConfirm extends BaseRequest
     /**
      * PaymentsConfirm constructor.
      *
-     * @param  int|float    $amount
-     * @param  string|null  $jsonData
+     * @param  int|float|string  $amount
+     * @param  string|null       $jsonData
+     *
      * @throws BadTypeException
      */
     public function __construct($amount, public int $transactionId, ?string $jsonData = null)

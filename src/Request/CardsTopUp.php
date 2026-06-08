@@ -18,6 +18,12 @@ class CardsTopUp extends BaseRequest
     public ?string $jsonData = null;
     public ?string $invoiceId = null;
     public ?string $description = null;
+    /**
+     * @var array<string, mixed>|null
+     */
     public ?array $payer = null;
+    /**
+     * @var array<string, mixed>|null
+     */
     public ?array $receiver = null;
 }

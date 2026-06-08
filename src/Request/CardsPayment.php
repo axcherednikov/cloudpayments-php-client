@@ -9,6 +9,9 @@ namespace Excent\Cloudpayments\Request;
  */
 class CardsPayment extends BaseRequest
 {
+    /**
+     * @param array<string, mixed>|null $payer
+     */
     public function __construct(
         public float|int $amount,
         public string $currency,

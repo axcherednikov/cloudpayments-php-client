@@ -39,6 +39,7 @@ use Excent\Cloudpayments\Response\TransactionResponse;
 use Excent\Cloudpayments\Response\TransactionWith3dsResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -353,6 +354,16 @@ class Library
 
     /**
      * Базовый запрос
+     *
+     * @template T of CloudResponse
+     *
+     * @param  string|CloudMethodsEnum  $method
+     * @param  array<string, mixed>     $postData
+     * @param  T                        $cloudResponse
+     *
+     * @return T
+     * @throws GuzzleException
+     * @throws JsonException
      */
     private function request(string|CloudMethodsEnum $method, array $postData, CloudResponse $cloudResponse): CloudResponse
     {
@@ -361,12 +372,15 @@ class Library
         }
 
         $response = $this->sendRequest($method, $postData);
+        $cloudResponse->fillByResponse($response);
 
-        return $cloudResponse->fillByResponse($response);
+        return $cloudResponse;
     }
 
     /**
      * Запрос по api.
+     *
+     * @param array<string, mixed> $postData
      *
      * @throws GuzzleException
      */
@@ -383,6 +397,8 @@ class Library
 
     /**
      * Генерирует request id для идемпотентных запросов.
+     *
+     * @param array<string, mixed> $postData
      */
     public function getRequestId(string $method, array $postData): string
     {
