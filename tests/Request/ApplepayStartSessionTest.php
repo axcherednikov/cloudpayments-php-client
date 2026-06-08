@@ -1,22 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Excent\Cloudpayments\Tests\Request;
 
 use Excent\Cloudpayments\Exceptions\BadTypeException;
 use Excent\Cloudpayments\Request\ApplepayStartSession;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ApplepayStartSessionTest.
- *
- * @group Cloudpayments
- */
-class ApplepayStartSessionTest extends TestCase
+final class ApplepayStartSessionTest extends TestCase
 {
-    /**
-     * Проверяем валидацию для validationUrl - успешный вариант
-     */
-    public function testCheckValidationUrlSuccess(): void
+    public function testConstructorAcceptsValidValidationUrl(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
 
@@ -24,22 +18,15 @@ class ApplepayStartSessionTest extends TestCase
         $this->assertEquals($validationUrl, $appleStartSessionRequest->validationUrl);
     }
 
-    /**
-     * Проверяем валидацию для validationUrl - ожидаем ошибку.
-     */
-    public function testCheckValidationUrlFailed(): void
+    public function testConstructorRejectsInvalidValidationUrl(): void
     {
         $validationUrl = 'asdf';
 
         $this->expectException(BadTypeException::class);
-        /* @phan-suppress-next-line PhanNoopNew */
         new ApplepayStartSession($validationUrl);
     }
 
-    /**
-     * Проверяем валидацию для paymentUrl - успешный вариант
-     */
-    public function testFillPaymentUrlSuccess(): void
+    public function testConstructorAcceptsValidPaymentUrl(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
         $paymentUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
@@ -50,11 +37,7 @@ class ApplepayStartSessionTest extends TestCase
         $this->assertEquals($paymentUrl, $appleStartSessionRequest->paymentUrl);
     }
 
-    /**
-     * Проверяем, что поле paymentUrl не заполняется,
-     * если ничего не передано.
-     */
-    public function testFillPaymentUrlNotFilledSuccess(): void
+    public function testConstructorLeavesPaymentUrlUnsetWhenItIsNotPassed(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
 
@@ -64,16 +47,12 @@ class ApplepayStartSessionTest extends TestCase
         $this->assertFalse(isset($vars['paymentUrl']));
     }
 
-    /**
-     * Проверяем валидацию для paymentUrl - ожидаем ошибку.
-     */
-    public function testFillPaymentUrlFailed(): void
+    public function testConstructorRejectsInvalidPaymentUrl(): void
     {
         $validationUrl = 'https://apple-pay-gateway.apple.com/paymentservices/startSession';
         $paymentUrl = 'asdf';
 
         $this->expectException(BadTypeException::class);
-        /* @phan-suppress-next-line PhanNoopNew */
         new ApplepayStartSession($validationUrl, $paymentUrl);
     }
 }
