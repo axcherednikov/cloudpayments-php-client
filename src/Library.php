@@ -18,6 +18,7 @@ use Excent\Cloudpayments\Request\PaymentsList;
 use Excent\Cloudpayments\Request\PaymentsRefund;
 use Excent\Cloudpayments\Request\PaymentsVoid;
 use Excent\Cloudpayments\Request\Post3DS;
+use Excent\Cloudpayments\Request\SbpLink;
 use Excent\Cloudpayments\Request\SubscriptionCancel;
 use Excent\Cloudpayments\Request\SubscriptionCreate;
 use Excent\Cloudpayments\Request\SubscriptionFind;
@@ -31,6 +32,7 @@ use Excent\Cloudpayments\Response\CloudResponse;
 use Excent\Cloudpayments\Response\KktReceiptResponse;
 use Excent\Cloudpayments\Response\NotificationResponse;
 use Excent\Cloudpayments\Response\OrderResponse;
+use Excent\Cloudpayments\Response\QrLinkResponse;
 use Excent\Cloudpayments\Response\SubscriptionArrayResponse;
 use Excent\Cloudpayments\Response\SubscriptionResponse;
 use Excent\Cloudpayments\Response\TokenArrayResponse;
@@ -179,6 +181,18 @@ class Library
         $method = CloudMethodsEnum::PAYMENTS_LIST;
 
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
+    }
+
+    /**
+     * Создание ссылки на оплату через СБП.
+     */
+    public function paymentsQrSbpLink(SbpLink $data): QrLinkResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_QR_SBP_LINK;
+        $postData = $data->asArray();
+        $postData['PublicId'] = $this->publicId;
+
+        return $this->request($method, $postData, new QrLinkResponse());
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Excent\Cloudpayments\Request\Receipt;
 
+use Excent\Cloudpayments\Enum\RussiaTimeZone;
 use Excent\Cloudpayments\Request\BaseRequest;
 
 /**
@@ -22,6 +23,18 @@ class CustomerReceipt extends BaseRequest
      * @param  string|null          $agentSign
      * @param  string|null          $cashierName
      * @param  array<int|string, mixed>|null $additionalReceiptInfos
+     * @param  string|null          $additionalReceiptRequisite
+     * @param  string|null          $customerBirthday
+     * @param  string|null          $customerStateCode
+     * @param  string|null          $customerDocType
+     * @param  string|null          $customerDoc
+     * @param  string|null          $customerPlace
+     * @param  UserRequisiteData|null    $userRequisiteData
+     * @param  OperationReceiptRequisite|null $operationReceiptRequisite
+     * @param  array<int, IndustryRequisiteCollection>|null $industryRequisiteCollection
+     * @param  bool|null             $isInternetPayment
+     * @param  RussiaTimeZone|null   $russiaTimeZone
+     * @param  array<int, NonCashPayments>|null $nonCashPayments
      */
     public function __construct(
         public array $items,
@@ -36,6 +49,42 @@ class CustomerReceipt extends BaseRequest
         public ?string $agentSign = null,
         public ?string $cashierName = null,
         public ?array $additionalReceiptInfos = null,
+        public ?string $additionalReceiptRequisite = null,
+        public ?string $customerBirthday = null,
+        public ?string $customerStateCode = null,
+        public ?string $customerDocType = null,
+        public ?string $customerDoc = null,
+        public ?string $customerPlace = null,
+        public ?UserRequisiteData $userRequisiteData = null,
+        public ?OperationReceiptRequisite $operationReceiptRequisite = null,
+        /** @var array<int, IndustryRequisiteCollection>|null */
+        public ?array $industryRequisiteCollection = null,
+        public ?bool $isInternetPayment = null,
+        public ?RussiaTimeZone $russiaTimeZone = null,
+        /** @var array<int, NonCashPayments>|null */
+        public ?array $nonCashPayments = null,
     ) {
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function asArray(): array
+    {
+        $data = parent::asArray();
+
+        if ($this->userRequisiteData !== null) {
+            $data['UserRequisiteData'] = $this->userRequisiteData->asArray();
+        }
+
+        if ($this->operationReceiptRequisite !== null) {
+            $data['OperationReceiptRequisite'] = $this->operationReceiptRequisite->asArray();
+        }
+
+        if ($this->russiaTimeZone !== null) {
+            $data['RussiaTimeZone'] = $this->russiaTimeZone->value;
+        }
+
+        return $data;
     }
 }
