@@ -353,6 +353,16 @@ class Library
     }
 
     /**
+     * Тестовый метод CloudPayments.
+     */
+    public function test(): CloudResponse
+    {
+        $method = CloudMethodsEnum::TEST;
+
+        return $this->request($method, [], new CloudResponse());
+    }
+
+    /**
      * Базовый запрос
      *
      * @template T of CloudResponse
