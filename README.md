@@ -125,6 +125,7 @@ if ($response->is3dsError()) {
 | `site/notifications/{Type}/update` | `siteNotificationsUpdate` | `NotificationsUpdate` | `CloudResponse`          |
 | `applepay/startsession`          | `startSession`            | `ApplepayStartSession` | `AppleSessionResponse`   |
 | `kkt/receipt`                    | `createReceipt`           | `KktReceipt`         | `KktReceiptResponse`       |
+| `test`                           | `test`                    | —                    | `CloudResponse`            |
 
 ## Запросы
 

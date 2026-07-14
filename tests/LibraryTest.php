@@ -85,6 +85,20 @@ final class LibraryTest extends TestCase
         $this->assertEquals($expectedData, $library->lastPostData);
     }
 
+    public function testTestMethodSendsEmptyRequestAndFillsCloudResponse(): void
+    {
+        $library = new RecordingLibrary('public_id', 'password');
+        $library->setNextResponse($this->jsonResponse(['Success' => true, 'Message' => 'ok']));
+
+        $result = $library->test();
+
+        $this->assertInstanceOf(CloudResponse::class, $result);
+        $this->assertTrue($result->success);
+        $this->assertSame('ok', $result->message);
+        $this->assertSame('test', $library->lastMethod);
+        $this->assertSame([], $library->lastPostData);
+    }
+
     public function testGettersReturnConstructorValues(): void
     {
         $library = new Library('public_id', 'password', 'https://example.com/');

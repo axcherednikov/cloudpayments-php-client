@@ -79,4 +79,7 @@ enum CloudMethodsEnum: string
 
     /** Создание чека */
     case KKT_RECEIPT = 'kkt/receipt';
+
+    /** Тестовый метод */
+    case TEST = 'test';
 }
