@@ -2,6 +2,7 @@
 
 namespace Excent\Cloudpayments\Request\Receipt;
 
+use Excent\Cloudpayments\Enum\Vat;
 use Excent\Cloudpayments\Request\BaseRequest;
 
 /**
@@ -9,12 +10,14 @@ use Excent\Cloudpayments\Request\BaseRequest;
  */
 class ReceiptItem extends BaseRequest
 {
+    public ?string $vat = null;
+
     public function __construct(
         public string $label,
         public string|float|int $price,
         public string|float|int $quantity,
         public string|float|int $amount,
-        public ?string $vat = null,
+        string|Vat|null $vat = null,
         public ?string $method = null,
         public ?string $object = null,
         public ?string $measurementUnit = null,
@@ -27,5 +30,6 @@ class ReceiptItem extends BaseRequest
         public ?ReceiptItemProductCodeData $productCodeData = null,
         public ?string $additionalPositionInfo = null,
     ) {
+        $this->vat = $vat instanceof Vat ? (string) $vat->value : $vat;
     }
 }

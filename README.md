@@ -113,6 +113,7 @@ if ($response->is3dsError()) {
 | `payments/get`                   | `getPaymentData`          | `PaymentsGet`        | `TransactionResponse`      |
 | `payments/find`                  | `getPaymentDataByInvoice` | `PaymentsFind`       | `TransactionResponse`      |
 | `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
+| `payments/qr/sbp/link`           | `paymentsQrSbpLink`       | `SbpLink`            | `QrLinkResponse`            |
 | `payments/tokens/list`           | `paymentsTokensList`      | `TokenList` или `null` | `TokenArrayResponse`     |
 | `subscriptions/create`           | `subscriptionsCreate`     | `SubscriptionCreate` | `SubscriptionResponse`     |
 | `subscriptions/get`              | `subscriptionsGet`        | `SubscriptionGet`    | `SubscriptionResponse`     |
@@ -145,8 +146,37 @@ DTO наследуются от `BaseRequest` и преобразуются в �
 
 - `amount` превращается в `Amount`;
 - значения `null` не попадают в запрос;
-- `true` и `false` передаются как строковые значения, ожидаемые API;
+- `true` и `false` в полях Request DTO передаются как строковые значения, ожидаемые API;
 - вложенные DTO и массивы DTO преобразуются рекурсивно.
+
+Для структурированных данных `JsonData` можно использовать общий DTO `CloudpaymentsData`. Он добавляет обязательную для CloudPayments обёртку `cloudpayments` и переиспользует `CustomerReceipt` во всех платежных методах, поддерживающих `JsonData`:
+
+```php
+use Excent\Cloudpayments\Enum\Currency;
+use Excent\Cloudpayments\Enum\SbpScheme;
+use Excent\Cloudpayments\Request\SbpLink;
+use Excent\Cloudpayments\Request\CloudpaymentsData;
+use Excent\Cloudpayments\Request\Receipt\CustomerReceipt;
+use Excent\Cloudpayments\Request\Receipt\ReceiptItem;
+
+$jsonData = new CloudpaymentsData(
+    customerReceipt: new CustomerReceipt([
+        new ReceiptItem('Товар', '100.00', '1.00', '100.00'),
+    ]),
+    additionalData: ['name' => 'Покупатель'],
+);
+
+$request = new SbpLink(
+    '1000.00',
+    Currency::RUB,
+    SbpScheme::CHARGE,
+    jsonData: $jsonData,
+);
+```
+
+Для `SbpLink` используются типизированные enum-поля `Currency::RUB`, `SbpScheme::CHARGE` и `Device`. Поля `Os` и `Browser` остаются строковыми, поскольку API допускает новые значения. Поле `jsonData` принимает только `CloudpaymentsData`; для существующих DTO со строковым `JsonData` используется `$jsonData->asJson()`.
+
+`CustomerReceipt` является общим DTO для чеков и не привязан к СБП. Вложенные реквизиты представлены DTO `UserRequisiteData`, `OperationReceiptRequisite`, `IndustryRequisiteCollection[]` и `NonCashPayments[]`; `RussiaTimeZone` принимает RTZ enum-коды `1–11`.
 
 Некоторые DTO для совместимости с существующим публичным контрактом заполняются через публичные свойства:
 
@@ -180,6 +210,7 @@ $client->siteNotificationsUpdate($request);
 | `KktReceiptResponse` | `KktReceiptModel` |
 | `NotificationResponse` | `NotificationModel` |
 | `OrderResponse` | `OrderModel` |
+| `QrLinkResponse` | `QrLinkModel` |
 | `SubscriptionResponse` | `SubscriptionModel` |
 | `SubscriptionArrayResponse` | `SubscriptionModel[]` |
 | `TokenArrayResponse` | `TokenModel[]` |
