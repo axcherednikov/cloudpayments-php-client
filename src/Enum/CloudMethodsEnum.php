@@ -14,6 +14,9 @@ enum CloudMethodsEnum: string
     /** Проверка платежа по номеру заказа */
     case PAYMENTS_FIND = 'payments/find';
 
+    /** Проверка последней операции по номеру заказа, включая возвраты и выплаты на карту */
+    case V2_PAYMENTS_FIND = 'v2/payments/find';
+
     /** Проверка платежа */
     case PAYMENTS_GET = 'payments/get';
 

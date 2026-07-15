@@ -116,6 +116,16 @@ class Library
     }
 
     /**
+     * Проверка через v2 последней операции по номеру заказа, включая возвраты и выплаты на карту.
+     */
+    public function getPaymentDataByInvoiceV2(PaymentsFind $data): TransactionResponse
+    {
+        $method = CloudMethodsEnum::V2_PAYMENTS_FIND;
+
+        return $this->request($method, $data->asArray(), new TransactionResponse());
+    }
+
+    /**
      * Метод получения детализации по транзакции.
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
