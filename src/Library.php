@@ -196,6 +196,18 @@ class Library
     }
 
     /**
+     * Получение QR-кода для оплаты через СБП.
+     */
+    public function paymentsQrSbpImage(SbpLink $data): QrLinkResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_QR_SBP_IMAGE;
+        $postData = $data->asArray();
+        $postData['PublicId'] = $this->publicId;
+
+        return $this->request($method, $postData, new QrLinkResponse());
+    }
+
+    /**
      * Отмена оплаты.
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse

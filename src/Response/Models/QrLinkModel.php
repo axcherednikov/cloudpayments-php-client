@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Excent\Cloudpayments\Response\Models;
 
 /**
- * Модель ответа на создание ссылки для оплаты через СБП.
+ * Модель ответа на создание ссылки или QR-кода для оплаты через СБП.
  */
 class QrLinkModel extends BaseModel
 {

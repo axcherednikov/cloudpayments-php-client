@@ -8,7 +8,7 @@ use Excent\Cloudpayments\Response\Models\QrLinkModel;
 use stdClass;
 
 /**
- * Ответ на создание ссылки для оплаты через СБП.
+ * Ответ на создание ссылки или QR-кода для оплаты через СБП.
  */
 class QrLinkResponse extends CloudResponse
 {
