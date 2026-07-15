@@ -112,6 +112,7 @@ if ($response->is3dsError()) {
 | `payments/token/topup`           | `paymentsTokenTopup`      | `TokenTopUp`         | `TransactionResponse`      |
 | `payments/get`                   | `getPaymentData`          | `PaymentsGet`        | `TransactionResponse`      |
 | `payments/find`                  | `getPaymentDataByInvoice` | `PaymentsFind`       | `TransactionResponse`      |
+| `v2/payments/find`               | `getPaymentDataByInvoiceV2` | `PaymentsFind`     | `TransactionResponse`      |
 | `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
 | `payments/qr/sbp/link`           | `paymentsQrSbpLink`       | `SbpLink`            | `QrLinkResponse`            |
 | `payments/qr/sbp/image`          | `paymentsQrSbpImage`      | `SbpLink`            | `QrLinkResponse`            |
@@ -129,6 +130,8 @@ if ($response->is3dsError()) {
 | `applepay/startsession`          | `startSession`            | `ApplepayStartSession` | `AppleSessionResponse`   |
 | `kkt/receipt`                    | `createReceipt`           | `KktReceipt`         | `KktReceiptResponse`       |
 | `test`                           | `test`                    | —                    | `CloudResponse`            |
+
+`payments/find` сохраняется для обратной совместимости. `v2/payments/find` ищет последнюю операцию среди платежей, возвратов и выплат на карту.
 
 ## Запросы
 
