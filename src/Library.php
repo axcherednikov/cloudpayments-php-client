@@ -18,6 +18,7 @@ use Excent\Cloudpayments\Request\PaymentsList;
 use Excent\Cloudpayments\Request\PaymentsRefund;
 use Excent\Cloudpayments\Request\PaymentsVoid;
 use Excent\Cloudpayments\Request\Post3DS;
+use Excent\Cloudpayments\Request\SbpBanksInfo;
 use Excent\Cloudpayments\Request\SbpLink;
 use Excent\Cloudpayments\Request\SubscriptionCancel;
 use Excent\Cloudpayments\Request\SubscriptionCreate;
@@ -33,6 +34,7 @@ use Excent\Cloudpayments\Response\KktReceiptResponse;
 use Excent\Cloudpayments\Response\NotificationResponse;
 use Excent\Cloudpayments\Response\OrderResponse;
 use Excent\Cloudpayments\Response\QrLinkResponse;
+use Excent\Cloudpayments\Response\SbpBanksInfoResponse;
 use Excent\Cloudpayments\Response\SubscriptionArrayResponse;
 use Excent\Cloudpayments\Response\SubscriptionResponse;
 use Excent\Cloudpayments\Response\TokenArrayResponse;
@@ -205,6 +207,18 @@ class Library
         $postData['PublicId'] = $this->publicId;
 
         return $this->request($method, $postData, new QrLinkResponse());
+    }
+
+    /**
+     * Получение списка банков — участников СБП.
+     */
+    public function sbpV2BanksInfo(?SbpBanksInfo $data = null): SbpBanksInfoResponse
+    {
+        $method = CloudMethodsEnum::SBP_V2_BANKS_INFO;
+        $postData = $data === null ? [] : $data->asArray();
+        $postData['PublicTerminalId'] = $this->publicId;
+
+        return $this->request($method, $postData, new SbpBanksInfoResponse());
     }
 
     /**

@@ -115,6 +115,7 @@ if ($response->is3dsError()) {
 | `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
 | `payments/qr/sbp/link`           | `paymentsQrSbpLink`       | `SbpLink`            | `QrLinkResponse`            |
 | `payments/qr/sbp/image`          | `paymentsQrSbpImage`      | `SbpLink`            | `QrLinkResponse`            |
+| `sbp/v2/banks/info`              | `sbpV2BanksInfo`          | `SbpBanksInfo` или `null` | `SbpBanksInfoResponse`   |
 | `payments/tokens/list`           | `paymentsTokensList`      | `TokenList` или `null` | `TokenArrayResponse`     |
 | `subscriptions/create`           | `subscriptionsCreate`     | `SubscriptionCreate` | `SubscriptionResponse`     |
 | `subscriptions/get`              | `subscriptionsGet`        | `SubscriptionGet`    | `SubscriptionResponse`     |
@@ -212,12 +213,15 @@ $client->siteNotificationsUpdate($request);
 | `NotificationResponse` | `NotificationModel` |
 | `OrderResponse` | `OrderModel` |
 | `QrLinkResponse` | `QrLinkModel` |
+| `SbpBanksInfoResponse` | `SbpBanksInfoModel[]` |
 | `SubscriptionResponse` | `SubscriptionModel` |
 | `SubscriptionArrayResponse` | `SubscriptionModel[]` |
 | `TokenArrayResponse` | `TokenModel[]` |
 | `TransactionResponse` | `TransactionModel` |
 | `TransactionArrayResponse` | `TransactionModel[]` |
 | `TransactionWith3dsResponse` | `TransactionWith3dsModel` |
+
+`SbpBanksInfoResponse` содержит массив источников (`SbpBanksInfoModel`), а `members` каждого источника — типизированный массив банков (`SbpBankMemberModel`). Библиотека сохраняет исходный порядок источников и банков и не изменяет значения `name`, `logo` и `url`.
 
 Для `paymentsQrSbpImage` значение `model->qrImage` содержит PNG-код, закодированный в Base64, и возвращается библиотекой без декодирования. Значение `model->qrUrl` для этого метода равно `null`. Один QR-код СБП можно использовать для многократной оплаты.
 
