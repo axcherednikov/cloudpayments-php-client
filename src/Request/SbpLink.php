@@ -11,9 +11,10 @@ use Excent\Cloudpayments\Exceptions\BadTypeException;
 use JsonException;
 
 /**
- * Запрос на создание ссылки для оплаты через СБП.
+ * Запрос на оплату через СБП.
  *
  * @see https://developers.cloudpayments.ru/#sbp-poluchenie-ssylki-dlya-oplaty
+ * @see https://developers.cloudpayments.ru/#sbp-poluchenie-qr-koda-dlya-oplaty
  */
 final class SbpLink extends BaseRequest
 {

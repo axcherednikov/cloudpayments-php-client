@@ -38,6 +38,9 @@ enum CloudMethodsEnum: string
     /** Создание ссылки на оплату через СБП */
     case PAYMENTS_QR_SBP_LINK = 'payments/qr/sbp/link';
 
+    /** Получение QR-кода для оплаты через СБП */
+    case PAYMENTS_QR_SBP_IMAGE = 'payments/qr/sbp/image';
+
     /** Отмена оплаты */
     case PAYMENTS_VOID = 'payments/void';
 
