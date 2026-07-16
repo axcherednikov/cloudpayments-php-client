@@ -38,6 +38,9 @@ enum CloudMethodsEnum: string
     /** Список транзакций за определенное время */
     case PAYMENTS_LIST = 'payments/list';
 
+    /** Список транзакций за произвольный период */
+    case V2_PAYMENTS_LIST = 'v2/payments/list';
+
     /** Создание ссылки на оплату через СБП */
     case PAYMENTS_QR_SBP_LINK = 'payments/qr/sbp/link';
 

@@ -114,6 +114,7 @@ if ($response->is3dsError()) {
 | `payments/find`                  | `getPaymentDataByInvoice` | `PaymentsFind`       | `TransactionResponse`      |
 | `v2/payments/find`               | `getPaymentDataByInvoiceV2` | `PaymentsFind`     | `TransactionResponse`      |
 | `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
+| `v2/payments/list`               | `getListPaymentV2`        | `PaymentsListV2`     | `TransactionArrayResponse` |
 | `payments/qr/sbp/link`           | `paymentsQrSbpLink`       | `SbpLink`            | `QrLinkResponse`            |
 | `payments/qr/sbp/image`          | `paymentsQrSbpImage`      | `SbpLink`            | `QrLinkResponse`            |
 | `sbp/v2/banks/info`              | `sbpV2BanksInfo`          | `SbpBanksInfo` или `null` | `SbpBanksInfoResponse`   |
@@ -132,6 +133,8 @@ if ($response->is3dsError()) {
 | `test`                           | `test`                    | —                    | `CloudResponse`            |
 
 `payments/find` сохраняется для обратной совместимости. `v2/payments/find` ищет последнюю операцию среди платежей, возвратов и выплат на карту.
+
+`payments/list` выгружает операции за один день. `v2/payments/list` выгружает операции за произвольный период, использует пагинацию и необязательный фильтр статусов. `pageNumber` начинается с 1, одна страница содержит не более 100 операций. Порядок ответа сохраняется библиотекой.
 
 ## Запросы
 
