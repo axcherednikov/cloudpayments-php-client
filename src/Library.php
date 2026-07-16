@@ -15,6 +15,7 @@ use Excent\Cloudpayments\Request\PaymentsConfirm;
 use Excent\Cloudpayments\Request\PaymentsFind;
 use Excent\Cloudpayments\Request\PaymentsGet;
 use Excent\Cloudpayments\Request\PaymentsList;
+use Excent\Cloudpayments\Request\PaymentsListV2;
 use Excent\Cloudpayments\Request\PaymentsRefund;
 use Excent\Cloudpayments\Request\PaymentsVoid;
 use Excent\Cloudpayments\Request\Post3DS;
@@ -191,6 +192,16 @@ class Library
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
     {
         $method = CloudMethodsEnum::PAYMENTS_LIST;
+
+        return $this->request($method, $data->asArray(), new TransactionArrayResponse());
+    }
+
+    /**
+     * Список транзакций за произвольный период.
+     */
+    public function getListPaymentV2(PaymentsListV2 $data): TransactionArrayResponse
+    {
+        $method = CloudMethodsEnum::V2_PAYMENTS_LIST;
 
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
     }

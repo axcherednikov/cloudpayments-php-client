@@ -11,7 +11,7 @@ use stdClass;
 class TransactionArrayResponse extends CloudResponse
 {
     /** @var TransactionModel[] */
-    public $model;
+    public $model = [];
 
     /**
      * @param mixed $modelDate
