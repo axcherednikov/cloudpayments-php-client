@@ -6,6 +6,7 @@ use Excent\Cloudpayments\Enum\CloudMethodsEnum;
 use Excent\Cloudpayments\Request\ApplepayStartSession;
 use Excent\Cloudpayments\Request\CardsPayment;
 use Excent\Cloudpayments\Request\CardsTopUp;
+use Excent\Cloudpayments\Request\ChargebacksList;
 use Excent\Cloudpayments\Request\KktReceipt;
 use Excent\Cloudpayments\Request\NotificationsGet;
 use Excent\Cloudpayments\Request\NotificationsUpdate;
@@ -30,6 +31,7 @@ use Excent\Cloudpayments\Request\TokenList;
 use Excent\Cloudpayments\Request\TokenPayment;
 use Excent\Cloudpayments\Request\TokenTopUp;
 use Excent\Cloudpayments\Response\AppleSessionResponse;
+use Excent\Cloudpayments\Response\ChargebackArrayResponse;
 use Excent\Cloudpayments\Response\CloudResponse;
 use Excent\Cloudpayments\Response\KktReceiptResponse;
 use Excent\Cloudpayments\Response\NotificationResponse;
@@ -204,6 +206,16 @@ class Library
         $method = CloudMethodsEnum::V2_PAYMENTS_LIST;
 
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
+    }
+
+    /**
+     * Список претензий за произвольный период.
+     */
+    public function chargebacksList(ChargebacksList $data): ChargebackArrayResponse
+    {
+        $method = CloudMethodsEnum::CHARGEBACKS_LIST;
+
+        return $this->request($method, $data->asArray(), new ChargebackArrayResponse());
     }
 
     /**

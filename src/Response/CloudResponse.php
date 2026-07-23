@@ -14,6 +14,7 @@ class CloudResponse
     public bool $success;
     public ?string $message = null;
     public ?string $warning = null;
+    public ?int $errorCode = null;
 
     /** @var mixed */
     public $model;
@@ -29,9 +30,15 @@ class CloudResponse
             $responseContent = new stdClass();
         }
 
-        $this->success = $responseContent->Success ?? false;
-        $this->message = $responseContent->Message ?? 'Message is not set';
-        $this->warning = $responseContent->Warning ?? 'Warning is not set';
+        $success = $responseContent->Success ?? false;
+        $message = $responseContent->Message ?? 'Message is not set';
+        $warning = $responseContent->Warning ?? 'Warning is not set';
+        $errorCode = $responseContent->ErrorCode ?? null;
+
+        $this->success = is_bool($success) ? $success : false;
+        $this->message = is_string($message) ? $message : 'Message is not set';
+        $this->warning = is_string($warning) ? $warning : 'Warning is not set';
+        $this->errorCode = is_int($errorCode) ? $errorCode : null;
 
         if (! empty($responseContent->Model)) {
             $this->fillModel($responseContent->Model);
