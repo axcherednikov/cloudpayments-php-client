@@ -22,7 +22,6 @@ PHP-клиент для [CloudPayments API](https://developers.cloudpayments.ru/
 - [Уведомления](#уведомления)
 - [Идемпотентность](#идемпотентность)
 - [Обработка ошибок](#обработка-ошибок)
-- [Разработка](#разработка)
 - [Версионирование](#версионирование)
 - [License](#license)
 
@@ -98,40 +97,40 @@ if ($response->is3dsError()) {
 
 Библиотека работает с методами из [CloudPayments API](https://developers.cloudpayments.ru/#api) через request/response DTO.
 
-| Метод API                        | Метод Library             | Request DTO          | Response DTO               |
-|----------------------------------|---------------------------|----------------------|----------------------------|
-| `payments/cards/charge`          | `paymentsCardsCharge`     | `CardsPayment`       | `TransactionWith3dsResponse` |
-| `payments/cards/auth`            | `createPaymentByCard2Step` | `CardsPayment`       | `TransactionWith3dsResponse` |
-| `payments/cards/post3ds`         | `post3Ds`                 | `Post3DS`            | `TransactionResponse`      |
-| `payments/tokens/charge`         | `executePaymentByToken`   | `TokenPayment`       | `TransactionResponse`      |
-| `payments/tokens/auth`           | `createPaymentByToken2Step` | `TokenPayment`       | `TransactionResponse`      |
-| `payments/confirm`               | `confirmPayment`          | `PaymentsConfirm`    | `CloudResponse`            |
-| `payments/void`                  | `cancelPayment`           | `PaymentsVoid`       | `CloudResponse`            |
-| `payments/refund`                | `paymentsRefund`          | `PaymentsRefund`     | `TransactionResponse`      |
-| `payments/cards/topup`           | `paymentsCardsTopup`      | `CardsTopUp`         | `TransactionResponse`      |
-| `payments/token/topup`           | `paymentsTokenTopup`      | `TokenTopUp`         | `TransactionResponse`      |
-| `payments/get`                   | `getPaymentData`          | `PaymentsGet`        | `TransactionResponse`      |
-| `payments/find`                  | `getPaymentDataByInvoice` | `PaymentsFind`       | `TransactionResponse`      |
-| `v2/payments/find`               | `getPaymentDataByInvoiceV2` | `PaymentsFind`     | `TransactionResponse`      |
-| `payments/list`                  | `getListPayment`          | `PaymentsList`       | `TransactionArrayResponse` |
-| `v2/payments/list`               | `getListPaymentV2`        | `PaymentsListV2`     | `TransactionArrayResponse` |
-| `chargebacks/list`               | `chargebacksList`         | `ChargebacksList`    | `ChargebackArrayResponse`  |
-| `payments/qr/sbp/link`           | `paymentsQrSbpLink`       | `SbpLink`            | `QrLinkResponse`            |
-| `payments/qr/sbp/image`          | `paymentsQrSbpImage`      | `SbpLink`            | `QrLinkResponse`            |
-| `sbp/v2/banks/info`              | `sbpV2BanksInfo`          | `SbpBanksInfo` или `null` | `SbpBanksInfoResponse`   |
-| `payments/tokens/list`           | `paymentsTokensList`      | `TokenList` или `null` | `TokenArrayResponse`     |
-| `subscriptions/create`           | `subscriptionsCreate`     | `SubscriptionCreate` | `SubscriptionResponse`     |
-| `subscriptions/get`              | `subscriptionsGet`        | `SubscriptionGet`    | `SubscriptionResponse`     |
-| `subscriptions/find`             | `subscriptionsFind`       | `SubscriptionFind`   | `SubscriptionArrayResponse` |
-| `subscriptions/update`           | `subscriptionsUpdate`     | `SubscriptionUpdate` | `SubscriptionResponse`     |
-| `subscriptions/cancel`           | `subscriptionsCancel`     | `SubscriptionCancel` | `CloudResponse`            |
-| `orders/create`                  | `ordersCreate`            | `OrderCreate`        | `OrderResponse`            |
-| `orders/cancel`                  | `ordersCancel`            | `OrderCancel`        | `CloudResponse`            |
-| `site/notifications/{Type}/get`  | `siteNotificationsGet`    | `NotificationsGet`   | `NotificationResponse`     |
-| `site/notifications/{Type}/update` | `siteNotificationsUpdate` | `NotificationsUpdate` | `CloudResponse`          |
-| `applepay/startsession`          | `startSession`            | `ApplepayStartSession` | `AppleSessionResponse`   |
-| `kkt/receipt`                    | `createReceipt`           | `KktReceipt`         | `KktReceiptResponse`       |
-| `test`                           | `test`                    | —                    | `CloudResponse`            |
+| Метод API                          | Метод Library               | Request DTO               | Response DTO                 |
+|------------------------------------|-----------------------------|---------------------------|------------------------------|
+| `payments/cards/charge`            | `paymentsCardsCharge`       | `CardsPayment`            | `TransactionWith3dsResponse` |
+| `payments/cards/auth`              | `createPaymentByCard2Step`  | `CardsPayment`            | `TransactionWith3dsResponse` |
+| `payments/cards/post3ds`           | `post3Ds`                   | `Post3DS`                 | `TransactionResponse`        |
+| `payments/tokens/charge`           | `executePaymentByToken`     | `TokenPayment`            | `TransactionResponse`        |
+| `payments/tokens/auth`             | `createPaymentByToken2Step` | `TokenPayment`            | `TransactionResponse`        |
+| `payments/confirm`                 | `confirmPayment`            | `PaymentsConfirm`         | `CloudResponse`              |
+| `payments/void`                    | `cancelPayment`             | `PaymentsVoid`            | `CloudResponse`              |
+| `payments/refund`                  | `paymentsRefund`            | `PaymentsRefund`          | `TransactionResponse`        |
+| `payments/cards/topup`             | `paymentsCardsTopup`        | `CardsTopUp`              | `TransactionResponse`        |
+| `payments/token/topup`             | `paymentsTokenTopup`        | `TokenTopUp`              | `TransactionResponse`        |
+| `payments/get`                     | `getPaymentData`            | `PaymentsGet`             | `TransactionResponse`        |
+| `payments/find`                    | `getPaymentDataByInvoice`   | `PaymentsFind`            | `TransactionResponse`        |
+| `v2/payments/find`                 | `getPaymentDataByInvoiceV2` | `PaymentsFind`            | `TransactionResponse`        |
+| `payments/list`                    | `getListPayment`            | `PaymentsList`            | `TransactionArrayResponse`   |
+| `v2/payments/list`                 | `getListPaymentV2`          | `PaymentsListV2`          | `TransactionArrayResponse`   |
+| `chargebacks/list`                 | `chargebacksList`           | `ChargebacksList`         | `ChargebackArrayResponse`    |
+| `payments/qr/sbp/link`             | `paymentsQrSbpLink`         | `SbpLink`                 | `QrLinkResponse`             |
+| `payments/qr/sbp/image`            | `paymentsQrSbpImage`        | `SbpLink`                 | `QrLinkResponse`             |
+| `sbp/v2/banks/info`                | `sbpV2BanksInfo`            | `SbpBanksInfo` или `null` | `SbpBanksInfoResponse`       |
+| `payments/tokens/list`             | `paymentsTokensList`        | `TokenList` или `null`    | `TokenArrayResponse`         |
+| `subscriptions/create`             | `subscriptionsCreate`       | `SubscriptionCreate`      | `SubscriptionResponse`       |
+| `subscriptions/get`                | `subscriptionsGet`          | `SubscriptionGet`         | `SubscriptionResponse`       |
+| `subscriptions/find`               | `subscriptionsFind`         | `SubscriptionFind`        | `SubscriptionArrayResponse`  |
+| `subscriptions/update`             | `subscriptionsUpdate`       | `SubscriptionUpdate`      | `SubscriptionResponse`       |
+| `subscriptions/cancel`             | `subscriptionsCancel`       | `SubscriptionCancel`      | `CloudResponse`              |
+| `orders/create`                    | `ordersCreate`              | `OrderCreate`             | `OrderResponse`              |
+| `orders/cancel`                    | `ordersCancel`              | `OrderCancel`             | `CloudResponse`              |
+| `site/notifications/{Type}/get`    | `siteNotificationsGet`      | `NotificationsGet`        | `NotificationResponse`       |
+| `site/notifications/{Type}/update` | `siteNotificationsUpdate`   | `NotificationsUpdate`     | `CloudResponse`              |
+| `applepay/startsession`            | `startSession`              | `ApplepayStartSession`    | `AppleSessionResponse`       |
+| `kkt/receipt`                      | `createReceipt`             | `KktReceipt`              | `KktReceiptResponse`         |
+| `test`                             | `test`                      | —                         | `CloudResponse`              |
 
 `payments/find` сохраняется для обратной совместимости. `v2/payments/find` ищет последнюю операцию среди платежей, возвратов и выплат на карту.
 
@@ -206,30 +205,30 @@ $client->siteNotificationsUpdate($request);
 
 Все response DTO наследуются от `CloudResponse`.
 
-| Свойство  | Описание |
-|-----------|----------|
-| `success` | Результат операции из поля `Success`. |
-| `message` | Сообщение из поля `Message`. |
-| `warning` | Предупреждение из поля `Warning`. |
-| `errorCode` | Код ошибки из поля `ErrorCode`. |
-| `model`   | Модель ответа, тип зависит от вызванного метода. |
+| Свойство    | Описание                                         |
+|-------------|--------------------------------------------------|
+| `success`   | Результат операции из поля `Success`.            |
+| `message`   | Сообщение из поля `Message`.                     |
+| `warning`   | Предупреждение из поля `Warning`.                |
+| `errorCode` | Код ошибки из поля `ErrorCode`.                  |
+| `model`     | Модель ответа, тип зависит от вызванного метода. |
 
 Поддерживаемые модели:
 
-| Response DTO | Model |
-|--------------|-------|
-| `AppleSessionResponse` | `AppleSessionModel` |
-| `ChargebackArrayResponse` | `ChargebackModel[]` |
-| `KktReceiptResponse` | `KktReceiptModel` |
-| `NotificationResponse` | `NotificationModel` |
-| `OrderResponse` | `OrderModel` |
-| `QrLinkResponse` | `QrLinkModel` |
-| `SbpBanksInfoResponse` | `SbpBanksInfoModel[]` |
-| `SubscriptionResponse` | `SubscriptionModel` |
-| `SubscriptionArrayResponse` | `SubscriptionModel[]` |
-| `TokenArrayResponse` | `TokenModel[]` |
-| `TransactionResponse` | `TransactionModel` |
-| `TransactionArrayResponse` | `TransactionModel[]` |
+| Response DTO                 | Model                     |
+|------------------------------|---------------------------|
+| `AppleSessionResponse`       | `AppleSessionModel`       |
+| `ChargebackArrayResponse`    | `ChargebackModel[]`       |
+| `KktReceiptResponse`         | `KktReceiptModel`         |
+| `NotificationResponse`       | `NotificationModel`       |
+| `OrderResponse`              | `OrderModel`              |
+| `QrLinkResponse`             | `QrLinkModel`             |
+| `SbpBanksInfoResponse`       | `SbpBanksInfoModel[]`     |
+| `SubscriptionResponse`       | `SubscriptionModel`       |
+| `SubscriptionArrayResponse`  | `SubscriptionModel[]`     |
+| `TokenArrayResponse`         | `TokenModel[]`            |
+| `TransactionResponse`        | `TransactionModel`        |
+| `TransactionArrayResponse`   | `TransactionModel[]`      |
 | `TransactionWith3dsResponse` | `TransactionWith3dsModel` |
 
 `SbpBanksInfoResponse` содержит массив источников (`SbpBanksInfoModel`), а `members` каждого источника — типизированный массив банков (`SbpBankMemberModel`). Библиотека сохраняет исходный порядок источников и банков и не изменяет значения `name`, `logo` и `url`.
@@ -256,16 +255,16 @@ echo $hook->transactionId;
 
 Классы уведомлений:
 
-| Webhook | DTO |
-|---------|-----|
-| `Check` | `HookCheck` |
-| `Pay` | `HookPay` |
-| `Fail` | `HookFail` |
-| `Confirm` | `HookConfirm` |
-| `Refund` | `HookRefund` |
+| Webhook     | DTO             |
+|-------------|-----------------|
+| `Check`     | `HookCheck`     |
+| `Pay`       | `HookPay`       |
+| `Fail`      | `HookFail`      |
+| `Confirm`   | `HookConfirm`   |
+| `Refund`    | `HookRefund`    |
 | `Recurrent` | `HookRecurrent` |
-| `Cancel` | `HookCancel` |
-| `Receipt` | `HookReceipt` |
+| `Cancel`    | `HookCancel`    |
+| `Receipt`   | `HookReceipt`   |
 
 Webhook DTO только преобразуют входные данные в объект. Проверку подписи, бизнес-валидацию и формирование ответа для CloudPayments нужно реализовать на стороне приложения.
 
@@ -291,40 +290,19 @@ $response = $client->createPaymentByCard2Step($request);
 
 ## Обработка ошибок
 
-Модели ответа транзакции всегда предоставляют `transactionId` типа PHP `int`. При создании модели поле `TransactionId` обязательно. Если ID отсутствует, имеет неверный формат или выходит за диапазон `PHP_INT_MIN`–`PHP_INT_MAX`, SDK выбрасывает `ResponseFormatException`, наследующий `CloudpaymentsException`. Проверка выполняется и для ответов с `Success: false`, если в них передана модель: это относится, например, к отказу и необходимости 3-D Secure.
+Методы `Library` объявляют `@throws Throwable` и передают исходные исключения и ошибки вызывающему коду без обёрток.
 
-CloudPayments документирует `TransactionId` как `Long` и показывает его в JSON без кавычек ([просмотр транзакции](https://developers.cloudpayments.ru/#prosmotr-tranzaktsii), [оплата картой](https://developers.cloudpayments.ru/#oplata-po-kriptogramme)). SDK сохраняет точность целых чисел из JSON и принимает целые PHP-числа или знаковые десятичные строки, в том числе с ведущими нулями, если значение помещается в диапазон PHP `int`. Нормализация строк и пределы платформенного типа `int` относятся к поведению SDK. Документация API не задаёт ограничений на число цифр, положительный знак или ведущие нули.
+| Тип исключения | Причина |
+|----------------|---------|
+| `BadTypeException` | Некорректные параметры request DTO. |
+| `GuzzleException` | Ошибка соединения или HTTP-запроса. |
+| `JsonException` | Ошибка сериализации или разбора JSON. |
+| `ResponseFormatException` | Некорректная модель транзакции, включая `TransactionId`. |
 
-Некоторые успешные ответы подтверждения и отмены оплаты содержат только `Success` и `Message`, без `Model` ([подтверждение оплаты](https://developers.cloudpayments.ru/#podtverzhdenie-oplaty), [отмена оплаты](https://developers.cloudpayments.ru/#otmena-oplaty)); такие ответы остаются допустимыми. При ручном создании `TransactionModel` или `TransactionWith3dsModel` передайте `stdClass` с `TransactionId`, например `new TransactionModel((object) ['TransactionId' => 123])`. Проверенный `$model->transactionId` можно передать напрямую в существующие DTO запросов: `PaymentsGet`, `PaymentsConfirm`, `PaymentsVoid`, `PaymentsRefund` и `Post3DS`.
-
-При обновлении с версии 3.x на 4.0 учтите два изменения совместимости: пустое создание моделей транзакции больше не поддерживается, а свойства `model` классов ответа имеют нативный тип `mixed`. Если ваш класс наследует ответ SDK и переобъявляет необязательное свойство модели, используйте `public mixed $model = null;`, сохранив PHPDoc с типом своей модели. Объекты ответа с отсутствующей моделью сохраняют прежнее значение `null`; существующие начальные пустые списки остаются пустыми списками.
-
-Все публичные API-методы `Library`, включая `subscriptionsCreate()` и `subscriptionsGet()`, а также `sendRequest()` объявляют общий контракт `@throws Throwable`. Он охватывает исключения и ошибки HTTP-слоя, сериализации, разбора и заполнения ответа. Внутренний `request()` использует тот же контракт, поэтому его ошибки не скрыты от вызывающего кода. PHP не поддерживает нативный `throws` в сигнатуре; типы параметров и возвращаемых DTO заданы в сигнатурах, а контракт исключений — в PHPDoc.
-
-| Граница вызова | Тип исключения | Причина |
-|----------------|----------------|---------|
-| Конструкторы валидируемых request DTO | `BadTypeException` | Некорректные параметры запроса. |
-| Все API-методы и `sendRequest()` | `GuzzleException` | Ошибка соединения или HTTP-запроса. |
-| Все API-методы и `CloudResponse::fillByResponse()` | `JsonException` | Некорректный JSON ответа; в СБП также ошибка сериализации `JsonData`. |
-| Разбор и заполнение моделей транзакций, вызываемые API-методами | `ResponseFormatException` | Некорректная модель транзакции, включая `TransactionId`. |
-
-`BadTypeException` и `ResponseFormatException` наследуют `CloudpaymentsException`. Конструирование DTO нужно включать в `try`, если приложение обрабатывает ошибки его валидации. Ответ с `Success: false` сам по себе не выбрасывает исключение: проверяйте `$response->success`, `$response->message` и `$response->errorCode`. Модель транзакции валидируется даже в таком ответе. Исключения сохраняют существующие типы и передаются вызывающему коду без обёрток.
-
-Для единой обработки всех ошибок вызова можно перехватывать `Throwable`. Конкретный класс ошибки сохраняется; при необходимости используйте отдельные `catch` из примера ниже.
+`BadTypeException` и `ResponseFormatException` наследуют `CloudpaymentsException`. Ответ с `Success: false` не является исключением: проверяйте `success`, `message` и `errorCode`.
 
 ```php
-try {
-    $response = $client->subscriptionsGet($request);
-} catch (\Throwable $error) {
-    // Обработайте или зарегистрируйте исходную ошибку вызова.
-}
-```
-
-```php
-use Excent\Cloudpayments\Exceptions\BadTypeException;
-use Excent\Cloudpayments\Exceptions\ResponseFormatException;
 use Excent\Cloudpayments\Request\PaymentsRefund;
-use GuzzleHttp\Exception\GuzzleException;
 
 try {
     $request = new PaymentsRefund($transactionId, $amount);
@@ -333,63 +311,20 @@ try {
     if (! $response->success) {
         // API отклонил операцию: проверьте message и errorCode.
     }
-} catch (BadTypeException $exception) {
-    // Некорректные параметры request DTO.
-} catch (GuzzleException $exception) {
-    // Ошибка HTTP-запроса.
-} catch (JsonException $exception) {
-    // Ответ API не удалось разобрать как JSON.
-} catch (ResponseFormatException $exception) {
-    // Ответ API содержит некорректную модель транзакции.
+} catch (\Throwable $error) {
+    // Обработайте или зарегистрируйте исходную ошибку вызова.
 }
 ```
 
-## Разработка
+### TransactionId
 
-Правила участия, подготовка окружения и требования к pull requests описаны в
-[CONTRIBUTING.md](CONTRIBUTING.md). В проекте действуют
-[кодекс поведения](CODE_OF_CONDUCT.md) и [положение о доступности](ACCESSIBILITY.md).
+Модели транзакций предоставляют точный `transactionId` типа PHP `int`. SDK принимает целые числа и знаковые десятичные строки в диапазоне `PHP_INT_MIN`–`PHP_INT_MAX`, сохраняя точность целых чисел из JSON. Отсутствующие, некорректные и выходящие за диапазон ID вызывают `ResponseFormatException`.
 
-Любые изменения в репозитории вносятся через отдельную ветку и pull request в `master`. Прямой push в `master` запрещён.
-
-```bash
-composer install
-composer bin phpstan install
-composer bin rector install
-composer bin php-cs-fixer install
-
-composer test
-make phpstan
-make rector
-make lint
-```
-
-Полезные команды:
-
-| Команда | Назначение |
-|---------|------------|
-| `composer test` | Запустить PHPUnit. |
-| `make phpstan` | Запустить PHPStan. |
-| `make rector` | Проверить код Rector в dry-run режиме. |
-| `make lint` | Проверить стиль PHP CS Fixer. |
-| `make fixcs` | Исправить стиль PHP CS Fixer. |
-| `make rector-fix` | Применить исправления Rector. |
-
-CI запускает тесты на поддерживаемых версиях PHP и отдельные quality checks для PHPStan, Rector и PHP CS Fixer.
-
-Workflow `Security` проверяет PHP-код с помощью Semgrep при push в `master`, в pull requests и еженедельно.
-Результаты доступны в GitHub Security → Code scanning. Сообщения об уязвимостях принимаются по [политике безопасности](.github/SECURITY.md).
-
-Для pull requests используйте ветки с префиксами `feat/`, `fix/`, `docs/` или `chore/`.
-Workflow деплоя или публикации должен разрешать запуск только из `master` либо из релизного тега, созданного на коммите, включённом в `master`.
+Проверка выполняется и при `Success: false`, если ответ содержит модель, в том числе при отказе платежа и 3-D Secure. Ответы подтверждения и отмены оплаты без `Model` допустимы. При ручном создании модели передайте данные: `new TransactionModel((object) ['TransactionId' => 123])`.
 
 ## Версионирование
 
-Проект следует SemVer:
-
-- patch-релизы исправляют ошибки, документацию, тесты и статический анализ без изменения публичного контракта;
-- minor-релизы могут добавлять новые методы и DTO обратно совместимым образом;
-- major-релизы могут содержать несовместимые изменения.
+История релизов и инструкции по миграции — в [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
