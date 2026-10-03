@@ -2,7 +2,9 @@
 
 namespace Excent\Cloudpayments\Response;
 
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
 use Excent\Cloudpayments\Response\Models\BaseModel;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
@@ -19,6 +21,9 @@ class CloudResponse
 
     /**
      * Заполняет по респонсу.
+     *
+     * @throws JsonException
+     * @throws ResponseFormatException When a typed response model has an invalid format.
      */
     public function fillByResponse(ResponseInterface $response): self
     {

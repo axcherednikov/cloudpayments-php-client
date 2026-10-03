@@ -84,11 +84,17 @@ class TransactionModel extends BaseModel
     public ?bool $transactionIsInProcess = null;
     public ?int $escrowAccumulationId = null;
 
+    /**
+     * @throws ResponseFormatException
+     */
     public function __construct(stdClass $data)
     {
         $this->fill($data);
     }
 
+    /**
+     * @throws ResponseFormatException
+     */
     public function fill(stdClass $fillData): void
     {
         $props = get_object_vars($fillData);

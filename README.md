@@ -299,20 +299,38 @@ CloudPayments документирует `TransactionId` как `Long` и пок
 
 При обновлении с версии 3.x на 4.0 учтите два изменения совместимости: пустое создание моделей транзакции больше не поддерживается, а свойства `model` классов ответа имеют нативный тип `mixed`. Если ваш класс наследует ответ SDK и переобъявляет необязательное свойство модели, используйте `public mixed $model = null;`, сохранив PHPDoc с типом своей модели. Объекты ответа с отсутствующей моделью сохраняют прежнее значение `null`; существующие начальные пустые списки остаются пустыми списками.
 
-Request DTO могут выбрасывать `BadTypeException`, если переданы некорректные значения. HTTP-слой может выбросить исключения Guzzle, а разбор JSON - `JsonException`.
+Все публичные API-методы `Library`, включая `subscriptionsCreate()`, явно объявляют типы исключений через `@throws`: IDE и статический анализатор показывают их непосредственно при вызове метода. PHP не поддерживает нативный `throws` в сигнатуре; типы параметров и возвращаемых DTO заданы в сигнатурах, а контракт исключений — в PHPDoc.
+
+| Граница вызова | Тип исключения | Причина |
+|----------------|----------------|---------|
+| Конструкторы валидируемых request DTO | `BadTypeException` | Некорректные параметры запроса. |
+| Все API-методы и `sendRequest()` | `GuzzleException` | Ошибка соединения или HTTP-запроса. |
+| Все API-методы и `CloudResponse::fillByResponse()` | `JsonException` | Некорректный JSON ответа; в СБП также ошибка сериализации `JsonData`. |
+| API-методы с `TransactionResponse`, `TransactionWith3dsResponse` или `TransactionArrayResponse`; заполнение этих ответов и моделей | `ResponseFormatException` | Некорректная модель транзакции, включая `TransactionId`. |
+
+`BadTypeException` и `ResponseFormatException` наследуют `CloudpaymentsException`. Конструирование DTO нужно включать в `try`, если приложение обрабатывает ошибки его валидации. Ответ с `Success: false` сам по себе не выбрасывает исключение: проверяйте `$response->success`, `$response->message` и `$response->errorCode`. Модель транзакции валидируется даже в таком ответе. Исключения сохраняют существующие типы и передаются вызывающему коду без обёрток.
 
 ```php
 use Excent\Cloudpayments\Exceptions\BadTypeException;
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
+use Excent\Cloudpayments\Request\PaymentsRefund;
 use GuzzleHttp\Exception\GuzzleException;
 
 try {
+    $request = new PaymentsRefund($transactionId, $amount);
     $response = $client->paymentsRefund($request);
+
+    if (! $response->success) {
+        // API отклонил операцию: проверьте message и errorCode.
+    }
 } catch (BadTypeException $exception) {
     // Некорректные параметры request DTO.
 } catch (GuzzleException $exception) {
     // Ошибка HTTP-запроса.
 } catch (JsonException $exception) {
     // Ответ API не удалось разобрать как JSON.
+} catch (ResponseFormatException $exception) {
+    // Ответ API содержит некорректную модель транзакции.
 }
 ```
 

@@ -18,6 +18,9 @@ use JsonException;
  */
 final class SbpLink extends BaseRequest
 {
+    /**
+     * @throws BadTypeException
+     */
     public function __construct(
         public string $amount,
         public Currency $currency,
