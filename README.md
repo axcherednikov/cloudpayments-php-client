@@ -318,6 +318,8 @@ try {
 
 ## Разработка
 
+Любые изменения в репозитории вносятся через отдельную ветку и pull request в `master`. Прямой push в `master` запрещён.
+
 ```bash
 composer install
 composer bin phpstan install
