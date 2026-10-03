@@ -32,6 +32,7 @@ fixcs: vendor ## Исправить ошибки PHP code style при помо�
 
 phpstan: vendor ## Запустить полный анализ PHP кода при помощи PHPStan (https://phpstan.org)
 	$(EXEC_PHP) vendor-bin/phpstan/vendor/bin/phpstan analyse --memory-limit 2G
+	$(EXEC_PHP) vendor-bin/phpstan/vendor/bin/phpstan analyse src/Library.php --configuration phpstan-exceptions.neon --memory-limit 2G
 .PHONY: phpstan
 
 ##

@@ -2,6 +2,27 @@
 
 This file documents notable changes to the library.
 
+## [4.0.2] - 2026-10-03
+
+### Fixed
+
+- All public API methods, `sendRequest()`, and the internal `request()` now
+  declare the same `@throws Throwable` boundary contract. This covers errors
+  from every lower layer, including response hydration, without incomplete
+  exception lists in subscription and other methods.
+- Original exception and error objects still propagate without wrapping.
+  Native parameter and return types and runtime behavior remain unchanged.
+- Clarified the boundary contract and concrete error categories in the README.
+
+### Tests
+
+- `make phpstan` now also checks missing exception declarations in `Library`
+  using PHPStan's `missingCheckedExceptionInThrows` rule. The rule reproduced
+  19 missing declarations in 4.0.1 before the fix.
+- PHPUnit enforces `@throws Throwable` at every public API and request boundary.
+- Verified that transport exceptions and native PHP errors reach the caller as
+  the exact original objects through `catch (Throwable)`.
+
 ## [4.0.1] - 2026-10-03
 
 ### Fixed

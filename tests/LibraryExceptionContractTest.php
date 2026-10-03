@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Excent\Cloudpayments\Tests;
 
 use DateTimeImmutable;
+use Error;
 use Excent\Cloudpayments\Enum\Currency;
 use Excent\Cloudpayments\Enum\SbpScheme;
 use Excent\Cloudpayments\Exceptions\ResponseFormatException;
@@ -31,10 +32,11 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionNamedType;
+use Throwable;
 
 final class LibraryExceptionContractTest extends TestCase
 {
-    public function testEveryPublicApiMethodDeclaresConcreteExceptionTypes(): void
+    public function testEveryPublicApiMethodDeclaresThrowable(): void
     {
         $coveredMethods = array_keys(self::apiMethodsProvider());
         $apiMethods = [];
@@ -50,11 +52,7 @@ final class LibraryExceptionContractTest extends TestCase
             $doc = $method->getDocComment();
             $this->assertIsString($doc, $method->getName());
             preg_match_all('/@throws\s+(\S+)/', $doc, $matches);
-            $expected = ['GuzzleException', 'JsonException'];
-
-            if (self::hasTransactionModel($method->getName())) {
-                $expected[] = 'ResponseFormatException';
-            }
+            $expected = ['Throwable'];
 
             $this->assertSame($expected, $matches[1], $method->getName());
         }
@@ -62,6 +60,15 @@ final class LibraryExceptionContractTest extends TestCase
         sort($apiMethods);
         sort($coveredMethods);
         $this->assertSame($apiMethods, $coveredMethods, 'Exercise every public API method.');
+    }
+
+    public function testRequestBoundariesDeclareThrowable(): void
+    {
+        foreach (['request', 'sendRequest'] as $name) {
+            $doc = (new ReflectionMethod(Library::class, $name))->getDocComment();
+            $this->assertIsString($doc);
+            $this->assertStringContainsString('@throws Throwable', $doc);
+        }
     }
 
     /**
@@ -74,8 +81,44 @@ final class LibraryExceptionContractTest extends TestCase
         $exception = new ConnectException('Connection failed', new Request('POST', '/test'));
         $library = $this->libraryWith($exception);
         $request = $requestFactory();
-        $this->expectExceptionObject($exception);
-        $request === null ? $library->{$apiMethod}() : $library->{$apiMethod}($request);
+
+        try {
+            $request === null ? $library->{$apiMethod}() : $library->{$apiMethod}($request);
+        } catch (Throwable $actual) {
+            $this->assertSame($exception, $actual);
+
+            return;
+        }
+
+        $this->fail('The original transport exception must reach the caller.');
+    }
+
+    /**
+     * @dataProvider apiMethodsProvider
+     *
+     * @param callable(): (object|null) $requestFactory
+     */
+    public function testNativeErrorReachesCaller(string $apiMethod, callable $requestFactory): void
+    {
+        $error = new Error('HTTP handler failed');
+        $library = new HttpClientLibrary('public_id', 'password');
+        $library->replaceClient(new Client([
+            'base_uri' => Library::DEFAULT_URL,
+            'handler' => static function () use ($error): never {
+                throw $error;
+            },
+        ]));
+        $request = $requestFactory();
+
+        try {
+            $request === null ? $library->{$apiMethod}() : $library->{$apiMethod}($request);
+        } catch (Throwable $actual) {
+            $this->assertSame($error, $actual);
+
+            return;
+        }
+
+        $this->fail('The original native error must reach the caller.');
     }
 
     /**
