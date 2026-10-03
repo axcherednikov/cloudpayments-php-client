@@ -7,6 +7,7 @@ namespace Excent\Cloudpayments\Tests;
 use Excent\Cloudpayments\Enum\Currency;
 use Excent\Cloudpayments\Enum\SbpScheme;
 use Excent\Cloudpayments\Request\SbpLink;
+use Excent\Cloudpayments\Response\Models\QrLinkModel;
 use Excent\Cloudpayments\Response\QrLinkResponse;
 use Excent\Cloudpayments\Tests\Support\RecordingLibrary;
 use GuzzleHttp\Psr7\Response;
@@ -62,6 +63,7 @@ final class LibrarySbpLinkTest extends TestCase
             'Scheme' => 'charge',
             'PublicId' => 'public_id',
         ], $library->lastPostData);
+        $this->assertInstanceOf(QrLinkModel::class, $result->model);
         $this->assertNull($result->model->qrUrl);
         $this->assertSame('iVBORw0KGgoAAAANSUhEUg==', $result->model->qrImage);
         $this->assertArrayNotHasKey('PublicId', $request->asArray());

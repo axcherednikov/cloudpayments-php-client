@@ -2,6 +2,47 @@
 
 This file documents notable changes to the library.
 
+## [4.0.0] - 2026-10-03
+
+### Changed
+
+- **Breaking:** `TransactionModel` and `TransactionWith3dsModel` constructors now
+  require response data containing `TransactionId` instead of allowing empty
+  construction followed by `fill()`.
+- Transaction IDs are validated inside the SDK and exposed as exact PHP `int`
+  values. Malformed, missing, floating-point, and out-of-range IDs throw
+  `ResponseFormatException`, a subclass of `CloudpaymentsException`.
+- Raw JSON integers retain their precision without conversion through `float`.
+  The API documents `TransactionId` as `Long`; signed decimal-string
+  normalization and native integer limits are SDK behavior.
+- **Breaking for custom response subclasses:** response `model` properties now
+  have the native `mixed` type. Redeclarations must use the same native type.
+
+### Fixed
+
+- Supplied transaction models are validated and hydrated even when
+  `Success` is `false`, including 3-D Secure challenges and declined payments.
+- Responses without a model remain valid, including successful payment
+  confirmations and voids. Optional `model` properties retain their previous
+  initial `null` value; existing empty-list defaults remain unchanged.
+
+### Tests
+
+- Added regression coverage for invalid IDs, native integer bounds, large raw
+  JSON integers, overflow, transaction lists, failed payments, and 3-D Secure.
+- Verified that hydrated IDs can be reused directly by existing request DTOs.
+- Replaced manual exception-catching loops with PHPUnit data providers.
+
+### Migration
+
+- Use models returned by the SDK, or construct a model with response data:
+  `new TransactionModel((object) ['TransactionId' => 123])`.
+- Keep using `$model->transactionId` directly in request DTOs. Handle
+  `ResponseFormatException` when reading an invalid API response; no duplicate
+  ID-format validation is required in application code.
+- In custom response subclasses, declare an overridden optional model as
+  `public mixed $model = null;` and retain its appropriate PHPDoc model type.
+
 ## [3.3.0] - 2026-07-23
 
 ### Added

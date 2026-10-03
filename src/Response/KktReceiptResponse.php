@@ -10,8 +10,10 @@ use stdClass;
  */
 class KktReceiptResponse extends CloudResponse
 {
-    /** @var KktReceiptModel */
-    public $model;
+    /**
+     * @var KktReceiptModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

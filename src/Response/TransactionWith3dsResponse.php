@@ -2,6 +2,7 @@
 
 namespace Excent\Cloudpayments\Response;
 
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
 use Excent\Cloudpayments\Response\Models\TransactionWith3dsModel;
 use stdClass;
 
@@ -10,17 +11,28 @@ use stdClass;
  */
 class TransactionWith3dsResponse extends CloudResponse
 {
-    /** @var TransactionWith3dsModel */
-    public $model;
+    /**
+     * @var TransactionWith3dsModel|null
+     */
+    public mixed $model = null;
+
+    protected function shouldFillModel(stdClass $responseContent): bool
+    {
+        return property_exists($responseContent, 'Model') && $responseContent->Model !== null;
+    }
 
     /**
-     * @param stdClass $modelDate
+     * @param  mixed  $modelDate
+     *
+     * @throws ResponseFormatException
      */
     public function fillModel($modelDate): void
     {
-        $model = new TransactionWith3dsModel();
-        $model->fill($modelDate);
+        if (! $modelDate instanceof stdClass) {
+            throw new ResponseFormatException('Transaction model must be an object.');
+        }
 
+        $model = new TransactionWith3dsModel($modelDate);
         $this->model = $model;
     }
 
@@ -29,6 +41,8 @@ class TransactionWith3dsResponse extends CloudResponse
      */
     public function is3dsError(): bool
     {
-        return $this->model->paReq !== null && $this->model->acsUrl !== null;
+        return $this->model instanceof TransactionWith3dsModel
+            && $this->model->paReq !== null
+            && $this->model->acsUrl !== null;
     }
 }

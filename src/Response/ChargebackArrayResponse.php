@@ -9,8 +9,10 @@ use stdClass;
 
 final class ChargebackArrayResponse extends CloudResponse
 {
-    /** @var ChargebackModel[] */
-    public $model = [];
+    /**
+     * @var ChargebackModel[]
+     */
+    public mixed $model = [];
 
     /**
      * @param mixed $modelDate

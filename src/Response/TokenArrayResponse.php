@@ -10,8 +10,10 @@ use stdClass;
  */
 class TokenArrayResponse extends CloudResponse
 {
-    /** @var TokenModel[] */
-    public $model;
+    /**
+     * @var TokenModel[]|null
+     */
+    public mixed $model = null;
 
     /**
      * @param mixed $modelDate
@@ -22,7 +24,9 @@ class TokenArrayResponse extends CloudResponse
 
         if (is_array($modelDate)) {
             foreach ($modelDate as $value) {
-                /** @var stdClass $value */
+                /**
+                 * @var stdClass $value
+                 */
                 $model = new TokenModel();
                 $model->fill($value);
 

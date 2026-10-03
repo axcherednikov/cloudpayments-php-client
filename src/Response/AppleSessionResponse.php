@@ -10,8 +10,10 @@ use stdClass;
  */
 class AppleSessionResponse extends CloudResponse
 {
-    /** @var AppleSessionModel */
-    public $model;
+    /**
+     * @var AppleSessionModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

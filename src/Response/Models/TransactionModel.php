@@ -2,6 +2,9 @@
 
 namespace Excent\Cloudpayments\Response\Models;
 
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
+use stdClass;
+
 /**
  * Class TransactionModel.
  */
@@ -80,6 +83,65 @@ class TransactionModel extends BaseModel
     public mixed $splits = null;
     public ?bool $transactionIsInProcess = null;
     public ?int $escrowAccumulationId = null;
+
+    public function __construct(stdClass $data)
+    {
+        $this->fill($data);
+    }
+
+    public function fill(stdClass $fillData): void
+    {
+        $props = get_object_vars($fillData);
+        $hasId = false;
+
+        foreach (['TransactionId', 'transactionId'] as $idKey) {
+            if (array_key_exists($idKey, $props)) {
+                $props[$idKey] = self::normalizeTransactionId($props[$idKey]);
+                $hasId = true;
+            }
+        }
+
+        if (! $hasId) {
+            if (! isset($this->transactionId)) {
+                throw new ResponseFormatException('TransactionId is required in a transaction model.');
+            }
+        }
+
+        $normalized = new stdClass();
+
+        foreach ($props as $key => $value) {
+            $normalized->{$key} = $value;
+        }
+        parent::fill($normalized);
+    }
+
+    /**
+     * @param  mixed  $value
+     *
+     * @throws ResponseFormatException
+     */
+    private static function normalizeTransactionId($value): int
+    {
+        if (is_int($value)) {
+            return $value;
+        }
+
+        if (! is_string($value) || preg_match('/^[+-]?[0-9]+$/D', $value) !== 1) {
+            throw new ResponseFormatException('TransactionId must be an integer or signed decimal integer string.');
+        }
+
+        $digits = ltrim(ltrim($value, '+-'), '0') === ''
+            ? '0'
+            : ltrim(ltrim($value, '+-'), '0');
+
+        $limit = str_starts_with($value, '-') ? substr((string) PHP_INT_MIN, 1) : (string) PHP_INT_MAX;
+
+        if (strlen($digits) > strlen($limit) || (strlen($digits) === strlen($limit) && strcmp($digits, $limit) > 0)) {
+            throw new ResponseFormatException('TransactionId is outside the native integer range.');
+        }
+
+        return (int) ((str_starts_with($value, '-') && $digits !== '0' ? '-' : '') . $digits);
+    }
 
     /**
      * Получение переведенного кода ошибки.

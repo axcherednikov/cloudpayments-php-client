@@ -10,8 +10,10 @@ use stdClass;
  */
 class OrderResponse extends CloudResponse
 {
-    /** @var OrderModel */
-    public $model;
+    /**
+     * @var OrderModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

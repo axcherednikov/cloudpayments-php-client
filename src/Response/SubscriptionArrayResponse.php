@@ -10,8 +10,10 @@ use stdClass;
  */
 class SubscriptionArrayResponse extends CloudResponse
 {
-    /** @var SubscriptionModel[] */
-    public $model;
+    /**
+     * @var SubscriptionModel[]|null
+     */
+    public mixed $model = null;
 
     /**
      * @param mixed $modelDate
@@ -22,7 +24,9 @@ class SubscriptionArrayResponse extends CloudResponse
 
         if (is_array($modelDate)) {
             foreach ($modelDate as $value) {
-                /** @var stdClass $value */
+                /**
+                 * @var stdClass $value
+                 */
                 $model = new SubscriptionModel();
                 $model->fill($value);
 
