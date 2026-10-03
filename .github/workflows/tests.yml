@@ -2,13 +2,11 @@ name: Tests
 
 on:
   push:
-    branches-ignore: ['codex/**']
   pull_request:
 
 jobs:
   checks:
     name: ${{ matrix.name }}
-    if: ${{ !startsWith(github.head_ref, 'codex/') && !startsWith(github.ref, 'refs/heads/codex/') }}
     runs-on: ubuntu-latest
 
     strategy:

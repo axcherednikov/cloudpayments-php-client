@@ -14,7 +14,6 @@ permissions:
 jobs:
   semgrep:
     name: Semgrep (PHP)
-    if: ${{ !startsWith(github.head_ref, 'codex/') && !startsWith(github.ref, 'refs/heads/codex/') }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
