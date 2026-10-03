@@ -10,8 +10,10 @@ use stdClass;
  */
 class NotificationResponse extends CloudResponse
 {
-    /** @var NotificationModel */
-    public $model;
+    /**
+     * @var NotificationModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

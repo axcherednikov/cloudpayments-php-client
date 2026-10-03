@@ -32,6 +32,7 @@ use Excent\Cloudpayments\Request\TokenTopUp;
 use Excent\Cloudpayments\Response\AppleSessionResponse;
 use Excent\Cloudpayments\Response\CloudResponse;
 use Excent\Cloudpayments\Response\KktReceiptResponse;
+use Excent\Cloudpayments\Response\Models\TransactionModel;
 use Excent\Cloudpayments\Response\NotificationResponse;
 use Excent\Cloudpayments\Response\OrderResponse;
 use Excent\Cloudpayments\Response\SubscriptionArrayResponse;
@@ -106,6 +107,23 @@ final class LibraryTest extends TestCase
         $this->assertSame('public_id', $library->getPublicId());
         $this->assertSame('password', $library->getPass());
         $this->assertSame('https://example.com/', $library->getUrl());
+    }
+
+    public function testValidatedTransactionIdCanBeUsedByExistingRequestDtos(): void
+    {
+        $model = new TransactionModel((object) ['TransactionId' => '09007199254740993']);
+        $id = $model->transactionId;
+        $requests = [
+            new PaymentsGet($id),
+            new PaymentsConfirm(1, $id),
+            new PaymentsVoid($id),
+            new PaymentsRefund($id, 1),
+            new Post3DS($id, 'pares'),
+        ];
+
+        foreach ($requests as $request) {
+            $this->assertSame($id, $request->asArray()['TransactionId']);
+        }
     }
 
     public function testSendRequestUsesFormParams(): void

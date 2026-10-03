@@ -12,8 +12,10 @@ use stdClass;
  */
 class QrLinkResponse extends CloudResponse
 {
-    /** @var QrLinkModel */
-    public $model;
+    /**
+     * @var QrLinkModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

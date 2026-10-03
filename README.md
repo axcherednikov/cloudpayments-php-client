@@ -291,6 +291,14 @@ $response = $client->createPaymentByCard2Step($request);
 
 ## Обработка ошибок
 
+Модели ответа транзакции всегда предоставляют `transactionId` типа PHP `int`. При создании модели поле `TransactionId` обязательно. Если ID отсутствует, имеет неверный формат или выходит за диапазон `PHP_INT_MIN`–`PHP_INT_MAX`, SDK выбрасывает `ResponseFormatException`, наследующий `CloudpaymentsException`. Проверка выполняется и для ответов с `Success: false`, если в них передана модель: это относится, например, к отказу и необходимости 3-D Secure.
+
+CloudPayments документирует `TransactionId` как `Long` и показывает его в JSON без кавычек ([просмотр транзакции](https://developers.cloudpayments.ru/#prosmotr-tranzaktsii), [оплата картой](https://developers.cloudpayments.ru/#oplata-po-kriptogramme)). SDK сохраняет точность целых чисел из JSON и принимает целые PHP-числа или знаковые десятичные строки, в том числе с ведущими нулями, если значение помещается в диапазон PHP `int`. Нормализация строк и пределы платформенного типа `int` относятся к поведению SDK. Документация API не задаёт ограничений на число цифр, положительный знак или ведущие нули.
+
+Некоторые успешные ответы подтверждения и отмены оплаты содержат только `Success` и `Message`, без `Model` ([подтверждение оплаты](https://developers.cloudpayments.ru/#podtverzhdenie-oplaty), [отмена оплаты](https://developers.cloudpayments.ru/#otmena-oplaty)); такие ответы остаются допустимыми. При ручном создании `TransactionModel` или `TransactionWith3dsModel` передайте `stdClass` с `TransactionId`, например `new TransactionModel((object) ['TransactionId' => 123])`. Проверенный `$model->transactionId` можно передать напрямую в существующие DTO запросов: `PaymentsGet`, `PaymentsConfirm`, `PaymentsVoid`, `PaymentsRefund` и `Post3DS`.
+
+При обновлении с версии 3.x на 4.0 учтите два изменения совместимости: пустое создание моделей транзакции больше не поддерживается, а свойства `model` классов ответа имеют нативный тип `mixed`. Если ваш класс наследует ответ SDK и переобъявляет необязательное свойство модели, используйте `public mixed $model = null;`, сохранив PHPDoc с типом своей модели. Объекты ответа с отсутствующей моделью сохраняют прежнее значение `null`; существующие начальные пустые списки остаются пустыми списками.
+
 Request DTO могут выбрасывать `BadTypeException`, если переданы некорректные значения. HTTP-слой может выбросить исключения Guzzle, а разбор JSON - `JsonException`.
 
 ```php

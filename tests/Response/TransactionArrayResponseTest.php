@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Excent\Cloudpayments\Tests\Response;
 
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
 use Excent\Cloudpayments\Response\TransactionArrayResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -23,5 +24,11 @@ final class TransactionArrayResponseTest extends TestCase
         $this->assertCount(2, $response->model);
         $this->assertSame(123, $response->model[0]->transactionId);
         $this->assertSame(456, $response->model[1]->transactionId);
+    }
+
+    public function testRejectsNonObjectListEntries(): void
+    {
+        $this->expectException(ResponseFormatException::class);
+        (new TransactionArrayResponse())->fillModel([['TransactionId' => 1]]);
     }
 }

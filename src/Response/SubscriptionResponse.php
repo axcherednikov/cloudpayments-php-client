@@ -10,8 +10,10 @@ use stdClass;
  */
 class SubscriptionResponse extends CloudResponse
 {
-    /** @var SubscriptionModel */
-    public $model;
+    /**
+     * @var SubscriptionModel|null
+     */
+    public mixed $model = null;
 
     /**
      * @param stdClass $modelDate

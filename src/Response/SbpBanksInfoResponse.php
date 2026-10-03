@@ -12,8 +12,10 @@ use stdClass;
  */
 class SbpBanksInfoResponse extends CloudResponse
 {
-    /** @var SbpBanksInfoModel[] */
-    public $model = [];
+    /**
+     * @var SbpBanksInfoModel[]
+     */
+    public mixed $model = [];
 
     /**
      * @param mixed $modelDate

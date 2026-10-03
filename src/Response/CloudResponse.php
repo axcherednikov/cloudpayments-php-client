@@ -15,16 +15,14 @@ class CloudResponse
     public ?string $message = null;
     public ?string $warning = null;
     public ?int $errorCode = null;
-
-    /** @var mixed */
-    public $model;
+    public mixed $model = null;
 
     /**
      * Заполняет по респонсу.
      */
     public function fillByResponse(ResponseInterface $response): self
     {
-        $responseContent = json_decode($response->getBody()->getContents(), null, 512, JSON_THROW_ON_ERROR);
+        $responseContent = json_decode($response->getBody()->getContents(), null, 512, JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING);
 
         if (! $responseContent instanceof stdClass) {
             $responseContent = new stdClass();
@@ -40,7 +38,7 @@ class CloudResponse
         $this->warning = is_string($warning) ? $warning : 'Warning is not set';
         $this->errorCode = is_int($errorCode) ? $errorCode : null;
 
-        if (! empty($responseContent->Model)) {
+        if ($this->shouldFillModel($responseContent)) {
             $this->fillModel($responseContent->Model);
         }
 
@@ -62,5 +60,10 @@ class CloudResponse
         }
 
         $this->model = $model;
+    }
+
+    protected function shouldFillModel(stdClass $responseContent): bool
+    {
+        return ! empty($responseContent->Model);
     }
 }
