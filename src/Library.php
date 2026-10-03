@@ -3,6 +3,7 @@
 namespace Excent\Cloudpayments;
 
 use Excent\Cloudpayments\Enum\CloudMethodsEnum;
+use Excent\Cloudpayments\Exceptions\ResponseFormatException;
 use Excent\Cloudpayments\Request\ApplepayStartSession;
 use Excent\Cloudpayments\Request\CardsPayment;
 use Excent\Cloudpayments\Request\CardsTopUp;
@@ -110,6 +111,10 @@ class Library
 
     /**
      * Проверка платежа по номеру заказа.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function getPaymentDataByInvoice(PaymentsFind $data): TransactionResponse
     {
@@ -120,6 +125,10 @@ class Library
 
     /**
      * Проверка через v2 последней операции по номеру заказа, включая возвраты и выплаты на карту.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function getPaymentDataByInvoiceV2(PaymentsFind $data): TransactionResponse
     {
@@ -130,6 +139,10 @@ class Library
 
     /**
      * Метод получения детализации по транзакции.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
     {
@@ -140,6 +153,10 @@ class Library
 
     /**
      * Создание оплаты по токену при двухшаговой оплате.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function createPaymentByToken2Step(TokenPayment $data): TransactionResponse
     {
@@ -150,6 +167,10 @@ class Library
 
     /**
      * Создание оплаты по карте при двухшаговой оплате.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function createPaymentByCard2Step(CardsPayment $data): TransactionWith3dsResponse
     {
@@ -160,6 +181,10 @@ class Library
 
     /**
      * Обработка 3Ds.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function post3Ds(Post3DS $data): TransactionResponse
     {
@@ -170,6 +195,10 @@ class Library
 
     /**
      * Проведение оплаты по токену при одношаговой оплате.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function executePaymentByToken(TokenPayment $data): TransactionResponse
     {
@@ -180,6 +209,9 @@ class Library
 
     /**
      * Подтверждение оплаты.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function confirmPayment(PaymentsConfirm $data): CloudResponse
     {
@@ -190,6 +222,10 @@ class Library
 
     /**
      * Список транзакций за определенное время.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
     {
@@ -200,6 +236,10 @@ class Library
 
     /**
      * Список транзакций за произвольный период.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function getListPaymentV2(PaymentsListV2 $data): TransactionArrayResponse
     {
@@ -210,6 +250,9 @@ class Library
 
     /**
      * Список претензий за произвольный период.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function chargebacksList(ChargebacksList $data): ChargebackArrayResponse
     {
@@ -220,6 +263,9 @@ class Library
 
     /**
      * Создание ссылки на оплату через СБП.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function paymentsQrSbpLink(SbpLink $data): QrLinkResponse
     {
@@ -232,6 +278,9 @@ class Library
 
     /**
      * Получение QR-кода для оплаты через СБП.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function paymentsQrSbpImage(SbpLink $data): QrLinkResponse
     {
@@ -244,6 +293,9 @@ class Library
 
     /**
      * Получение списка банков — участников СБП.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function sbpV2BanksInfo(?SbpBanksInfo $data = null): SbpBanksInfoResponse
     {
@@ -256,6 +308,9 @@ class Library
 
     /**
      * Отмена оплаты.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse
     {
@@ -266,6 +321,9 @@ class Library
 
     /**
      * Старт сессии Applepay.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function startSession(ApplepayStartSession $data): AppleSessionResponse
     {
@@ -276,6 +334,9 @@ class Library
 
     /**
      * Создание чека.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function createReceipt(KktReceipt $data): KktReceiptResponse
     {
@@ -286,6 +347,10 @@ class Library
 
     /**
      * Возврат средств.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function paymentsRefund(PaymentsRefund $data): TransactionResponse
     {
@@ -297,6 +362,10 @@ class Library
     /**
      * Метод для оплаты по криптограмме платежных данных (результат алгоритма шифрования)
      * для одностадийного платежа.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function paymentsCardsCharge(CardsPayment $data): TransactionWith3dsResponse
     {
@@ -307,6 +376,10 @@ class Library
 
     /**
      * Выплата по криптограмме.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function paymentsCardsTopup(CardsTopUp $data): TransactionResponse
     {
@@ -317,6 +390,10 @@ class Library
 
     /**
      * Выплата по токену.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
+     * @throws ResponseFormatException
      */
     public function paymentsTokenTopup(TokenTopUp $data): TransactionResponse
     {
@@ -327,6 +404,9 @@ class Library
 
     /**
      * Метод выгрузки списка всех платежных токенов CloudPayments.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function paymentsTokensList(?TokenList $data = null): TokenArrayResponse
     {
@@ -337,6 +417,9 @@ class Library
 
     /**
      * Метод создания подписки на рекуррентные платежи.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function subscriptionsCreate(SubscriptionCreate $data): SubscriptionResponse
     {
@@ -347,6 +430,9 @@ class Library
 
     /**
      * Метод получения информации о статусе подписки.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function subscriptionsGet(SubscriptionGet $data): SubscriptionResponse
     {
@@ -357,6 +443,9 @@ class Library
 
     /**
      * Метод получения списка подписок для определенного аккаунта.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function subscriptionsFind(SubscriptionFind $data): SubscriptionArrayResponse
     {
@@ -367,6 +456,9 @@ class Library
 
     /**
      * Метод изменения ранее созданной подписки.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function subscriptionsUpdate(SubscriptionUpdate $data): SubscriptionResponse
     {
@@ -377,6 +469,9 @@ class Library
 
     /**
      * Метод отмены подписки на рекуррентные платежи.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function subscriptionsCancel(SubscriptionCancel $data): CloudResponse
     {
@@ -387,6 +482,9 @@ class Library
 
     /**
      * Создание счета для отправки по почте.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function ordersCreate(OrderCreate $data): OrderResponse
     {
@@ -397,6 +495,9 @@ class Library
 
     /**
      * Метод отмены созданного счета.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function ordersCancel(OrderCancel $data): CloudResponse
     {
@@ -407,6 +508,9 @@ class Library
 
     /**
      * Метод просмотра настроек уведомлений (с указанием типа уведомления).
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function siteNotificationsGet(NotificationsGet $data): NotificationResponse
     {
@@ -417,6 +521,9 @@ class Library
 
     /**
      * Метод изменения настроек уведомлений.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function siteNotificationsUpdate(NotificationsUpdate $data): CloudResponse
     {
@@ -427,6 +534,9 @@ class Library
 
     /**
      * Тестовый метод CloudPayments.
+     *
+     * @throws GuzzleException
+     * @throws JsonException
      */
     public function test(): CloudResponse
     {
@@ -447,6 +557,7 @@ class Library
      * @return T
      * @throws GuzzleException
      * @throws JsonException
+     * @throws ResponseFormatException
      */
     private function request(string|CloudMethodsEnum $method, array $postData, CloudResponse $cloudResponse): CloudResponse
     {

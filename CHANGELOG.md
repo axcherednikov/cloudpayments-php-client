@@ -2,6 +2,26 @@
 
 This file documents notable changes to the library.
 
+## [4.0.1] - 2026-10-03
+
+### Fixed
+
+- All public API methods now declare their concrete `@throws` types:
+  `GuzzleException`, `JsonException`, and, for transaction responses,
+  `ResponseFormatException`. IDEs and static analyzers can see errors at the
+  call site without inspecting the internal request implementation.
+- Added missing exception declarations to response hydration, transaction model
+  construction and filling, and SBP request validation.
+- Corrected the error-handling example to cover DTO construction and invalid
+  transaction responses.
+
+### Tests
+
+- Added public exception contract coverage and regression tests for transport
+  errors, invalid JSON, invalid transaction models, and `Success: false`.
+- Existing exception classes, method signatures, and runtime behavior remain
+  unchanged.
+
 ## [4.0.0] - 2026-10-03
 
 ### Changed
