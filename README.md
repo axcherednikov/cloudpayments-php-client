@@ -336,6 +336,10 @@ try {
 
 ## Разработка
 
+Правила участия, подготовка окружения и требования к pull requests описаны в
+[CONTRIBUTING.md](CONTRIBUTING.md). В проекте действуют
+[кодекс поведения](CODE_OF_CONDUCT.md) и [положение о доступности](ACCESSIBILITY.md).
+
 Любые изменения в репозитории вносятся через отдельную ветку и pull request в `master`. Прямой push в `master` запрещён.
 
 ```bash
