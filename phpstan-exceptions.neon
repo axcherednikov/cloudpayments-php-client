@@ -1,0 +1,7 @@
+includes:
+    - phpstan.neon
+
+parameters:
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
